@@ -4,7 +4,6 @@
 
 ### NEW
 #### This release is now open source and free.
-#### 
 - New Window to add postcards to the database (all the optional data is read from other tables and shown as drop down menus
 - New Window to edit properties of a postcard.
 
