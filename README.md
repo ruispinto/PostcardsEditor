@@ -1,11 +1,11 @@
 # PostcardsEditor
 
-## Version 2.0.00.0412
+### Version 2.0.00.0412 (2021-04-11)
 
 ### NEW
 ###
-### The ability to add/edit postcards from any (local or online) database
-This release of Postcards Editor is open source and is intended as a tutorial of a Windows Desktop Application.
-If you would like to use it, you will need to modify the settings on the connection_class.cs file.
-It is a working release of my personnal editor. Allows modifications in a local or remote database.
-You can view a postcard collection using mysql database. All database structure will be added in the future.
+### - This release is now open source (free to use)
+### - New Window to add postcards to the database (all the optional data is read from other tables and shown as drop down menus
+### - New Window to edit properties of a postcard.
+###
+### - All database structure will be released on 2021-04-14
