@@ -82,6 +82,12 @@
     </Compile>
     <Compile Include="myclass\connection_class.cs" />
     <Compile Include="myclass\dataclass.cs" />
+    <Compile Include="SeriesViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeriesViewer.Designer.cs">
+      <DependentUpon>SeriesViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataViewer.resx">
       <DependentUpon>DataViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SeriesViewer.resx">
+      <DependentUpon>SeriesViewer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SplashScreen.resx">
       <DependentUpon>SplashScreen.cs</DependentUpon>
@@ -131,6 +140,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\postcards.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Circle-information_600x600.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
