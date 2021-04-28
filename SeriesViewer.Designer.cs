@@ -55,10 +55,10 @@ namespace PostcardsEditor
             this.pic_seriesBackImg = new System.Windows.Forms.PictureBox();
             this.txt_seriesBigDescription = new System.Windows.Forms.TextBox();
             this.pic_seriesFrontImg = new System.Windows.Forms.PictureBox();
-            this.txt_seriesBackImgPath = new System.Windows.Forms.TextBox();
+            this.txt_seriesBackImg = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
-            this.txt_seriesFrontImgPath = new System.Windows.Forms.TextBox();
+            this.txt_seriesFrontImg = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txt_seriesBackTxtColor = new System.Windows.Forms.TextBox();
@@ -321,10 +321,10 @@ namespace PostcardsEditor
             this.groupBox3.Controls.Add(this.pic_seriesBackImg);
             this.groupBox3.Controls.Add(this.txt_seriesBigDescription);
             this.groupBox3.Controls.Add(this.pic_seriesFrontImg);
-            this.groupBox3.Controls.Add(this.txt_seriesBackImgPath);
+            this.groupBox3.Controls.Add(this.txt_seriesBackImg);
             this.groupBox3.Controls.Add(this.label20);
             this.groupBox3.Controls.Add(this.label23);
-            this.groupBox3.Controls.Add(this.txt_seriesFrontImgPath);
+            this.groupBox3.Controls.Add(this.txt_seriesFrontImg);
             this.groupBox3.Controls.Add(this.label22);
             this.groupBox3.Location = new System.Drawing.Point(15, 167);
             this.groupBox3.Name = "groupBox3";
@@ -385,13 +385,13 @@ namespace PostcardsEditor
             this.pic_seriesFrontImg.TabIndex = 53;
             this.pic_seriesFrontImg.TabStop = false;
             // 
-            // txt_seriesBackImgPath
+            // txt_seriesBackImg
             // 
-            this.txt_seriesBackImgPath.Location = new System.Drawing.Point(683, 44);
-            this.txt_seriesBackImgPath.Name = "txt_seriesBackImgPath";
-            this.txt_seriesBackImgPath.Size = new System.Drawing.Size(379, 24);
-            this.txt_seriesBackImgPath.TabIndex = 3;
-            this.txt_seriesBackImgPath.TextChanged += new System.EventHandler(this.pic_loader);
+            this.txt_seriesBackImg.Location = new System.Drawing.Point(683, 44);
+            this.txt_seriesBackImg.Name = "txt_seriesBackImg";
+            this.txt_seriesBackImg.Size = new System.Drawing.Size(379, 24);
+            this.txt_seriesBackImg.TabIndex = 3;
+            this.txt_seriesBackImg.TextChanged += new System.EventHandler(this.pic_loader);
             // 
             // label20
             // 
@@ -415,13 +415,13 @@ namespace PostcardsEditor
             this.label23.Text = "Back Image Path";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // txt_seriesFrontImgPath
+            // txt_seriesFrontImg
             // 
-            this.txt_seriesFrontImgPath.Location = new System.Drawing.Point(128, 44);
-            this.txt_seriesFrontImgPath.Name = "txt_seriesFrontImgPath";
-            this.txt_seriesFrontImgPath.Size = new System.Drawing.Size(379, 24);
-            this.txt_seriesFrontImgPath.TabIndex = 1;
-            this.txt_seriesFrontImgPath.TextChanged += new System.EventHandler(this.pic_loader);
+            this.txt_seriesFrontImg.Location = new System.Drawing.Point(128, 44);
+            this.txt_seriesFrontImg.Name = "txt_seriesFrontImg";
+            this.txt_seriesFrontImg.Size = new System.Drawing.Size(379, 24);
+            this.txt_seriesFrontImg.TabIndex = 1;
+            this.txt_seriesFrontImg.TextChanged += new System.EventHandler(this.pic_loader);
             // 
             // label22
             // 
@@ -795,9 +795,9 @@ namespace PostcardsEditor
         private System.Windows.Forms.Button btn_seriesOpenFrontImg;
         private System.Windows.Forms.PictureBox pic_seriesBackImg;
         private System.Windows.Forms.PictureBox pic_seriesFrontImg;
-        private System.Windows.Forms.TextBox txt_seriesBackImgPath;
+        private System.Windows.Forms.TextBox txt_seriesBackImg;
         private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox txt_seriesFrontImgPath;
+        private System.Windows.Forms.TextBox txt_seriesFrontImg;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox txt_seriesDate;

@@ -124,7 +124,7 @@ namespace PostcardsEditor
             if (picPicker.ShowDialog() == DialogResult.OK)
             {
                 pic_seriesBackImg.Image = new Bitmap(picPicker.FileName);
-                txt_seriesBackImgPath.Text = picPicker.FileName;
+                txt_seriesBackImg.Text = picPicker.FileName;
                 pic_seriesBackImg.Enabled = true;
             }
         }
@@ -136,7 +136,7 @@ namespace PostcardsEditor
             if (picPicker.ShowDialog() == DialogResult.OK)
             {
                 pic_seriesFrontImg.Image = new Bitmap(picPicker.FileName);
-                txt_seriesFrontImgPath.Text = picPicker.FileName;
+                txt_seriesFrontImg.Text = picPicker.FileName;
                 pic_seriesFrontImg.Enabled = true;
             }
         }
@@ -240,18 +240,19 @@ namespace PostcardsEditor
             if (txt_mainCardNumber.Enabled == false)
             {
                 txt_mainCardNumber.Enabled = true;
-                txt_seriesBackImgPath.Enabled = true;
+                txt_seriesBackImg.Enabled = true;
                 txt_seriesBackTxtColor.Enabled = true;
                 txt_seriesBarcodeGen.Enabled = true;
                 txt_seriesBigDescription.Enabled = true;
                 txt_seriesDate.Enabled = true;
                 txt_seriesDescENG.Enabled = true;
                 txt_seriesDescORIG.Enabled = true;
-                txt_seriesFrontImgPath.Enabled = true;
+                txt_seriesFrontImg.Enabled = true;
                 txt_seriesFrtTxtColor.Enabled = true;
                 txt_seriesSecondNumber.Enabled = true;
                 txt_seriesTotalImgCard.Enabled = true;
                 chk_seriesUpdate.Visible = true;
+                btn_seriesSave.Enabled = true;
                 txt_updSecondNumber.Visible = true;
                 btn_seriesOpenBackImg.Enabled = true;
                 btn_seriesOpenFrontImg.Enabled = true;
@@ -262,6 +263,7 @@ namespace PostcardsEditor
                 combo_seriesOrient.Enabled = true;
                 combo_seriesYear.Enabled = true;
                 dateTimePickerSeries.Enabled = true;
+                chk_seriesUpdate.Enabled = true;
             }
         }
 
@@ -337,8 +339,8 @@ namespace PostcardsEditor
                 dc.seriesFrontTxtColor = txt_seriesFrtTxtColor.Text;
                 dc.seriesBackTxtColor = txt_seriesBackTxtColor.Text;
                 dc.seriesBigDesc = txt_seriesBigDescription.Text;
-                dc.seriesFrontImgPath = txt_seriesFrontImgPath.Text;
-                dc.seriesBackImgPath = txt_seriesBackImgPath.Text;
+                dc.seriesFrontImgPath = txt_seriesFrontImg.Text;
+                dc.seriesBackImgPath = txt_seriesBackImg.Text;
 
                 // check if it is a new postcard or an update
                 if (chkSeries == true)
@@ -366,7 +368,10 @@ namespace PostcardsEditor
             try
             {
                 // if is the real image, display the new image
-                pic_seriesFrontImg.Image = new Bitmap(txt_seriesFrontImgPath.Text);
+                if (txt_seriesFrontImg.Text.Substring(0, 4) == "HTTP" || txt_seriesFrontImg.Text.Substring(0, 4) == "http")
+                    pic_seriesFrontImg.ImageLocation = txt_seriesFrontImg.Text;
+                else
+                    pic_seriesFrontImg.Image = new Bitmap(txt_seriesFrontImg.Text);
             }
             catch
             {
@@ -378,7 +383,10 @@ namespace PostcardsEditor
             try
             {
                 // if is the real image, display the new image
-                pic_seriesBackImg.Image = new Bitmap(txt_seriesBackImgPath.Text);
+                if (txt_seriesBackImg.Text.Substring(0, 4) == "HTTP" || txt_seriesBackImg.Text.Substring(0, 4) == "http")
+                    pic_seriesBackImg.ImageLocation = txt_seriesBackImg.Text;
+                else
+                    pic_seriesBackImg.Image = new Bitmap(txt_seriesBackImg.Text);
             }
             catch
             {
@@ -435,26 +443,29 @@ namespace PostcardsEditor
             txt_seriesBigDescription.Text = dataGridSeries.CurrentRow.Cells[12].Value.ToString();
             if (chkSeries == true)
             {
-                txt_seriesFrontImgPath.Text = dataGridSeries.CurrentRow.Cells[13].Value.ToString();
-                txt_seriesBackImgPath.Text = dataGridSeries.CurrentRow.Cells[14].Value.ToString();
+                txt_seriesFrontImg.Text = dataGridSeries.CurrentRow.Cells[13].Value.ToString();
+                txt_seriesBackImg.Text = dataGridSeries.CurrentRow.Cells[14].Value.ToString();
             }
             else
             {
-                txt_seriesFrontImgPath.Text = "";
-                txt_seriesBackImgPath.Text = "";
+                txt_seriesFrontImg.Text = "";
+                txt_seriesBackImg.Text = "";
             }
 
             // Check if any of the image path fields has any image name. If it has, it shows, otherwise just show the default image
             try
             {
                 // Front Image
-                if (txt_seriesFrontImgPath.Text == "" || txt_seriesFrontImgPath.Text == null)
+                if (txt_seriesFrontImg.Text == "" || txt_seriesFrontImg.Text == null)
                 {
                     pic_seriesFrontImg.Image = new Bitmap(Properties.Resources.no_image);
                 }
                 else
                 {
-                    pic_seriesFrontImg.Image = new Bitmap(txt_seriesFrontImgPath.Text);
+                    if (txt_seriesFrontImg.Text.Substring(0, 4) == "HTTP" || txt_seriesFrontImg.Text.Substring(0, 4) == "http")
+                        pic_seriesFrontImg.ImageLocation = txt_seriesFrontImg.Text;
+                    else
+                        pic_seriesFrontImg.Image = new Bitmap(txt_seriesFrontImg.Text);
                 }
             }
             catch
@@ -464,13 +475,16 @@ namespace PostcardsEditor
             try
             {
                 // Back image
-                if (txt_seriesBackImgPath.Text == "" || txt_seriesBackImgPath.Text == null)
+                if (txt_seriesBackImg.Text == "" || txt_seriesBackImg.Text == null)
                 {
                     pic_seriesBackImg.Image = new Bitmap(Properties.Resources.no_image);
                 }
                 else
                 {
-                    pic_seriesBackImg.Image = new Bitmap(txt_seriesBackImgPath.Text);
+                    if (txt_seriesBackImg.Text.Substring(0, 4) == "HTTP" || txt_seriesBackImg.Text.Substring(0, 4) == "http")
+                        pic_seriesBackImg.ImageLocation = txt_seriesBackImg.Text;
+                    else
+                        pic_seriesBackImg.Image = new Bitmap(txt_seriesBackImg.Text);
                 }
             }
             catch
@@ -515,14 +529,14 @@ namespace PostcardsEditor
 
             // Disable all fields
             txt_mainCardNumber.Enabled = false;
-            txt_seriesBackImgPath.Enabled = false;
+            txt_seriesBackImg.Enabled = false;
             txt_seriesBackTxtColor.Enabled = false;
             txt_seriesBarcodeGen.Enabled = false;
             txt_seriesBigDescription.Enabled = false;
             txt_seriesDate.Enabled = false;
             txt_seriesDescENG.Enabled = false;
             txt_seriesDescORIG.Enabled = false;
-            txt_seriesFrontImgPath.Enabled = false;
+            txt_seriesFrontImg.Enabled = false;
             txt_seriesFrtTxtColor.Enabled = false;
             txt_seriesSecondNumber.Enabled = false;
             txt_seriesTotalImgCard.Enabled = false;
@@ -568,28 +582,23 @@ namespace PostcardsEditor
             txt_seriesFrtTxtColor.Text = dataGridSeries.CurrentRow.Cells[10].Value.ToString();
             txt_seriesBackTxtColor.Text = dataGridSeries.CurrentRow.Cells[11].Value.ToString();
             txt_seriesBigDescription.Text = dataGridSeries.CurrentRow.Cells[12].Value.ToString();
-            if (chkSeries == true)
-            {
-                txt_seriesFrontImgPath.Text = dataGridSeries.CurrentRow.Cells[13].Value.ToString();
-                txt_seriesBackImgPath.Text = dataGridSeries.CurrentRow.Cells[14].Value.ToString();
-            }
-            else
-            {
-                txt_seriesFrontImgPath.Text = "";
-                txt_seriesBackImgPath.Text = "";
-            }
+            txt_seriesFrontImg.Text = dataGridSeries.CurrentRow.Cells[13].Value.ToString();
+            txt_seriesBackImg.Text = dataGridSeries.CurrentRow.Cells[14].Value.ToString();
 
             // Check if any of the image path fields has any image name. If it has, it shows, otherwise just show the default image
             try
             {
                 // Front Image
-                if (txt_seriesFrontImgPath.Text == "" || txt_seriesFrontImgPath.Text == null)
+                if (txt_seriesFrontImg.Text == "" || txt_seriesFrontImg.Text == null)
                 {
                     pic_seriesFrontImg.Image = new Bitmap(Properties.Resources.no_image);
                 }
                 else
                 {
-                    pic_seriesFrontImg.Image = new Bitmap(txt_seriesFrontImgPath.Text);
+                    if (txt_seriesFrontImg.Text.Substring(0, 4) == "HTTP" || txt_seriesFrontImg.Text.Substring(0, 4) == "http")
+                        pic_seriesFrontImg.ImageLocation = txt_seriesFrontImg.Text;
+                    else
+                        pic_seriesFrontImg.Image = new Bitmap(txt_seriesFrontImg.Text);
                 }
             }
             catch
@@ -599,13 +608,16 @@ namespace PostcardsEditor
             try
             {
                 // Back image
-                if (txt_seriesBackImgPath.Text == "" || txt_seriesBackImgPath.Text == null)
+                if (txt_seriesBackImg.Text == "" || txt_seriesBackImg.Text == null)
                 {
                     pic_seriesBackImg.Image = new Bitmap(Properties.Resources.no_image);
                 }
                 else
                 {
-                    pic_seriesBackImg.Image = new Bitmap(txt_seriesBackImgPath.Text);
+                    if (txt_seriesBackImg.Text.Substring(0, 4) == "HTTP" || txt_seriesBackImg.Text.Substring(0, 4) == "http")
+                        pic_seriesBackImg.ImageLocation = txt_seriesBackImg.Text;
+                    else
+                        pic_seriesBackImg.Image = new Bitmap(txt_seriesBackImg.Text);
                 }
             }
             catch

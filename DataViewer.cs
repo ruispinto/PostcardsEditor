@@ -89,7 +89,10 @@ namespace PostcardsEditor
             try
             {
                 // if is the real image, display the new image
-                pic_frontImg.Image = new Bitmap(txt_frontImgPath.Text);
+                if (txt_frontImgPath.Text.Substring(0, 4) == "HTTP" || txt_frontImgPath.Text.Substring(0, 4) == "http")
+                    pic_frontImg.ImageLocation = txt_frontImgPath.Text;
+                else
+                    pic_frontImg.Image = new Bitmap(txt_frontImgPath.Text);
             }
             catch
             {
@@ -101,7 +104,10 @@ namespace PostcardsEditor
             try
             {
                 // if is the real image, display the new image
-                pic_backImg.Image = new Bitmap(txt_backImgPath.Text);
+                if (txt_backImgPath.Text.Substring(0, 4) == "HTTP" || txt_backImgPath.Text.Substring(0, 4) == "http")
+                    pic_backImg.ImageLocation = txt_backImgPath.Text;
+                else
+                    pic_backImg.Image = new Bitmap(txt_backImgPath.Text);
             }
             catch
             {
@@ -322,6 +328,7 @@ namespace PostcardsEditor
                 txt_TypeDesc.Enabled = true;
                 txt_webpage.Enabled = true;
                 btn_saveCard.Visible = true;
+                btn_saveCard.Enabled = true;
                 combo_cardNumber.Enabled = true;
                 combo_coloring.Enabled = true;
                 combo_cond.Enabled = true;
@@ -336,6 +343,13 @@ namespace PostcardsEditor
                 combo_theme.Enabled = true;
                 combo_year.Enabled = true;
                 chk_updateCard.Visible = true;
+                chk_blog.Enabled = true;
+                chk_borders.Enabled = true;
+                chk_identical.Enabled = true;
+                chk_scanned.Enabled = true;
+                chk_seriesMulti.Enabled = true;
+                btn_openBackImg.Enabled = true;
+                btn_openFrontImg.Enabled = true;
             }
         }
 
@@ -564,7 +578,10 @@ namespace PostcardsEditor
                 }
                 else
                 {
-                    pic_frontImg.Image = new Bitmap(txt_frontImgPath.Text);
+                    if (txt_frontImgPath.Text.Substring(0, 4) == "HTTP" || txt_frontImgPath.Text.Substring(0, 4) == "http")
+                        pic_frontImg.ImageLocation = txt_frontImgPath.Text;
+                    else
+                        pic_frontImg.Image = new Bitmap(txt_frontImgPath.Text);
                 }
             }
             catch
@@ -579,7 +596,10 @@ namespace PostcardsEditor
                 }
                 else
                 {
-                    pic_backImg.Image = new Bitmap(txt_backImgPath.Text);
+                    if (txt_backImgPath.Text.Substring(0, 4) == "HTTP" || txt_backImgPath.Text.Substring(0, 4) == "http")
+                        pic_backImg.ImageLocation = txt_backImgPath.Text;
+                    else
+                        pic_backImg.Image = new Bitmap(txt_backImgPath.Text);
                 }
             }
             catch
@@ -796,6 +816,8 @@ namespace PostcardsEditor
             pic_backImg.Enabled = false;
             dateTimePicker1.Enabled = false;
             chk_borders.Enabled = false;
+            btn_openFrontImg.Enabled = false;
+            btn_openBackImg.Enabled = false;
 
             txt_cardNumber.Text = dataGridCard.CurrentRow.Cells[0].Value.ToString();
             get_cardPublish = dataGridCard.CurrentRow.Cells[1].Value.ToString();
@@ -859,16 +881,8 @@ namespace PostcardsEditor
             txt_bigDescription.Text = dataGridCard.CurrentRow.Cells[28].Value.ToString();
             get_cardSentType = dataGridCard.CurrentRow.Cells[29].Value.ToString();
             txt_TypeDesc.Text = dataGridCard.CurrentRow.Cells[30].Value.ToString();
-            if (chkCard == true)
-            {
-                txt_frontImgPath.Text = dataGridCard.CurrentRow.Cells[31].Value.ToString();
-                txt_backImgPath.Text = dataGridCard.CurrentRow.Cells[32].Value.ToString();
-            }
-            else
-            {
-                txt_frontImgPath.Text = "";
-                txt_backImgPath.Text = "";
-            }
+            txt_frontImgPath.Text = dataGridCard.CurrentRow.Cells[31].Value.ToString();
+            txt_backImgPath.Text = dataGridCard.CurrentRow.Cells[32].Value.ToString();
 
             // error check while displaying the images (if available)
             try
@@ -879,7 +893,10 @@ namespace PostcardsEditor
                 }
                 else
                 {
-                    pic_frontImg.Image = new Bitmap(txt_frontImgPath.Text);
+                    if (txt_frontImgPath.Text.Substring(0, 4) == "HTTP" || txt_frontImgPath.Text.Substring(0, 4) == "http")
+                        pic_frontImg.ImageLocation = txt_frontImgPath.Text;
+                    else
+                        pic_frontImg.Image = new Bitmap(txt_frontImgPath.Text);
                 }
             }
             catch
@@ -894,7 +911,10 @@ namespace PostcardsEditor
                 }
                 else
                 {
-                    pic_backImg.Image = new Bitmap(txt_backImgPath.Text);
+                    if (txt_frontImgPath.Text.Substring(0, 4) == "HTTP" || txt_frontImgPath.Text.Substring(0, 4) == "http")
+                        pic_frontImg.ImageLocation = txt_frontImgPath.Text;
+                    else
+                        pic_frontImg.Image = new Bitmap(txt_frontImgPath.Text);
                 }
             }
             catch
