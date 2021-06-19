@@ -1,10 +1,10 @@
 # PostcardsEditor
 ##
-## Revision 2.0.01.0428 - 2021-04-28
+## Revision 2.0.01.0619 - 2021-06-19
 ##
 ### *** NEW ***
 ###
-### - Added the possibility to show images from the Web or from the disk
+### - Other tables access (add/update/delete/export to excel data). These tables are the ones used in the postcard.
 ###
 ###
 ###  *** UPDATED ***
