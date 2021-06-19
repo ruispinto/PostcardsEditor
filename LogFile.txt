@@ -1,5 +1,12 @@
 Log for PostcardsEditor
 
+Revision 2.0.01.0619 - 2021-06-19
+=================================
+*** NEW ***
+- Other tables access (add/update/delete/export to excel data). These tables are the ones used in the postcard.
+*** UPDATED ***
+- Minor bug fixes
+
 Revision 2.0.01.0428 - 2021-04-28
 =================================
 *** NEW ***
