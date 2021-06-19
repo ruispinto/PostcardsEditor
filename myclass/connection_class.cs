@@ -14,11 +14,11 @@ namespace PostcardsEditor.myclass
 
         public connection_class()
         {
-            string host = "localhost";    // host name 'localhost', 'web_address', etc...
-            string database = "mydatabase";     // database name
+            string host = "localhost";    		// host name 'localhost', 'web_address', etc...
+            string database = "postcards";      // database name
             string port = "3306";               // port used to connect to SQL Server
-            string username = "myusername";     // username ('root' - default username if you are using 'localhost')
-            string password = "mypassword";     // password
+            string username = "root";     		// username ('root' - default username if you are using 'localhost')
+            string password = "noPasswiord";    // password
 
             // connection string with all the above information in a way SQL connector understands
             string connection_string = "datasource=" + host + ";database=" + database + ";port=" + port + ";username=" + username + ";password=" + password;

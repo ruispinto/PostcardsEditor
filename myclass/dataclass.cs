@@ -26,6 +26,7 @@ namespace PostcardsEditor.myclass
         public List<string> dt_cardNumberFill = new List<string>();
 
         // declaring all fields that are used in the postcards
+        public Int32 cardID { get; set; }                     // Card Number (record number --> to delete the right record)
         public string cardNumber { get; set; }              // Card Number (unique numbering)
         public string cardPublisher { get; set; }           // Publisher
         public string cardScanned { get; set; }             // Scanned ? (logical --> checked option)
@@ -61,6 +62,7 @@ namespace PostcardsEditor.myclass
         public string cardBackImgPath { get; set; }         // Back Image Path (web / hdd
 
         // declaring all fields that are used in the postcards series
+        public Int32 seriesID { get; set; }               // Postcard Number (to delete the right record)
         public string seriesCardNumber { get; set; }        // Postcard Number (unique numbering of postcards) --> from main table
         public string seriesSecCardNumber { get; set; }     // New Secondary postcard number
         public string seriesDescEng { get; set; }           // Description in English
@@ -81,11 +83,17 @@ namespace PostcardsEditor.myclass
         public string old_seriesSecond { get; set; }        // Old Secondary postcard number
         public string new_seriesSecond { get; set; }        // New Secondary postcard number
 
+        // declaring all fields for other tables
+        public Int32 othersID { get; set; }
+        public string othersField1 { get; set; }
+        public string othersField2 { get; set; }
+        public string othersField3 { get; set; }
+
         // read properties
         public DataTable DT = new DataTable();
         public DataSet DS = new DataSet();
 
-        public string sVersion = "2.0.01.0426";
+        public string sVersion = "2.0.01.0619";
 
         // fetch data from coloring Table
         public void Show_ColoringTable()
@@ -381,10 +389,19 @@ namespace PostcardsEditor.myclass
             }
         }
 
+
+
+        // *******************************************************************************************************
+        // * 
+        // *  Card Table Management
+        // * 
+        // * *****************************************************************************************************
+
         // Show data from the table 'Card' in the grid
         public void REFRESH_CARD()
         {
-            string query = "SELECT cardnumber AS 'Card Number', cardpublisher AS 'Publisher', cardscanned AS 'Scanned', cardintheblog AS 'Blog', cardcountryname AS 'Country', carddesceng AS 'Description (English)', carddescoriginal AS 'Description (Original)', cardthemename AS 'Theme', cardcoloringabr AS 'Coloring', cardyearnumber AS 'Year', cardimgnmbr AS 'Tot.Num.of Img', cardseriesmulti AS 'Series ?', cardseriestotal AS 'Total Series', cardsizename AS 'Size', cardshapename AS 'Shape', cardorientabr AS 'Orient.', cardbarcode AS 'Barcode', cardmaterial as 'Material', cardcondabr AS 'Condition', cardborders AS 'Borders ?', cardfronttxtcolor AS 'Front Text Color', cardbacktxtcolor AS 'Back Text Color', carddatepurchased AS 'Purchase Date', cardcostprice AS 'Cost Price', cardwebpage AS 'Webpage', cardidentical AS 'Identical ?', cardequalsto AS 'Equals to', carddifferences AS 'Differencies', cardbigdesc AS 'Big Description', cardsenttypename AS 'Sent Type', cardtypedesc AS 'Type Description', cardfrontimgpath AS 'Front Image Path', cardbackimgpath AS 'Back Image Path' FROM card";
+            string query = "SELECT cardid AS 'Card #', cardnumber AS 'Card Number', cardpublisher AS 'Publisher', cardscanned AS 'Scanned', cardintheblog AS 'Blog', cardcountryname AS 'Country', carddesceng AS 'Description (English)', carddescoriginal AS 'Description (Original)', cardthemename AS 'Theme', cardcoloringabr AS 'Coloring', cardyearnumber AS 'Year', cardimgnmbr AS 'Tot.Num.of Img', cardseriesmulti AS 'Series ?', cardseriestotal AS 'Total Series', cardsizename AS 'Size', cardshapename AS 'Shape', cardorientabr AS 'Orient.', cardbarcode AS 'Barcode', cardmaterial as 'Material', cardcondabr AS 'Condition', cardborders AS 'Borders ?', cardfronttxtcolor AS 'Front Text Color', cardbacktxtcolor AS 'Back Text Color', carddatepurchased AS 'Purchase Date', cardcostprice AS 'Cost Price', cardwebpage AS 'Webpage', cardidentical AS 'Identical ?', cardequalsto AS 'Equals to', carddifferences AS 'Differencies', cardbigdesc AS 'Big Description', cardsenttypename AS 'Sent Type', cardtypedesc AS 'Type Description', cardfrontimgpath AS 'Front Image Path', cardbackimgpath AS 'Back Image Path' FROM card";
+            DS = new DataSet();
             DT.Clear();
             MySqlDataAdapter DA = new MySqlDataAdapter(query, connectdb);
             DA.Fill(DS);
@@ -447,13 +464,14 @@ namespace PostcardsEditor.myclass
         public void UPDATE_CARD()
         {
             connectdb.Open();
-            string query = "UPDATE card SET cardnumber=@cnumber, cardpublisher=@cpublisher, cardscanned=@cscan, cardintheblog=@cblog, cardcountryname=@ccountry, carddesceng=@cdesceng, carddescoriginal=@cdescorig, cardthemename=@ctheme, cardcoloringabr=@ccolor, cardyearnumber=@cyear, cardimgnmbr=@cimg, cardseriesmulti=@csermulti, cardseriestotal=@csertotal, cardsizename=@csize, cardshapename=@cshape, cardorientabr=@corient, cardbarcode=@cbarcode, cardmaterial=@cmaterial, cardcondabr=@ccond, cardborders=@cborders, cardfronttxtcolor=@cfrttxtcolor, cardbacktxtcolor=@cbcktxtcolor, carddatepurchased=@cdtpurchase, cardcostprice=@ccost, cardwebpage=@cweb, cardidentical=@cidentical, cardequalsto=@cequals, carddifferences=@cdif, cardbigdesc=@cbigdsc, cardsenttypename=@csenttype, cardtypedesc=@ctypedesc, cardfrontimgpath=@cfrtimg, cardbackimgpath=@cbckimg WHERE cardnumber=@cnumber";
+            string query = "UPDATE card SET cardnumber=@cnumber, cardpublisher=@cpublisher, cardscanned=@cscan, cardintheblog=@cblog, cardcountryname=@ccountry, carddesceng=@cdesceng, carddescoriginal=@cdescorig, cardthemename=@ctheme, cardcoloringabr=@ccolor, cardyearnumber=@cyear, cardimgnmbr=@cimg, cardseriesmulti=@csermulti, cardseriestotal=@csertotal, cardsizename=@csize, cardshapename=@cshape, cardorientabr=@corient, cardbarcode=@cbarcode, cardmaterial=@cmaterial, cardcondabr=@ccond, cardborders=@cborders, cardfronttxtcolor=@cfrttxtcolor, cardbacktxtcolor=@cbcktxtcolor, carddatepurchased=@cdtpurchase, cardcostprice=@ccost, cardwebpage=@cweb, cardidentical=@cidentical, cardequalsto=@cequals, carddifferences=@cdif, cardbigdesc=@cbigdsc, cardsenttypename=@csenttype, cardtypedesc=@ctypedesc, cardfrontimgpath=@cfrtimg, cardbackimgpath=@cbckimg WHERE cardid=@cid";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connectdb;
 
+                cmd.Parameters.Add("@cnumber", MySqlDbType.VarChar).Value = cardNumber;
                 cmd.Parameters.Add("@cpublisher", MySqlDbType.VarChar).Value = cardPublisher;
                 cmd.Parameters.Add("@cscan", MySqlDbType.VarChar).Value = cardScanned;
                 cmd.Parameters.Add("@cblog", MySqlDbType.VarChar).Value = cardInTheBlog;
@@ -488,7 +506,7 @@ namespace PostcardsEditor.myclass
                 cmd.Parameters.Add("@cbckimg", MySqlDbType.VarChar).Value = cardBackImgPath;
 
                 // WHERE clause
-                cmd.Parameters.Add("@cnumber", MySqlDbType.VarChar).Value = cardNumber;
+                cmd.Parameters.Add("@cid", MySqlDbType.Int32).Value = cardID;
 
                 // execute the query (in this case update the current postcard)
                 cmd.ExecuteNonQuery();
@@ -500,7 +518,7 @@ namespace PostcardsEditor.myclass
         public void DELETE_CARD()
         {
             connectdb.Open();
-            string query = "DELETE FROM card WHERE cardnumber=@cnumber";
+            string query = "DELETE FROM card WHERE cardid=@cid";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -508,7 +526,7 @@ namespace PostcardsEditor.myclass
                 cmd.Connection = connectdb;
 
                 // WHERE
-                cmd.Parameters.Add("@cnumber", MySqlDbType.VarChar).Value = cardNumber;
+                cmd.Parameters.Add("@cid",MySqlDbType.Int32).Value = cardID;
 
                 // execute the query (in this case update the current postcard)
                 cmd.ExecuteNonQuery();
@@ -517,10 +535,20 @@ namespace PostcardsEditor.myclass
             }
         }
 
+
+
+        // *******************************************************************************************************
+        // * 
+        // *  Series Card Table Management
+        // * 
+        // * *****************************************************************************************************
+
+
         // Show data from the table 'CardSeries' in the grid
         public void REFRESH_MULTICARD(string upd_cardnumber)
         {
-            string query = "SELECT seriescardnumber AS 'Main Card Number', seriesseccardnumber AS 'Secondary Card Number', seriesdesceng AS 'Description (English)', seriesdescoriginal AS 'Description (Original)', seriescolorabr AS 'Coloring', seriesorientabr AS 'Orient.', seriesimgcount AS 'Tot.Num.of Img', seriesdate AS 'Referenced Date', seriesyearnumber AS 'Year', seriesbarcode AS 'Barcode', seriesfronttxtcolor AS 'Front Text Color', seriesbacktxtcolor AS 'Back Text Color', seriesbigdesc AS 'Big Description', seriesfrontimgpath AS 'Front Image Path', seriesbackimgpath AS 'Back Image Path' FROM cardseries WHERE seriescardnumber='" + upd_cardnumber + "'";
+            string query = "SELECT seriesid AS 'Series #', seriescardnumber AS 'Main Card Number', seriesseccardnumber AS 'Secondary Card Number', seriesdesceng AS 'Description (English)', seriesdescoriginal AS 'Description (Original)', seriescolorabr AS 'Coloring', seriesorientabr AS 'Orient.', seriesimgcount AS 'Tot.Num.of Img', seriesdate AS 'Referenced Date', seriesyearnumber AS 'Year', seriesbarcode AS 'Barcode', seriesfronttxtcolor AS 'Front Text Color', seriesbacktxtcolor AS 'Back Text Color', seriesbigdesc AS 'Big Description', seriesfrontimgpath AS 'Front Image Path', seriesbackimgpath AS 'Back Image Path' FROM cardseries WHERE seriescardnumber='" + upd_cardnumber + "'";
+            DS = new DataSet();
             DT.Clear();
             MySqlDataAdapter DA = new MySqlDataAdapter(query, connectdb);
             DA.Fill(DS);
@@ -530,7 +558,8 @@ namespace PostcardsEditor.myclass
         // Show data from the table 'CardSeries' in the grid
         public void REFRESH_ALL_MULTICARD()
         {
-            string query = "SELECT seriescardnumber AS 'Main Card Number', seriesseccardnumber AS 'Secondary Card Number', seriesdesceng AS 'Description (English)', seriesdescoriginal AS 'Description (Original)', seriescolorabr AS 'Coloring', seriesorientabr AS 'Orient.', seriesimgcount AS 'Tot.Num.of Img', seriesdate AS 'Referenced Date', seriesyearnumber AS 'Year', seriesbarcode AS 'Barcode', seriesfronttxtcolor AS 'Front Text Color', seriesbacktxtcolor AS 'Back Text Color', seriesbigdesc AS 'Big Description', seriesfrontimgpath AS 'Front Image Path', seriesbackimgpath AS 'Back Image Path' FROM cardseries";
+            string query = "SELECT seriesid AS 'Series #', seriescardnumber AS 'Main Card Number', seriesseccardnumber AS 'Secondary Card Number', seriesdesceng AS 'Description (English)', seriesdescoriginal AS 'Description (Original)', seriescolorabr AS 'Coloring', seriesorientabr AS 'Orient.', seriesimgcount AS 'Tot.Num.of Img', seriesdate AS 'Referenced Date', seriesyearnumber AS 'Year', seriesbarcode AS 'Barcode', seriesfronttxtcolor AS 'Front Text Color', seriesbacktxtcolor AS 'Back Text Color', seriesbigdesc AS 'Big Description', seriesfrontimgpath AS 'Front Image Path', seriesbackimgpath AS 'Back Image Path' FROM cardseries";
+            DS = new DataSet();
             DT.Clear();
             MySqlDataAdapter DA = new MySqlDataAdapter(query, connectdb);
             DA.Fill(DS);
@@ -575,7 +604,7 @@ namespace PostcardsEditor.myclass
         public void UPDATE_SERIESCARD()
         {
             connectdb.Open();
-            string query = "UPDATE cardseries SET seriesseccardnumber=@ssecnumber, seriesdesceng=@sdesceng, seriesdescoriginal=@sdescorig, seriescolorabr=@scolor, seriesorientabr=@sorient, seriesimgcount=@simg, seriesdate=@sdate, seriesyearnumber=@syear, seriesbarcode=@sbarcode, seriesfronttxtcolor=@sfrttxtcolor, seriesbacktxtcolor=@sbcktxtcolor, seriesbigdesc=@sbigdsc, seriesfrontimgpath=@sfrtimg, seriesbackimgpath=@sbckimg WHERE seriesseccardnumber=@old_seriesSecond";
+            string query = "UPDATE cardseries SET seriesseccardnumber=@ssecnumber, seriesdesceng=@sdesceng, seriesdescoriginal=@sdescorig, seriescolorabr=@scolor, seriesorientabr=@sorient, seriesimgcount=@simg, seriesdate=@sdate, seriesyearnumber=@syear, seriesbarcode=@sbarcode, seriesfronttxtcolor=@sfrttxtcolor, seriesbacktxtcolor=@sbcktxtcolor, seriesbigdesc=@sbigdsc, seriesfrontimgpath=@sfrtimg, seriesbackimgpath=@sbckimg WHERE seriesid=@sid";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -599,7 +628,7 @@ namespace PostcardsEditor.myclass
 
 
                 // WHERE clause
-                cmd.Parameters.Add("@old_seriesSecond", MySqlDbType.VarChar).Value = seriesSecCardNumber;
+                cmd.Parameters.Add("@sid", MySqlDbType.Int32).Value = seriesID;
 
                 // execute the query (in this case update the current postcard)
                 cmd.ExecuteNonQuery();
@@ -611,7 +640,7 @@ namespace PostcardsEditor.myclass
         public void DELETE_SERIESCARD()
         {
             connectdb.Open();
-            string query = "DELETE FROM cardseries WHERE seriesseccardnumber@ssecnumber";
+            string query = "DELETE FROM cardseries WHERE seriesid=@sid";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -619,7 +648,7 @@ namespace PostcardsEditor.myclass
                 cmd.Connection = connectdb;
 
                 // WHERE
-                cmd.Parameters.Add("@ssecnumber", MySqlDbType.VarChar).Value = seriesSecCardNumber;
+                cmd.Parameters.Add("@sid", MySqlDbType.Int32).Value = seriesID;
 
                 // execute the query (in this case update the current postcard)
                 cmd.ExecuteNonQuery();
@@ -628,26 +657,596 @@ namespace PostcardsEditor.myclass
             }
         }
 
-        // Edit postcard from the database
-        public void UPDATE_SECOND_NUMBER()
+
+        // *******************************************************************************************************
+        // * 
+        // *  Other Tables Management
+        // * 
+        // * *****************************************************************************************************
+
+        // Show data from the table 'coloring' in the grid
+        public void REFRESH_OTHERS(int opt)
+        {
+            string query = "";
+            if (opt == 1)
+            {
+                query = "SELECT coloringid AS 'Coloring #', coloringabr AS 'Abrev.', coloringname AS 'Coloring Name' FROM coloring";
+            }
+            else if(opt == 2)
+            {
+                query = "SELECT condid AS 'Condition #', condabr AS 'Abrev.', condname AS 'Condition Name', conddesc AS 'Description' FROM cond";
+            }
+            else if (opt == 3)
+            {
+                query = "SELECT countryid AS 'Country #', countryname AS 'Country', countryiso AS 'ISO' FROM country";
+            }
+            else if (opt == 4)
+            {
+                query = "SELECT materialid AS 'Material #', materialname AS 'Material Name' FROM material";
+            }
+            else if (opt == 5)
+            {
+                query = "SELECT orientid AS 'Orientation #', orientabr AS 'Abrev.', orientname AS 'Orientation Name' FROM orient";
+            }
+            else if (opt == 6)
+            {
+                query = "SELECT publishid AS 'Publisher #', publishname AS 'Publisher Name', publishcompanies AS 'Companies' FROM publish";
+            }
+            else if (opt == 7)
+            {
+                query = "SELECT sentypeid AS 'Sent Type #', senttypename AS 'Name' FROM senttype";
+            }
+            else if (opt == 8)
+            {
+                query = "SELECT shapeid AS 'Shape #', shapename AS 'Name' FROM shape";
+            }
+            else if (opt == 9)
+            {
+                query = "SELECT sizeid AS 'Size #', sizename AS 'Name' FROM size";
+            }
+            else if (opt == 10)
+            {
+                query = "SELECT themeid AS 'Theme #', themename AS 'Theme' FROM theme";
+            }
+            else if (opt == 11)
+            {
+                query = "SELECT yearid AS 'Year #', yearnumber AS 'Year' FROM yyear";
+            }
+            DS = new DataSet();
+            DT.Clear();
+            MySqlDataAdapter DA01 = new MySqlDataAdapter(query, connectdb);
+            DA01.Fill(DS);
+            DT = DS.Tables[0];
+        }
+
+        // Add data to the coloring table
+        public void ADD_OTHERS_COLORING()
         {
             connectdb.Open();
-            string query = "UPDATE cardseries SET seriesseccardnumber=@new_seriesSecond WHERE seriesseccardnumber=@old_seriesSecond";
+            string query = "";
+            query = "INSERT INTO coloring(coloringabr, coloringname) VALUES(@otherField1, @otherField2)";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
                 cmd.CommandType = CommandType.Text;
                 cmd.Connection = connectdb;
 
-                cmd.Parameters.Add("@new_seriesSecond", MySqlDbType.VarChar).Value = seriesSecCardNumber;
+                // add app fields data to the database fields
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+                cmd.Parameters.Add("@otherField2", MySqlDbType.VarChar).Value = othersField2;
+
+                // execute the query (in this case add a new postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Add data to the condition table
+        public void ADD_OTHERS_COND()
+        {
+            connectdb.Open();
+            string query = "";
+            query = "INSERT INTO cond(condabr, condname, conddesc) VALUES(@otherField1, @otherField2, @otherField3)";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                // add app fields data to the database fields
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+                cmd.Parameters.Add("@otherField2", MySqlDbType.VarChar).Value = othersField2;
+                cmd.Parameters.Add("@otherField3", MySqlDbType.VarChar).Value = othersField3;
+
+                // execute the query (in this case add a new postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Add data to the country table
+        public void ADD_OTHERS_COUNTRY()
+        {
+            connectdb.Open();
+            string query = "";
+            query = "INSERT INTO country(countryname, countryiso) VALUES(@otherField1, @otherField2)";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                // add app fields data to the database fields
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+                cmd.Parameters.Add("@otherField2", MySqlDbType.VarChar).Value = othersField2;
+
+                // execute the query (in this case add a new postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Add data to the material table
+        public void ADD_OTHERS_MATERIAL()
+        {
+            connectdb.Open();
+            string query = "";
+            query = "INSERT INTO material(materialname) VALUES(@otherField1)";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                // add app fields data to the database fields
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+
+                // execute the query (in this case add a new postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Add data to the orientation table
+        public void ADD_OTHERS_ORIENT()
+        {
+            connectdb.Open();
+            string query = "";
+            query = "INSERT INTO orient(orientabr, orientname) VALUES(@otherField1, @otherField2)";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                // add app fields data to the database fields
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+                cmd.Parameters.Add("@otherField2", MySqlDbType.VarChar).Value = othersField2;
+
+                // execute the query (in this case add a new postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Add data to the publisher table
+        public void ADD_OTHERS_PUBLISH()
+        {
+            connectdb.Open();
+            string query = "";
+            query = "INSERT INTO publish(publishname, publishcompanies) VALUES(@otherField1, @otherField2)";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                // add app fields data to the database fields
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+                cmd.Parameters.Add("@otherField2", MySqlDbType.VarChar).Value = othersField2;
+
+                // execute the query (in this case add a new postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Add data to the sent type table
+        public void ADD_OTHERS_SENTTYPE()
+        {
+            connectdb.Open();
+            string query = "";
+            query = "INSERT INTO senttype(senttypename) VALUES(@otherField1)";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                // add app fields data to the database fields
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+
+                // execute the query (in this case add a new postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Add data to the shape table
+        public void ADD_OTHERS_SHAPE()
+        {
+            connectdb.Open();
+            string query = "";
+            query = "INSERT INTO shape(shapename) VALUES(@otherField1)";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                // add app fields data to the database fields
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+
+                // execute the query (in this case add a new postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Add data to the size table
+        public void ADD_OTHERS_SIZE()
+        {
+            connectdb.Open();
+            string query = "";
+            query = "INSERT INTO size(sizename) VALUES(@otherField1)";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                // add app fields data to the database fields
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+
+                // execute the query (in this case add a new postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Add data to the theme table
+        public void ADD_OTHERS_THEME()
+        {
+            connectdb.Open();
+            string query = "";
+            query = "INSERT INTO theme(themename) VALUES(@otherField1)";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                // add app fields data to the database fields
+                cmd.Parameters.Add("@sdesceng", MySqlDbType.VarChar).Value = othersField1;
+
+                // execute the query (in this case add a new postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Add data to the year table
+        public void ADD_OTHERS_YEAR()
+        {
+            connectdb.Open();
+            string query = "";
+            query = "INSERT INTO yyear(yearnumber) VALUES(@otherField1)";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                // add app fields data to the database fields
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+
+                // execute the query (in this case add a new postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Update data to the coloring table
+        public void UPDATE_OTHERS_COLORING()
+        {
+            connectdb.Open();
+            string query = "UPDATE coloring SET coloringabr=@otherField1, coloringname=@otherField2 WHERE coloringid=@otherID";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+                cmd.Parameters.Add("@otherField2", MySqlDbType.VarChar).Value = othersField2;
 
                 // WHERE clause
-                cmd.Parameters.Add("@old_seriesSecond", MySqlDbType.VarChar).Value = seriesSecCardNumber;
+                cmd.Parameters.Add("@otherID", MySqlDbType.Int32).Value = othersID;
 
                 // execute the query (in this case update the current postcard)
                 cmd.ExecuteNonQuery();
                 connectdb.Close();
             }
         }
+
+        // Update data to the condition table
+        public void UPDATE_OTHERS_COND()
+        {
+            connectdb.Open();
+            string query = "UPDATE cond SET condabr=@otherField1, condname=@otherField2, conddesc=@otherField3 WHERE condid=@otherID";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+                cmd.Parameters.Add("@otherField2", MySqlDbType.VarChar).Value = othersField2;
+                cmd.Parameters.Add("@otherField3", MySqlDbType.VarChar).Value = othersField3;
+
+                // WHERE clause
+                cmd.Parameters.Add("@otherID", MySqlDbType.Int32).Value = othersID;
+
+                // execute the query (in this case update the current postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Update data to the country table
+        public void UPDATE_OTHERS_COUNTRY()
+        {
+            connectdb.Open();
+            string query = "UPDATE cond SET countryname=@otherField1, countryiso=@otherField2 WHERE countryid=@otherID";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+                cmd.Parameters.Add("@otherField2", MySqlDbType.VarChar).Value = othersField2;
+
+                // WHERE clause
+                cmd.Parameters.Add("@otherID", MySqlDbType.Int32).Value = othersID;
+
+                // execute the query (in this case update the current postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Update data to the material table
+        public void UPDATE_OTHERS_MATERIAL()
+        {
+            connectdb.Open();
+            string query = "UPDATE material SET materialname=@otherField1 WHERE materialid=@otherID";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+
+                // WHERE clause
+                cmd.Parameters.Add("@otherID", MySqlDbType.Int32).Value = othersID;
+
+                // execute the query (in this case update the current postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Update data to the orientation table
+        public void UPDATE_OTHERS_ORIENT()
+        {
+            connectdb.Open();
+            string query = "UPDATE orient SET orientabr=@otherField1, orientname=@otherField2 WHERE orientid=@otherID";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+                cmd.Parameters.Add("@otherField2", MySqlDbType.VarChar).Value = othersField2;
+
+                // WHERE clause
+                cmd.Parameters.Add("@otherID", MySqlDbType.Int32).Value = othersID;
+
+                // execute the query (in this case update the current postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Update data to the publisher table
+        public void UPDATE_OTHERS_PUBLISH()
+        {
+            connectdb.Open();
+            string query = "UPDATE publish SET publishname=@otherField1, publishcompanies=@otherField2 WHERE publishid=@otherID";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+                cmd.Parameters.Add("@otherField2", MySqlDbType.VarChar).Value = othersField2;
+
+                // WHERE clause
+                cmd.Parameters.Add("@otherID", MySqlDbType.Int32).Value = othersID;
+
+                // execute the query (in this case update the current postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Update data to the senttype table
+        public void UPDATE_OTHERS_SENTTYPE()
+        {
+            connectdb.Open();
+            string query = "UPDATE senttype SET senttypename=@otherField1 WHERE senttypeid=@otherID";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+
+                // WHERE clause
+                cmd.Parameters.Add("@otherID", MySqlDbType.Int32).Value = othersID;
+
+                // execute the query (in this case update the current postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Update data to the shape table
+        public void UPDATE_OTHERS_SHAPE()
+        {
+            connectdb.Open();
+            string query = "UPDATE shape SET shapename=@otherField1 WHERE shapeid=@otherID";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+
+                // WHERE clause
+                cmd.Parameters.Add("@otherID", MySqlDbType.Int32).Value = othersID;
+
+                // execute the query (in this case update the current postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Update data to the size table
+        public void UPDATE_OTHERS_SIZE()
+        {
+            connectdb.Open();
+            string query = "UPDATE size SET sizename=@otherField1 WHERE sizeid=@otherID";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+
+                // WHERE clause
+                cmd.Parameters.Add("@otherID", MySqlDbType.Int32).Value = othersID;
+
+                // execute the query (in this case update the current postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Update data to the theme table
+        public void UPDATE_OTHERS_THEME()
+        {
+            connectdb.Open();
+            string query = "UPDATE theme SET themename=@otherField1 WHERE themeid=@otherID";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+
+                // WHERE clause
+                cmd.Parameters.Add("@otherID", MySqlDbType.Int32).Value = othersID;
+
+                // execute the query (in this case update the current postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Update data to the year table
+        public void UPDATE_OTHERS_YEAR()
+        {
+            connectdb.Open();
+            string query = "UPDATE year SET yearnumber=@otherField1 WHERE yearid=@otherID";
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
+
+                // WHERE clause
+                cmd.Parameters.Add("@otherID", MySqlDbType.Int32).Value = othersID;
+
+                // execute the query (in this case update the current postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+            }
+        }
+
+        // Delete postcard in the database
+        public void DELETE_OTHERS(int opt)
+        {
+            connectdb.Open();
+            string query = "";
+            if (opt == 1)
+                query = "DELETE FROM coloring WHERE coloringid=@otherID";
+            else if (opt == 2)
+                query = "DELETE FROM cond WHERE condid=@otherID";
+            else if (opt == 3)
+                query = "DELETE FROM country WHERE countryid=@otherID";
+            else if (opt == 4)
+                query = "DELETE FROM material WHERE materialid=@otherID";
+            else if (opt == 5)
+                query = "DELETE FROM orient WHERE orientid=@otherID";
+            else if (opt == 6)
+                query = "DELETE FROM publish WHERE publishid=@otherID";
+            else if (opt == 7)
+                query = "DELETE FROM senttype WHERE senttypeid=@otherID";
+            else if (opt == 8)
+                query = "DELETE FROM shape WHERE shapeid=@otherID";
+            else if (opt == 9)
+                query = "DELETE FROM size WHERE sizeid=@otherID";
+            else if (opt == 10)
+                query = "DELETE FROM theme WHERE themeid=@otherID";
+            else if (opt == 11)
+                query = "DELETE FROM yyear WHERE yearid=@otherID";
+
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = query;
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+
+                // WHERE
+                cmd.Parameters.Add("@otherID", MySqlDbType.Int32).Value = othersID;
+
+                // execute the query (in this case update the current postcard)
+                cmd.ExecuteNonQuery();
+                connectdb.Close();
+
+            }
+        }
+
     }
 }
