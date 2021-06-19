@@ -253,11 +253,9 @@ namespace PostcardsEditor
                 txt_seriesTotalImgCard.Enabled = true;
                 chk_seriesUpdate.Visible = true;
                 btn_seriesSave.Enabled = true;
-                txt_updSecondNumber.Visible = true;
                 btn_seriesOpenBackImg.Enabled = true;
                 btn_seriesOpenFrontImg.Enabled = true;
                 btn_seriesSave.Visible = true;
-                btn_updSecondNumber.Visible = true;
                 txt_MainCard.Enabled = true;
                 combo_seriesColoring.Enabled = true;
                 combo_seriesOrient.Enabled = true;
@@ -271,22 +269,6 @@ namespace PostcardsEditor
         {
             panel2.Visible = false;
             this.Close();
-        }
-
-        private void btn_updSecondNumber_Click(object sender, EventArgs e)
-        {
-            if (txt_seriesSecondNumber.Text.Length > 0 && txt_mainCardNumber.Text.Trim() != "" && txt_seriesSecondNumber.Text.Length > 0 || txt_seriesSecondNumber.Text.Trim() != "" && txt_seriesSecondNumber.Text.Trim() != txt_mainCardNumber.Text.Trim())
-            {
-                dc.old_seriesSecond = txt_seriesSecondNumber.Text;
-                dc.new_seriesSecond = txt_updSecondNumber.Text;
-                dc.UPDATE_SECOND_NUMBER();
-                string query = "Postcard\n\nChanging Card Number from: " + txt_seriesSecondNumber.Text + "\nTo number: " + txt_updSecondNumber.Text + "\n\nSaved!";
-                MessageBox.Show(query);
-
-                con.connectdb.Close();
-                panel2.Visible = false;
-                CHECKS_SERIES();
-            }
         }
 
         private void dataGridSeries_ViewContent(object sender, DataGridViewCellEventArgs e)
@@ -360,6 +342,14 @@ namespace PostcardsEditor
             {
                 MessageBox.Show("Field 'Main Card Number'  and 'Secondary Card Number' cannot be empty.\nField 'Secondary Card Number' must have a unique number.", "Main & Secondary Numbers", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void chk_seriesDelete_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_seriesDelete.Checked == true)
+                btn_seriesDelete.Enabled = true;
+            else
+                btn_seriesDelete.Enabled = false;
         }
 
         private void pic_loader(object sender, EventArgs e)
@@ -541,11 +531,9 @@ namespace PostcardsEditor
             txt_seriesSecondNumber.Enabled = false;
             txt_seriesTotalImgCard.Enabled = false;
             chk_seriesUpdate.Visible = false;
-            txt_updSecondNumber.Visible = false;
             btn_seriesOpenBackImg.Enabled = false;
             btn_seriesOpenFrontImg.Enabled = false;
             btn_seriesSave.Visible = false;
-            btn_updSecondNumber.Visible = false;
             txt_MainCard.Enabled = false;
             combo_seriesColoring.Enabled = false;
             combo_seriesOrient.Enabled = false;

@@ -42,8 +42,6 @@ namespace PostcardsEditor
             this.dataGridSeries = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.lbl_loadingSeries = new System.Windows.Forms.Label();
-            this.txt_updSecondNumber = new System.Windows.Forms.TextBox();
-            this.btn_updSecondNumber = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.lbl_seriesAddEdit = new System.Windows.Forms.Label();
             this.chk_seriesUpdate = new System.Windows.Forms.CheckBox();
@@ -149,6 +147,7 @@ namespace PostcardsEditor
             this.chk_seriesDelete.Size = new System.Drawing.Size(15, 14);
             this.chk_seriesDelete.TabIndex = 3;
             this.chk_seriesDelete.UseVisualStyleBackColor = true;
+            this.chk_seriesDelete.CheckedChanged += new System.EventHandler(this.chk_seriesDelete_CheckedChanged);
             // 
             // lbl_seriesRowNumber
             // 
@@ -219,8 +218,6 @@ namespace PostcardsEditor
             // 
             this.panel2.BackColor = System.Drawing.Color.PeachPuff;
             this.panel2.Controls.Add(this.lbl_loadingSeries);
-            this.panel2.Controls.Add(this.txt_updSecondNumber);
-            this.panel2.Controls.Add(this.btn_updSecondNumber);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.lbl_seriesAddEdit);
             this.panel2.Controls.Add(this.chk_seriesUpdate);
@@ -244,25 +241,6 @@ namespace PostcardsEditor
             this.lbl_loadingSeries.Size = new System.Drawing.Size(160, 24);
             this.lbl_loadingSeries.TabIndex = 16;
             this.lbl_loadingSeries.Text = "Loading content...";
-            // 
-            // txt_updSecondNumber
-            // 
-            this.txt_updSecondNumber.Location = new System.Drawing.Point(247, 625);
-            this.txt_updSecondNumber.Name = "txt_updSecondNumber";
-            this.txt_updSecondNumber.Size = new System.Drawing.Size(307, 24);
-            this.txt_updSecondNumber.TabIndex = 10;
-            // 
-            // btn_updSecondNumber
-            // 
-            this.btn_updSecondNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_updSecondNumber.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btn_updSecondNumber.Location = new System.Drawing.Point(560, 623);
-            this.btn_updSecondNumber.Name = "btn_updSecondNumber";
-            this.btn_updSecondNumber.Size = new System.Drawing.Size(138, 28);
-            this.btn_updSecondNumber.TabIndex = 9;
-            this.btn_updSecondNumber.Text = "&New 2nd Number";
-            this.btn_updSecondNumber.UseVisualStyleBackColor = true;
-            this.btn_updSecondNumber.Click += new System.EventHandler(this.btn_updSecondNumber_Click);
             // 
             // label5
             // 
@@ -831,8 +809,6 @@ namespace PostcardsEditor
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txt_MainCard;
         private System.Windows.Forms.CheckBox chk_allSeries;
-        private System.Windows.Forms.TextBox txt_updSecondNumber;
-        private System.Windows.Forms.Button btn_updSecondNumber;
         private System.Windows.Forms.Label lbl_loadingSeries;
     }
 }

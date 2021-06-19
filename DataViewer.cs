@@ -21,6 +21,7 @@ namespace PostcardsEditor
 
         // Temporary variables
         public string get_cardNumber, get_cardPublish, get_cardCountry, get_cardTheme, get_cardColoring, get_cardYear, get_cardSize, get_cardShape, get_cardOrient, get_cardCond, get_cardSentType, get_cardEquals, get_cardMaterial;
+        public Int32 get_cardID;
 
         // search variables
         public string combo_result, search_text;
@@ -270,7 +271,10 @@ namespace PostcardsEditor
 
                 // check if it is a new postcard or an update
                 if (chkCard == true)
+                {
+                    dc.cardID = get_cardID;
                     dc.UPDATE_CARD();
+                }
                 else
                     dc.ADD_CARD();
 
@@ -382,7 +386,7 @@ namespace PostcardsEditor
 
         private void chk_updateCard_CheckedChanged(object sender, EventArgs e)
         {
-            if (!chk_updateCard.Checked == true)
+            if (chk_updateCard.Checked != true)
             {
                 chkCard = false;
                 txt_cardNumber.Enabled = true;
@@ -393,8 +397,9 @@ namespace PostcardsEditor
             {
                 chkCard = true;
                 txt_cardNumber.Enabled = false;
-                txt_frontImgPath.Text = dataGridCard.CurrentRow.Cells[30].Value.ToString();
-                txt_backImgPath.Text = dataGridCard.CurrentRow.Cells[31].Value.ToString();
+                get_cardID = (Int32)dataGridCard.CurrentRow.Cells[0].Value;
+                txt_frontImgPath.Text = dataGridCard.CurrentRow.Cells[31].Value.ToString();
+                txt_backImgPath.Text = dataGridCard.CurrentRow.Cells[32].Value.ToString();
             }
         }
 
@@ -414,6 +419,19 @@ namespace PostcardsEditor
         private void btn_publishBlog_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Not ready yet. Try again later.");
+        }
+
+        private void btn_cardRefresh_Click(object sender, EventArgs e)
+        {
+            dataGridCard.DataSource = null;
+            dc.REFRESH_CARD();
+            dataGridCard.DataSource = dc.DT;
+        }
+
+        private void btn_moreOptions_Click(object sender, EventArgs e)
+        {
+            Form newform = new OtherOptions();
+            newform.ShowDialog();
         }
 
         private void btn_exitApp_Click(object sender, EventArgs e)
@@ -441,6 +459,8 @@ namespace PostcardsEditor
             chk_delete.Checked = false;
             if (dialog == DialogResult.Yes)
             {
+                get_cardID = (Int32)dataGridCard.CurrentRow.Cells[0].Value;
+                dc.cardID = get_cardID;
                 txt_cardNumber.Text = dataGridCard.CurrentRow.Cells[0].Value.ToString();
                 dc.cardNumber = txt_cardNumber.Text;
                 dc.DELETE_CARD();
@@ -473,6 +493,7 @@ namespace PostcardsEditor
         {
             chkCard = true;
             chk_updateCard.Checked = chkCard;
+            get_cardID = (Int32)dataGridCard.CurrentRow.Cells[0].Value;
             panel2.Visible = true;
             lbl_addEdit.Text = "Edit Postcard";
 
@@ -540,21 +561,27 @@ namespace PostcardsEditor
         private void dataGridCard_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView senderGrid = (DataGridView)sender;
-            lbl_rowNumber.Text = "Row " + dataGridCard.CurrentRow.Index.ToString() + " / " + (dataGridCard.RowCount - 1).ToString();
+            Int32 currentRow = dataGridCard.CurrentRow.Index + 1;
+            lbl_rowNumber.Text = "Row " + currentRow.ToString() + " / " + (dataGridCard.RowCount).ToString();
+            lbl_cardNumber.Text = dataGridCard.CurrentRow.Cells[1].Value.ToString();
         }
 
         // In case you press down a key in the grid
         private void dataGridCard_CellContentClick(object sender, KeyPressEventArgs e)
         {
             DataGridView senderGrid = (DataGridView)sender;
-            lbl_rowNumber.Text = "Row " + dataGridCard.CurrentRow.Index.ToString() + " / " + (dataGridCard.RowCount - 1).ToString();
+            Int32 currentRow = dataGridCard.CurrentRow.Index + 1;
+            lbl_rowNumber.Text = "Row " + currentRow.ToString() + " / " + (dataGridCard.RowCount).ToString();
+            lbl_cardNumber.Text = dataGridCard.CurrentRow.Cells[1].Value.ToString();
         }
 
         // in case you move around using arrow keys (or enter key)
         private void dataGridCard_CellContentClick(object sender, KeyEventArgs e)
         {
             DataGridView senderGrid = (DataGridView)sender;
-            lbl_rowNumber.Text = "Row " + dataGridCard.CurrentRow.Index.ToString() + " / " + (dataGridCard.RowCount - 1).ToString();
+            Int32 currentRow = dataGridCard.CurrentRow.Index + 1;
+            lbl_rowNumber.Text = "Row " + currentRow.ToString() + " / " + (dataGridCard.RowCount).ToString();
+            lbl_cardNumber.Text = dataGridCard.CurrentRow.Cells[1].Value.ToString();
         }
 
         // Just the preparation for the add/edit panel
@@ -607,43 +634,44 @@ namespace PostcardsEditor
                 pic_backImg.Image = new Bitmap(Properties.Resources.no_image);
             }
 
-            txt_cardNumber.Text = dataGridCard.CurrentRow.Cells[0].Value.ToString();
-            get_cardPublish = dataGridCard.CurrentRow.Cells[1].Value.ToString();
-            if (dataGridCard.CurrentRow.Cells[2].Value.ToString() == "Y")
+            get_cardID = (Int32)dataGridCard.CurrentRow.Cells[0].Value;
+            txt_cardNumber.Text = dataGridCard.CurrentRow.Cells[1].Value.ToString();
+            get_cardPublish = dataGridCard.CurrentRow.Cells[2].Value.ToString();
+            if (dataGridCard.CurrentRow.Cells[3].Value.ToString() == "Y")
                 chk_scanned.Checked = true;
             else
                 chk_scanned.Checked = false;
-            if (dataGridCard.CurrentRow.Cells[3].Value.ToString() == "Y")
+            if (dataGridCard.CurrentRow.Cells[4].Value.ToString() == "Y")
                 chk_blog.Checked = true;
             else
                 chk_blog.Checked = false;
-            get_cardCountry = dataGridCard.CurrentRow.Cells[4].Value.ToString();
-            txt_descENG.Text = dataGridCard.CurrentRow.Cells[5].Value.ToString();
-            txt_descORIG.Text = dataGridCard.CurrentRow.Cells[6].Value.ToString();
-            get_cardTheme = dataGridCard.CurrentRow.Cells[7].Value.ToString();
-            get_cardColoring = dataGridCard.CurrentRow.Cells[8].Value.ToString();
-            get_cardYear = dataGridCard.CurrentRow.Cells[9].Value.ToString();
-            txt_totalmgInCard.Text = dataGridCard.CurrentRow.Cells[10].Value.ToString();
-            if (dataGridCard.CurrentRow.Cells[11].Value.ToString() == "Y")
+            get_cardCountry = dataGridCard.CurrentRow.Cells[5].Value.ToString();
+            txt_descENG.Text = dataGridCard.CurrentRow.Cells[6].Value.ToString();
+            txt_descORIG.Text = dataGridCard.CurrentRow.Cells[7].Value.ToString();
+            get_cardTheme = dataGridCard.CurrentRow.Cells[8].Value.ToString();
+            get_cardColoring = dataGridCard.CurrentRow.Cells[9].Value.ToString();
+            get_cardYear = dataGridCard.CurrentRow.Cells[10].Value.ToString();
+            txt_totalmgInCard.Text = dataGridCard.CurrentRow.Cells[11].Value.ToString();
+            if (dataGridCard.CurrentRow.Cells[12].Value.ToString() == "Y")
                 chk_seriesMulti.Checked = true;
             else
                 chk_seriesMulti.Checked = false;
-            txt_totSeriesCards.Text = dataGridCard.CurrentRow.Cells[12].Value.ToString();
-            get_cardSize = dataGridCard.CurrentRow.Cells[13].Value.ToString();
-            get_cardShape = dataGridCard.CurrentRow.Cells[14].Value.ToString();
-            get_cardOrient = dataGridCard.CurrentRow.Cells[15].Value.ToString();
-            txt_barcodeGen.Text = dataGridCard.CurrentRow.Cells[16].Value.ToString();
-            get_cardMaterial = dataGridCard.CurrentRow.Cells[17].Value.ToString();
-            get_cardCond = dataGridCard.CurrentRow.Cells[18].Value.ToString();
-            if (dataGridCard.CurrentRow.Cells[19].Value.ToString() == "Y")
+            txt_totSeriesCards.Text = dataGridCard.CurrentRow.Cells[13].Value.ToString();
+            get_cardSize = dataGridCard.CurrentRow.Cells[14].Value.ToString();
+            get_cardShape = dataGridCard.CurrentRow.Cells[15].Value.ToString();
+            get_cardOrient = dataGridCard.CurrentRow.Cells[16].Value.ToString();
+            txt_barcodeGen.Text = dataGridCard.CurrentRow.Cells[17].Value.ToString();
+            get_cardMaterial = dataGridCard.CurrentRow.Cells[18].Value.ToString();
+            get_cardCond = dataGridCard.CurrentRow.Cells[19].Value.ToString();
+            if (dataGridCard.CurrentRow.Cells[20].Value.ToString() == "Y")
                 chk_borders.Checked = true;
             else
                 chk_borders.Checked = false;
-            txt_frtTxtColor.Text = dataGridCard.CurrentRow.Cells[20].Value.ToString();
-            txt_backTxtColor.Text = dataGridCard.CurrentRow.Cells[21].Value.ToString();
-            if ((dataGridCard.CurrentRow.Cells[22].Value.ToString()).Trim() != "")
+            txt_frtTxtColor.Text = dataGridCard.CurrentRow.Cells[21].Value.ToString();
+            txt_backTxtColor.Text = dataGridCard.CurrentRow.Cells[22].Value.ToString();
+            if ((dataGridCard.CurrentRow.Cells[23].Value.ToString()).Trim() != "")
             {
-                txt_datePurchase.Text = dataGridCard.CurrentRow.Cells[22].Value.ToString();
+                txt_datePurchase.Text = dataGridCard.CurrentRow.Cells[23].Value.ToString();
                 try
                 {
                     dateTimePicker1.Value = DateTime.Parse(txt_datePurchase.Text);
@@ -658,21 +686,21 @@ namespace PostcardsEditor
                 txt_datePurchase.Text = "";
                 dateTimePicker1.Value = DateTime.Now;
             }
-            txt_price.Text = dataGridCard.CurrentRow.Cells[23].Value.ToString();
-            txt_webpage.Text = dataGridCard.CurrentRow.Cells[24].Value.ToString();
-            if (dataGridCard.CurrentRow.Cells[25].Value.ToString() == "Y")
+            txt_price.Text = dataGridCard.CurrentRow.Cells[24].Value.ToString();
+            txt_webpage.Text = dataGridCard.CurrentRow.Cells[25].Value.ToString();
+            if (dataGridCard.CurrentRow.Cells[26].Value.ToString() == "Y")
                 chk_identical.Checked = true;
             else
                 chk_identical.Checked = false;
-            get_cardEquals = dataGridCard.CurrentRow.Cells[26].Value.ToString();
-            txt_cardDifferencies.Text = dataGridCard.CurrentRow.Cells[27].Value.ToString();
-            txt_bigDescription.Text = dataGridCard.CurrentRow.Cells[28].Value.ToString();
-            get_cardSentType = dataGridCard.CurrentRow.Cells[29].Value.ToString();
-            txt_TypeDesc.Text = dataGridCard.CurrentRow.Cells[30].Value.ToString();
+            get_cardEquals = dataGridCard.CurrentRow.Cells[27].Value.ToString();
+            txt_cardDifferencies.Text = dataGridCard.CurrentRow.Cells[28].Value.ToString();
+            txt_bigDescription.Text = dataGridCard.CurrentRow.Cells[29].Value.ToString();
+            get_cardSentType = dataGridCard.CurrentRow.Cells[30].Value.ToString();
+            txt_TypeDesc.Text = dataGridCard.CurrentRow.Cells[31].Value.ToString();
             if (chkCard == true)
             {
-                txt_frontImgPath.Text = dataGridCard.CurrentRow.Cells[31].Value.ToString();
-                txt_backImgPath.Text = dataGridCard.CurrentRow.Cells[32].Value.ToString();
+                txt_frontImgPath.Text = dataGridCard.CurrentRow.Cells[32].Value.ToString();
+                txt_backImgPath.Text = dataGridCard.CurrentRow.Cells[33].Value.ToString();
             }
             else
             {
@@ -819,43 +847,44 @@ namespace PostcardsEditor
             btn_openFrontImg.Enabled = false;
             btn_openBackImg.Enabled = false;
 
-            txt_cardNumber.Text = dataGridCard.CurrentRow.Cells[0].Value.ToString();
-            get_cardPublish = dataGridCard.CurrentRow.Cells[1].Value.ToString();
-            if (dataGridCard.CurrentRow.Cells[2].Value.ToString() == "Y")
+            get_cardID = (int)dataGridCard.CurrentRow.Cells[0].Value;
+            txt_cardNumber.Text = dataGridCard.CurrentRow.Cells[1].Value.ToString();
+            get_cardPublish = dataGridCard.CurrentRow.Cells[2].Value.ToString();
+            if (dataGridCard.CurrentRow.Cells[3].Value.ToString() == "Y")
                 chk_scanned.Checked = true;
             else
                 chk_scanned.Checked = false;
-            if (dataGridCard.CurrentRow.Cells[3].Value.ToString() == "Y")
+            if (dataGridCard.CurrentRow.Cells[4].Value.ToString() == "Y")
                 chk_blog.Checked = true;
             else
                 chk_blog.Checked = false;
-            get_cardCountry = dataGridCard.CurrentRow.Cells[4].Value.ToString();
-            txt_descENG.Text = dataGridCard.CurrentRow.Cells[5].Value.ToString();
-            txt_descORIG.Text = dataGridCard.CurrentRow.Cells[6].Value.ToString();
-            get_cardTheme = dataGridCard.CurrentRow.Cells[7].Value.ToString();
-            get_cardColoring = dataGridCard.CurrentRow.Cells[8].Value.ToString();
-            get_cardYear = dataGridCard.CurrentRow.Cells[9].Value.ToString();
-            txt_totalmgInCard.Text = dataGridCard.CurrentRow.Cells[10].Value.ToString();
-            if (dataGridCard.CurrentRow.Cells[11].Value.ToString() == "Y")
+            get_cardCountry = dataGridCard.CurrentRow.Cells[5].Value.ToString();
+            txt_descENG.Text = dataGridCard.CurrentRow.Cells[6].Value.ToString();
+            txt_descORIG.Text = dataGridCard.CurrentRow.Cells[7].Value.ToString();
+            get_cardTheme = dataGridCard.CurrentRow.Cells[8].Value.ToString();
+            get_cardColoring = dataGridCard.CurrentRow.Cells[9].Value.ToString();
+            get_cardYear = dataGridCard.CurrentRow.Cells[10].Value.ToString();
+            txt_totalmgInCard.Text = dataGridCard.CurrentRow.Cells[11].Value.ToString();
+            if (dataGridCard.CurrentRow.Cells[12].Value.ToString() == "Y")
                 chk_seriesMulti.Checked = true;
             else
                 chk_seriesMulti.Checked = false;
-            txt_totSeriesCards.Text = dataGridCard.CurrentRow.Cells[12].Value.ToString();
-            get_cardSize = dataGridCard.CurrentRow.Cells[13].Value.ToString();
-            get_cardShape = dataGridCard.CurrentRow.Cells[14].Value.ToString();
-            get_cardOrient = dataGridCard.CurrentRow.Cells[15].Value.ToString();
-            txt_barcodeGen.Text = dataGridCard.CurrentRow.Cells[16].Value.ToString();
-            get_cardMaterial = dataGridCard.CurrentRow.Cells[17].Value.ToString();
-            get_cardCond = dataGridCard.CurrentRow.Cells[18].Value.ToString();
-            if (dataGridCard.CurrentRow.Cells[19].Value.ToString() == "Y")
+            txt_totSeriesCards.Text = dataGridCard.CurrentRow.Cells[13].Value.ToString();
+            get_cardSize = dataGridCard.CurrentRow.Cells[14].Value.ToString();
+            get_cardShape = dataGridCard.CurrentRow.Cells[15].Value.ToString();
+            get_cardOrient = dataGridCard.CurrentRow.Cells[16].Value.ToString();
+            txt_barcodeGen.Text = dataGridCard.CurrentRow.Cells[17].Value.ToString();
+            get_cardMaterial = dataGridCard.CurrentRow.Cells[18].Value.ToString();
+            get_cardCond = dataGridCard.CurrentRow.Cells[19].Value.ToString();
+            if (dataGridCard.CurrentRow.Cells[20].Value.ToString() == "Y")
                 chk_borders.Checked = true;
             else
                 chk_borders.Checked = false;
-            txt_frtTxtColor.Text = dataGridCard.CurrentRow.Cells[20].Value.ToString();
-            txt_backTxtColor.Text = dataGridCard.CurrentRow.Cells[21].Value.ToString();
-            if ((dataGridCard.CurrentRow.Cells[22].Value.ToString()).Trim() != "")
+            txt_frtTxtColor.Text = dataGridCard.CurrentRow.Cells[21].Value.ToString();
+            txt_backTxtColor.Text = dataGridCard.CurrentRow.Cells[22].Value.ToString();
+            if ((dataGridCard.CurrentRow.Cells[23].Value.ToString()).Trim() != "")
             {
-                txt_datePurchase.Text = dataGridCard.CurrentRow.Cells[22].Value.ToString();
+                txt_datePurchase.Text = dataGridCard.CurrentRow.Cells[23].Value.ToString();
                 try
                 {
                     dateTimePicker1.Value = DateTime.Parse(txt_datePurchase.Text);
@@ -870,19 +899,19 @@ namespace PostcardsEditor
                 txt_datePurchase.Text = "";
                 dateTimePicker1.Value = DateTime.Now;
             }
-            txt_price.Text = dataGridCard.CurrentRow.Cells[23].Value.ToString();
-            txt_webpage.Text = dataGridCard.CurrentRow.Cells[24].Value.ToString();
-            if (dataGridCard.CurrentRow.Cells[25].Value.ToString() == "Y")
+            txt_price.Text = dataGridCard.CurrentRow.Cells[24].Value.ToString();
+            txt_webpage.Text = dataGridCard.CurrentRow.Cells[25].Value.ToString();
+            if (dataGridCard.CurrentRow.Cells[26].Value.ToString() == "Y")
                 chk_identical.Checked = true;
             else
                 chk_identical.Checked = false;
-            get_cardEquals = dataGridCard.CurrentRow.Cells[26].Value.ToString();
-            txt_cardDifferencies.Text = dataGridCard.CurrentRow.Cells[27].Value.ToString();
-            txt_bigDescription.Text = dataGridCard.CurrentRow.Cells[28].Value.ToString();
-            get_cardSentType = dataGridCard.CurrentRow.Cells[29].Value.ToString();
-            txt_TypeDesc.Text = dataGridCard.CurrentRow.Cells[30].Value.ToString();
-            txt_frontImgPath.Text = dataGridCard.CurrentRow.Cells[31].Value.ToString();
-            txt_backImgPath.Text = dataGridCard.CurrentRow.Cells[32].Value.ToString();
+            get_cardEquals = dataGridCard.CurrentRow.Cells[27].Value.ToString();
+            txt_cardDifferencies.Text = dataGridCard.CurrentRow.Cells[28].Value.ToString();
+            txt_bigDescription.Text = dataGridCard.CurrentRow.Cells[29].Value.ToString();
+            get_cardSentType = dataGridCard.CurrentRow.Cells[30].Value.ToString();
+            txt_TypeDesc.Text = dataGridCard.CurrentRow.Cells[31].Value.ToString();
+            txt_frontImgPath.Text = dataGridCard.CurrentRow.Cells[32].Value.ToString();
+            txt_backImgPath.Text = dataGridCard.CurrentRow.Cells[33].Value.ToString();
 
             // error check while displaying the images (if available)
             try
@@ -1022,6 +1051,9 @@ namespace PostcardsEditor
             {
                 MessageBox.Show("You must write some text and choose one of the options to where to search");
             }
+            dataGridCard.DataSource = null;
+            dc.REFRESH_CARD();
+            dataGridCard.DataSource = dc.DT;
         }
     }
 }

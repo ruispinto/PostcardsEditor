@@ -35,6 +35,9 @@
   <PropertyGroup>
     <StartupObject>PostcardsEditor.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>postcards.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EPPlus, Version=5.6.2.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>packages\EPPlus.5.6.2\lib\net45\EPPlus.dll</HintPath>
@@ -82,6 +85,12 @@
     </Compile>
     <Compile Include="myclass\connection_class.cs" />
     <Compile Include="myclass\dataclass.cs" />
+    <Compile Include="OtherOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherOptions.Designer.cs">
+      <DependentUpon>OtherOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="SeriesViewer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataViewer.resx">
       <DependentUpon>DataViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherOptions.resx">
+      <DependentUpon>OtherOptions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SeriesViewer.resx">
       <DependentUpon>SeriesViewer.cs</DependentUpon>
@@ -146,6 +158,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="postcards.ico" />
+    <None Include="Resources\postcardsico.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

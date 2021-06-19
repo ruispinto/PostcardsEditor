@@ -31,6 +31,8 @@ namespace PostcardsEditor
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataViewer));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_moreOoptions = new System.Windows.Forms.Button();
+            this.lbl_cardNumber = new System.Windows.Forms.Label();
             this.btn_series = new System.Windows.Forms.Button();
             this.btn_publishBlog = new System.Windows.Forms.Button();
             this.btn_saveExcel = new System.Windows.Forms.Button();
@@ -123,6 +125,7 @@ namespace PostcardsEditor
             this.combo_searchType = new System.Windows.Forms.ComboBox();
             this.txt_searchBox = new System.Windows.Forms.TextBox();
             this.btn_search = new System.Windows.Forms.Button();
+            this.btn_cardRefresh = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCard)).BeginInit();
             this.panel2.SuspendLayout();
@@ -137,6 +140,8 @@ namespace PostcardsEditor
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.btn_moreOoptions);
+            this.panel1.Controls.Add(this.lbl_cardNumber);
             this.panel1.Controls.Add(this.btn_series);
             this.panel1.Controls.Add(this.btn_publishBlog);
             this.panel1.Controls.Add(this.btn_saveExcel);
@@ -153,6 +158,27 @@ namespace PostcardsEditor
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1145, 42);
             this.panel1.TabIndex = 0;
+            // 
+            // btn_moreOoptions
+            // 
+            this.btn_moreOoptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_moreOoptions.Location = new System.Drawing.Point(881, 6);
+            this.btn_moreOoptions.Name = "btn_moreOoptions";
+            this.btn_moreOoptions.Size = new System.Drawing.Size(29, 30);
+            this.btn_moreOoptions.TabIndex = 12;
+            this.btn_moreOoptions.Text = "+";
+            this.btn_moreOoptions.UseVisualStyleBackColor = true;
+            this.btn_moreOoptions.Click += new System.EventHandler(this.btn_moreOptions_Click);
+            // 
+            // lbl_cardNumber
+            // 
+            this.lbl_cardNumber.AutoSize = true;
+            this.lbl_cardNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_cardNumber.Location = new System.Drawing.Point(176, 20);
+            this.lbl_cardNumber.Name = "lbl_cardNumber";
+            this.lbl_cardNumber.Size = new System.Drawing.Size(88, 17);
+            this.lbl_cardNumber.TabIndex = 11;
+            this.lbl_cardNumber.Text = "CardNumber";
             // 
             // btn_series
             // 
@@ -178,7 +204,7 @@ namespace PostcardsEditor
             // 
             // btn_saveExcel
             // 
-            this.btn_saveExcel.Location = new System.Drawing.Point(904, 6);
+            this.btn_saveExcel.Location = new System.Drawing.Point(916, 6);
             this.btn_saveExcel.Name = "btn_saveExcel";
             this.btn_saveExcel.Size = new System.Drawing.Size(130, 30);
             this.btn_saveExcel.TabIndex = 9;
@@ -200,16 +226,17 @@ namespace PostcardsEditor
             // lbl_rowNumber
             // 
             this.lbl_rowNumber.AutoSize = true;
-            this.lbl_rowNumber.Location = new System.Drawing.Point(176, 11);
+            this.lbl_rowNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_rowNumber.Location = new System.Drawing.Point(176, 2);
             this.lbl_rowNumber.Name = "lbl_rowNumber";
-            this.lbl_rowNumber.Size = new System.Drawing.Size(39, 18);
+            this.lbl_rowNumber.Size = new System.Drawing.Size(35, 17);
             this.lbl_rowNumber.TabIndex = 2;
             this.lbl_rowNumber.Text = "Row";
             // 
             // chk_delete
             // 
             this.chk_delete.AutoSize = true;
-            this.chk_delete.Location = new System.Drawing.Point(791, 15);
+            this.chk_delete.Location = new System.Drawing.Point(770, 15);
             this.chk_delete.Name = "chk_delete";
             this.chk_delete.Size = new System.Drawing.Size(15, 14);
             this.chk_delete.TabIndex = 7;
@@ -219,7 +246,7 @@ namespace PostcardsEditor
             // btn_delete
             // 
             this.btn_delete.Enabled = false;
-            this.btn_delete.Location = new System.Drawing.Point(808, 6);
+            this.btn_delete.Location = new System.Drawing.Point(787, 6);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(88, 30);
             this.btn_delete.TabIndex = 8;
@@ -229,7 +256,7 @@ namespace PostcardsEditor
             // 
             // btn_edit
             // 
-            this.btn_edit.Location = new System.Drawing.Point(688, 6);
+            this.btn_edit.Location = new System.Drawing.Point(667, 6);
             this.btn_edit.Name = "btn_edit";
             this.btn_edit.Size = new System.Drawing.Size(88, 30);
             this.btn_edit.TabIndex = 6;
@@ -239,7 +266,7 @@ namespace PostcardsEditor
             // 
             // btn_add
             // 
-            this.btn_add.Location = new System.Drawing.Point(595, 6);
+            this.btn_add.Location = new System.Drawing.Point(574, 6);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(88, 30);
             this.btn_add.TabIndex = 5;
@@ -259,7 +286,7 @@ namespace PostcardsEditor
             // 
             // btn_exitApp
             // 
-            this.btn_exitApp.Location = new System.Drawing.Point(1044, 6);
+            this.btn_exitApp.Location = new System.Drawing.Point(1052, 6);
             this.btn_exitApp.Name = "btn_exitApp";
             this.btn_exitApp.Size = new System.Drawing.Size(88, 30);
             this.btn_exitApp.TabIndex = 10;
@@ -1139,6 +1166,16 @@ namespace PostcardsEditor
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
+            // btn_cardRefresh
+            // 
+            this.btn_cardRefresh.Location = new System.Drawing.Point(1060, 11);
+            this.btn_cardRefresh.Name = "btn_cardRefresh";
+            this.btn_cardRefresh.Size = new System.Drawing.Size(84, 26);
+            this.btn_cardRefresh.TabIndex = 6;
+            this.btn_cardRefresh.Text = "&Refresh";
+            this.btn_cardRefresh.UseVisualStyleBackColor = true;
+            this.btn_cardRefresh.Click += new System.EventHandler(this.btn_cardRefresh_Click);
+            // 
             // DataViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
@@ -1152,6 +1189,7 @@ namespace PostcardsEditor
             this.Controls.Add(this.combo_searchType);
             this.Controls.Add(this.dataGridCard);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.btn_cardRefresh);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1273,5 +1311,8 @@ namespace PostcardsEditor
         private System.Windows.Forms.ComboBox combo_material;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label lbl_loadingCard;
+        private System.Windows.Forms.Label lbl_cardNumber;
+        private System.Windows.Forms.Button btn_cardRefresh;
+        private System.Windows.Forms.Button btn_moreOoptions;
     }
 }
