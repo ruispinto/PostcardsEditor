@@ -93,7 +93,8 @@ namespace PostcardsEditor.myclass
         public DataTable DT = new DataTable();
         public DataSet DS = new DataSet();
 
-        public string sVersion = "2.0.01.0619";
+        public string sVersion = "2.0.02.0005";
+        public string dVersion = "2021-07-02";
 
         // fetch data from coloring Table
         public void Show_ColoringTable()
