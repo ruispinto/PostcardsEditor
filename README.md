@@ -4,6 +4,8 @@
 ##
 ### *** NEW ***
 ###
+### - Now the revision date appears in the about screen
+###
 ###
 ###
 ###  *** UPDATED ***
