@@ -1,12 +1,12 @@
 # PostcardsEditor
 ##
-## Revision 2.0.01.0619 - 2021-06-19
+## Revision 2.0.02.0005 - 2021-07-02
 ##
 ### *** NEW ***
 ###
-### - Other tables access (add/update/delete/export to excel data). These tables are the ones used in the postcard.
 ###
 ###
 ###  *** UPDATED ***
 ###
 ### - Minor bug fixes
+### - Now everytime you add a postcard to the database it refresh data in the screen but maintain the cursor in the row where you were before.
