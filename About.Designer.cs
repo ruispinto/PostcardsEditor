@@ -48,6 +48,7 @@ namespace PostcardsEditor
             this.btn_closeAbout.TabIndex = 13;
             this.btn_closeAbout.Text = "&Close";
             this.btn_closeAbout.UseVisualStyleBackColor = true;
+            this.btn_closeAbout.UseWaitCursor = true;
             this.btn_closeAbout.Click += new System.EventHandler(this.btn_closeAbout_Click);
             // 
             // label5
@@ -59,6 +60,7 @@ namespace PostcardsEditor
             this.label5.Size = new System.Drawing.Size(186, 19);
             this.label5.TabIndex = 11;
             this.label5.Text = "Database engine: MySQL™";
+            this.label5.UseWaitCursor = true;
             // 
             // label4
             // 
@@ -69,6 +71,7 @@ namespace PostcardsEditor
             this.label4.Size = new System.Drawing.Size(395, 19);
             this.label4.TabIndex = 10;
             this.label4.Text = "Technology used: C#, .Net™ Framework, MySQL™, EPPlus™";
+            this.label4.UseWaitCursor = true;
             // 
             // label3
             // 
@@ -79,16 +82,18 @@ namespace PostcardsEditor
             this.label3.Size = new System.Drawing.Size(210, 19);
             this.label3.TabIndex = 9;
             this.label3.Text = "© Copyright 2021 by Rui Pinto";
+            this.label3.UseWaitCursor = true;
             // 
             // lbl_softwareVersion
             // 
             this.lbl_softwareVersion.AutoSize = true;
             this.lbl_softwareVersion.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_softwareVersion.Location = new System.Drawing.Point(156, 69);
+            this.lbl_softwareVersion.Location = new System.Drawing.Point(113, 69);
             this.lbl_softwareVersion.Name = "lbl_softwareVersion";
             this.lbl_softwareVersion.Size = new System.Drawing.Size(62, 19);
             this.lbl_softwareVersion.TabIndex = 8;
             this.lbl_softwareVersion.Text = "Version ";
+            this.lbl_softwareVersion.UseWaitCursor = true;
             // 
             // label1
             // 
@@ -99,6 +104,7 @@ namespace PostcardsEditor
             this.label1.Size = new System.Drawing.Size(296, 26);
             this.label1.TabIndex = 7;
             this.label1.Text = "Postcards Database Editor";
+            this.label1.UseWaitCursor = true;
             // 
             // label6
             // 
@@ -112,6 +118,7 @@ namespace PostcardsEditor
             this.label6.Text = "Disclaimer: All wrtiten code is open source and can be accessed through  github a" +
     "nd can be modified freely. The only part that isn\'t correct is the login usernam" +
     "e and password, for obvious reasons.";
+            this.label6.UseWaitCursor = true;
             // 
             // About
             // 
@@ -128,9 +135,13 @@ namespace PostcardsEditor
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "About";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "About";
+            this.UseWaitCursor = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 

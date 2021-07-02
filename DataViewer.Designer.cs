@@ -126,6 +126,7 @@ namespace PostcardsEditor
             this.txt_searchBox = new System.Windows.Forms.TextBox();
             this.btn_search = new System.Windows.Forms.Button();
             this.btn_cardRefresh = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCard)).BeginInit();
             this.panel2.SuspendLayout();
@@ -134,12 +135,12 @@ namespace PostcardsEditor
             ((System.ComponentModel.ISupportInitialize)(this.pic_frontImg)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.panel1.Controls.Add(this.btn_moreOoptions);
             this.panel1.Controls.Add(this.lbl_cardNumber);
             this.panel1.Controls.Add(this.btn_series);
@@ -308,6 +309,9 @@ namespace PostcardsEditor
             // 
             this.dataGridCard.AllowUserToAddRows = false;
             this.dataGridCard.AllowUserToDeleteRows = false;
+            this.dataGridCard.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridCard.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridCard.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridCard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -325,6 +329,7 @@ namespace PostcardsEditor
             // 
             // panel2
             // 
+            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.panel2.BackColor = System.Drawing.Color.Silver;
             this.panel2.Controls.Add(this.lbl_loadingCard);
             this.panel2.Controls.Add(this.lbl_dbConnect);
@@ -335,7 +340,7 @@ namespace PostcardsEditor
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Controls.Add(this.lbl_addEdit);
             this.panel2.Controls.Add(this.groupBox1);
-            this.panel2.Location = new System.Drawing.Point(12, 3);
+            this.panel2.Location = new System.Drawing.Point(12, 5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1148, 830);
             this.panel2.TabIndex = 2;
@@ -1142,7 +1147,7 @@ namespace PostcardsEditor
             "Identical ?",
             "Big Description",
             "Offer Type"});
-            this.combo_searchType.Location = new System.Drawing.Point(12, 12);
+            this.combo_searchType.Location = new System.Drawing.Point(7, 5);
             this.combo_searchType.Name = "combo_searchType";
             this.combo_searchType.Size = new System.Drawing.Size(180, 26);
             this.combo_searchType.TabIndex = 3;
@@ -1150,7 +1155,7 @@ namespace PostcardsEditor
             // 
             // txt_searchBox
             // 
-            this.txt_searchBox.Location = new System.Drawing.Point(199, 13);
+            this.txt_searchBox.Location = new System.Drawing.Point(194, 6);
             this.txt_searchBox.MaxLength = 250;
             this.txt_searchBox.Name = "txt_searchBox";
             this.txt_searchBox.Size = new System.Drawing.Size(350, 24);
@@ -1158,7 +1163,7 @@ namespace PostcardsEditor
             // 
             // btn_search
             // 
-            this.btn_search.Location = new System.Drawing.Point(555, 11);
+            this.btn_search.Location = new System.Drawing.Point(550, 4);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(84, 26);
             this.btn_search.TabIndex = 5;
@@ -1168,13 +1173,26 @@ namespace PostcardsEditor
             // 
             // btn_cardRefresh
             // 
-            this.btn_cardRefresh.Location = new System.Drawing.Point(1060, 11);
+            this.btn_cardRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_cardRefresh.Location = new System.Drawing.Point(1055, 4);
             this.btn_cardRefresh.Name = "btn_cardRefresh";
             this.btn_cardRefresh.Size = new System.Drawing.Size(84, 26);
             this.btn_cardRefresh.TabIndex = 6;
             this.btn_cardRefresh.Text = "&Refresh";
             this.btn_cardRefresh.UseVisualStyleBackColor = true;
             this.btn_cardRefresh.Click += new System.EventHandler(this.btn_cardRefresh_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.panel3.Controls.Add(this.btn_search);
+            this.panel3.Controls.Add(this.txt_searchBox);
+            this.panel3.Controls.Add(this.btn_cardRefresh);
+            this.panel3.Controls.Add(this.combo_searchType);
+            this.panel3.Location = new System.Drawing.Point(9, 8);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1150, 35);
+            this.panel3.TabIndex = 7;
             // 
             // DataViewer
             // 
@@ -1184,16 +1202,14 @@ namespace PostcardsEditor
             this.ClientSize = new System.Drawing.Size(1169, 837);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.btn_search);
-            this.Controls.Add(this.txt_searchBox);
-            this.Controls.Add(this.combo_searchType);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.dataGridCard);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.btn_cardRefresh);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MinimizeBox = false;
             this.Name = "DataViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Postcards DB Viewer";
@@ -1211,8 +1227,9 @@ namespace PostcardsEditor
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1314,5 +1331,6 @@ namespace PostcardsEditor
         private System.Windows.Forms.Label lbl_cardNumber;
         private System.Windows.Forms.Button btn_cardRefresh;
         private System.Windows.Forms.Button btn_moreOoptions;
+        private System.Windows.Forms.Panel panel3;
     }
 }

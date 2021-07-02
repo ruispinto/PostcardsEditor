@@ -35,7 +35,11 @@ namespace PostcardsEditor
             InitializeComponent();
             btn_publishBlog.Visible = false;
             panel2.Visible = false;
+            panel1.Enabled = true;
+            panel3.Enabled = true;
         }
+
+
 
         private void DataViewer_Load(object sender, EventArgs e)
         {
@@ -60,6 +64,8 @@ namespace PostcardsEditor
             }
         }
 
+
+
         private void btn_openFrontImg_Click(object sender, EventArgs e)
         {
             // display dialog box to choose a new front image
@@ -71,6 +77,8 @@ namespace PostcardsEditor
                 pic_frontImg.Enabled = true;
             }
         }
+
+
 
         private void btn_openBackImg_Click(object sender, EventArgs e)
         {
@@ -84,13 +92,15 @@ namespace PostcardsEditor
             }
         }
 
+
+
         private void pic_loader(object sender, EventArgs e)
         {
             // test if the front image is a real image file
             try
             {
                 // if is the real image, display the new image
-                if (txt_frontImgPath.Text.Substring(0, 4) == "HTTP" || txt_frontImgPath.Text.Substring(0, 4) == "http")
+                if (txt_frontImgPath.Text.Substring(0, 4) == "HTTP" || txt_frontImgPath.Text.Substring(0, 4) == "http" || txt_frontImgPath.Text.Substring(0, 3) == "WWW" || txt_frontImgPath.Text.Substring(0, 3) == "www")
                     pic_frontImg.ImageLocation = txt_frontImgPath.Text;
                 else
                     pic_frontImg.Image = new Bitmap(txt_frontImgPath.Text);
@@ -105,7 +115,7 @@ namespace PostcardsEditor
             try
             {
                 // if is the real image, display the new image
-                if (txt_backImgPath.Text.Substring(0, 4) == "HTTP" || txt_backImgPath.Text.Substring(0, 4) == "http")
+                if (txt_backImgPath.Text.Substring(0, 4) == "HTTP" || txt_backImgPath.Text.Substring(0, 4) == "http" || txt_backImgPath.Text.Substring(0, 3) == "WWW" || txt_backImgPath.Text.Substring(0, 3) == "www")
                     pic_backImg.ImageLocation = txt_backImgPath.Text;
                 else
                     pic_backImg.Image = new Bitmap(txt_backImgPath.Text);
@@ -117,8 +127,11 @@ namespace PostcardsEditor
             }
         }
 
+
+
         private void btn_saveCard_Click(object sender, EventArgs e)
         {
+            int localRow = dataGridCard.CurrentRow.Index;
             if (txt_cardNumber.Text.Length > 0 || txt_cardNumber.Text.Trim() != "")
             {
                 dc.cardNumber = txt_cardNumber.Text;
@@ -242,20 +255,22 @@ namespace PostcardsEditor
                 if (chk_identical.Checked == true)
                 {
                     dc.cardIdentical = "Y";
+                    if (combo_cardNumber.Text == "Choose...")
+                    {
+                        dc.cardEqualsTo = "";
+                    }
+                    else
+                    {
+                        dc.cardEqualsTo = combo_cardNumber.Text;
+                    }
+                    dc.cardDifferences = txt_cardDifferencies.Text;
                 }
                 else
                 {
                     dc.cardIdentical = "N";
-                }
-                if (combo_cardNumber.Text == "Choose...")
-                {
                     dc.cardEqualsTo = "";
+                    dc.cardDifferences = "";
                 }
-                else
-                {
-                    dc.cardEqualsTo = combo_cardNumber.Text;
-                }
-                dc.cardDifferences = txt_cardDifferencies.Text;
                 dc.cardBigDesc = txt_bigDescription.Text;
                 if (combo_SentType.Text == "Choose...")
                 {
@@ -270,16 +285,21 @@ namespace PostcardsEditor
                 dc.cardBackImgPath = txt_backImgPath.Text;
 
                 // check if it is a new postcard or an update
+                string query2 = "";
                 if (chkCard == true)
                 {
                     dc.cardID = get_cardID;
                     dc.UPDATE_CARD();
+                    query2 = "Updated!";
                 }
                 else
+                {
                     dc.ADD_CARD();
+                    query2 = "Added!";
+                }
 
                 // create a messegabox with all results to confirm
-                string query = "Card\n\nCard Number: " + txt_cardNumber.Text + "\nPublisher " + combo_publish.Text + "\nCountry " + combo_country.Text + "\n\nSaved!";
+                string query = "Card\n\nCard Number: " + txt_cardNumber.Text + "\nPublisher " + combo_publish.Text + "\nCountry " + combo_country.Text + "\n\n" + query2;
                 MessageBox.Show(query);
 
                 con.connectdb.Close();
@@ -300,83 +320,65 @@ namespace PostcardsEditor
             {
                 MessageBox.Show("Field 'Card Number' cannot be empty.", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            panel1.Enabled = true;
+            panel3.Enabled = true;
+            dataGridCard.DataSource = null;
+            dc.REFRESH_CARD();
+            dataGridCard.DataSource = dc.DT;
+            dataGridCard.Rows[localRow].Selected = true;
+            dataGridCard.FirstDisplayedScrollingRowIndex = localRow;
+            dataGridCard.Focus();
+            dataGridCard.Enabled = true;
         }
+
+
 
         private void btn_about_Click(object sender, EventArgs e)
         {
+            dataGridCard.Enabled = false;
             Form newform = new About();
-            newform.Show();
+            newform.ShowDialog();
+            dataGridCard.Enabled = true;
+
         }
+
+
 
         private void btn_close_Click(object sender, EventArgs e)
         {
+            panel1.Enabled = true;
+            panel3.Enabled = true;
             panel2.Visible = false;
 
             // enable editing and adding
-            if (txt_cardNumber.Enabled == false)
-            {
-                txt_backImgPath.Enabled = true;
-                txt_backTxtColor.Enabled = true;
-                txt_barcodeGen.Enabled = true;
-                txt_bigDescription.Enabled = true;
-                txt_cardDifferencies.Enabled = true;
-                txt_cardNumber.Enabled = true;
-                txt_datePurchase.Enabled = true;
-                txt_descENG.Enabled = true;
-                txt_descORIG.Enabled = true;
-                txt_frontImgPath.Enabled = true;
-                txt_frtTxtColor.Enabled = true;
-                txt_price.Enabled = true;
-                txt_totalmgInCard.Enabled = true;
-                txt_totSeriesCards.Enabled = true;
-                txt_TypeDesc.Enabled = true;
-                txt_webpage.Enabled = true;
-                btn_saveCard.Visible = true;
-                btn_saveCard.Enabled = true;
-                combo_cardNumber.Enabled = true;
-                combo_coloring.Enabled = true;
-                combo_cond.Enabled = true;
-                combo_country.Enabled = true;
-                combo_material.Enabled = true;
-                combo_orient.Enabled = true;
-                combo_publish.Enabled = true;
-                combo_searchType.Enabled = true;
-                combo_SentType.Enabled = true;
-                combo_shape.Enabled = true;
-                combo_size.Enabled = true;
-                combo_theme.Enabled = true;
-                combo_year.Enabled = true;
-                chk_updateCard.Visible = true;
-                chk_blog.Enabled = true;
-                chk_borders.Enabled = true;
-                chk_identical.Enabled = true;
-                chk_scanned.Enabled = true;
-                chk_seriesMulti.Enabled = true;
-                btn_openBackImg.Enabled = true;
-                btn_openFrontImg.Enabled = true;
-            }
+            btn_saveCard.Visible = true;
+            chk_updateCard.Visible = true;
+            btn_openBackImg.Enabled = true;
+            btn_openFrontImg.Enabled = true;
+            dateTimePicker1.Enabled = true;
+            dataGridCard.Enabled = true;
         }
+
+
 
         private void chk_identical_CheckedChanged(object sender, EventArgs e)
         {
             // checi if the 'identical' checkbox is checked or not
-            if (!chk_identical.Checked)
+            if (chk_identical.Checked == false)
             {
                 // fields disabled if 'identical' checkbox isn't checked
-                lbl_cardEqualsTo.Enabled = false;
-                lbl_differencies.Enabled = false;
                 txt_cardDifferencies.Enabled = false;
                 combo_cardNumber.Enabled = false;
             }
             else
             {
                 // fields enabled if 'identical' checkbox is checked
-                lbl_cardEqualsTo.Enabled = true;
-                lbl_differencies.Enabled = true;
                 txt_cardDifferencies.Enabled = true;
                 combo_cardNumber.Enabled = true;
             }
         }
+
+
 
         private void dtPicker_changed(object sender, EventArgs e)
         {
@@ -384,24 +386,26 @@ namespace PostcardsEditor
                 txt_datePurchase.Text = dateTimePicker1.Value.ToString();
         }
 
+
+
         private void chk_updateCard_CheckedChanged(object sender, EventArgs e)
         {
             if (chk_updateCard.Checked != true)
             {
                 chkCard = false;
-                txt_cardNumber.Enabled = true;
                 txt_backImgPath.Text = "";
                 txt_frontImgPath.Text = "";
             }
             else
             {
                 chkCard = true;
-                txt_cardNumber.Enabled = false;
                 get_cardID = (Int32)dataGridCard.CurrentRow.Cells[0].Value;
-                txt_frontImgPath.Text = dataGridCard.CurrentRow.Cells[31].Value.ToString();
-                txt_backImgPath.Text = dataGridCard.CurrentRow.Cells[32].Value.ToString();
+                txt_frontImgPath.Text = dataGridCard.CurrentRow.Cells[32].Value.ToString();
+                txt_backImgPath.Text = dataGridCard.CurrentRow.Cells[33].Value.ToString();
             }
         }
+
+
 
         private void btn_series_Click(object sender, EventArgs e)
         {
@@ -409,35 +413,55 @@ namespace PostcardsEditor
             newform.ShowDialog();
         }
 
+
+
         private void dataGridCard_ContentView(object sender, DataGridViewCellEventArgs e)
         {
+            panel1.Enabled = true;
+            panel3.Enabled = true;
             panel2.Visible = true;
             lbl_addEdit.Text = "View Postcard Info";
             VIEW_PANEL();
         }
+
+
 
         private void btn_publishBlog_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Not ready yet. Try again later.");
         }
 
+
+
         private void btn_cardRefresh_Click(object sender, EventArgs e)
         {
+            int localRow = dataGridCard.CurrentRow.Index;
             dataGridCard.DataSource = null;
             dc.REFRESH_CARD();
             dataGridCard.DataSource = dc.DT;
+            dataGridCard.Rows[localRow].Selected = true;
+            dataGridCard.FirstDisplayedScrollingRowIndex = localRow;
+            dataGridCard.Focus();
+            dataGridCard.Enabled = true;
         }
+
+
 
         private void btn_moreOptions_Click(object sender, EventArgs e)
         {
+            dataGridCard.Enabled = false;
             Form newform = new OtherOptions();
             newform.ShowDialog();
         }
+
+
 
         private void btn_exitApp_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Application.Exit();
         }
+
+
 
         private void chk_delete_CheckedChanged(object sender, EventArgs e)
         {
@@ -450,6 +474,8 @@ namespace PostcardsEditor
                 btn_delete.Enabled = false;
             }
         }
+
+
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
@@ -474,23 +500,27 @@ namespace PostcardsEditor
             }
         }
 
+
+
         private void btn_add_Click(object sender, EventArgs e)
         {
+            panel1.Enabled = false;
+            panel3.Enabled = false;
             panel2.Visible = true;
             lbl_addEdit.Text = "Add Postcard";
             chkCard = false;
             chk_updateCard.Checked = chkCard;
 
             LOAD_PANEL();
-
-            dataGridCard.DataSource = null;
-            dc.REFRESH_CARD();
-            dataGridCard.DataSource = dc.DT;
         }
+
+
 
         private void btn_edit_Click(object sender, EventArgs e)
 
         {
+            panel1.Enabled = false;
+            panel3.Enabled = false;
             chkCard = true;
             chk_updateCard.Checked = chkCard;
             get_cardID = (Int32)dataGridCard.CurrentRow.Cells[0].Value;
@@ -498,11 +528,9 @@ namespace PostcardsEditor
             lbl_addEdit.Text = "Edit Postcard";
 
             LOAD_PANEL();
-            
-            dataGridCard.DataSource = null;
-            dc.REFRESH_CARD();
-            dataGridCard.DataSource = dc.DT;
         }
+
+
 
         /*
          * 
@@ -525,37 +553,47 @@ namespace PostcardsEditor
 
                 // EPPlus license (Excel isn't required to be installed in the computer. You may use other open source software to open it)
                 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-                using (var package = new ExcelPackage(new System.IO.FileInfo(sFDialog.FileName)))
+                try
                 {
-                    // define spreadsheet's sheet name
-                    var worksheet = package.Workbook.Worksheets.Add("Users");
-
-                    // save the header
-                    for (int i = 1; i < dataGridCard.Columns.Count + 1; i++)
+                    using (var package = new ExcelPackage(new System.IO.FileInfo(sFDialog.FileName)))
                     {
-                        worksheet.Cells[1, i].Value = dataGridCard.Columns[i - 1].HeaderText;
-                    }
+                        // define spreadsheet's sheet name
+                        var worksheet = package.Workbook.Worksheets.Add("Postcards");
 
-                    // save all information in the gridview to the spreadsheet
-                    for (int i = 0; i < dataGridCard.Rows.Count; i++)
-                    {
-                        for (int j = 0; j < dataGridCard.Columns.Count; j++)
+                        // save the header
+                        for (int i = 1; i < dataGridCard.Columns.Count + 1; i++)
                         {
-                            worksheet.Cells[i + 2, j + 1].Value = dataGridCard.Rows[i].Cells[j].Value.ToString();
+                            worksheet.Cells[1, i].Value = dataGridCard.Columns[i - 1].HeaderText;
                         }
+
+                        // save all information in the gridview to the spreadsheet
+                        for (int i = 0; i < dataGridCard.Rows.Count; i++)
+                        {
+                            for (int j = 0; j < dataGridCard.Columns.Count; j++)
+                            {
+                                worksheet.Cells[i + 2, j + 1].Value = dataGridCard.Rows[i].Cells[j].Value.ToString();
+                            }
+                        }
+
+                        // adjust column's width
+                        worksheet.Cells.AutoFitColumns(0);
+
+                        // save file to the disk
+                        package.Save();
                     }
-
-                    // adjust column's width
-                    worksheet.Cells.AutoFitColumns(0);
-
-                    // save file to the disk
-                    package.Save();
+                    MessageBox.Show("Database exported!");
                 }
-                MessageBox.Show("Database exported!");
+                catch
+                {
+                    MessageBox.Show("File already exists! Please try again.");
+
+                }
             }
             // cursor is back to default
             Cursor.Current = Cursors.Default;
         }
+
+
 
         // In case you click with your mouse
         private void dataGridCard_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -566,6 +604,8 @@ namespace PostcardsEditor
             lbl_cardNumber.Text = dataGridCard.CurrentRow.Cells[1].Value.ToString();
         }
 
+
+
         // In case you press down a key in the grid
         private void dataGridCard_CellContentClick(object sender, KeyPressEventArgs e)
         {
@@ -574,6 +614,8 @@ namespace PostcardsEditor
             lbl_rowNumber.Text = "Row " + currentRow.ToString() + " / " + (dataGridCard.RowCount).ToString();
             lbl_cardNumber.Text = dataGridCard.CurrentRow.Cells[1].Value.ToString();
         }
+
+
 
         // in case you move around using arrow keys (or enter key)
         private void dataGridCard_CellContentClick(object sender, KeyEventArgs e)
@@ -584,14 +626,17 @@ namespace PostcardsEditor
             lbl_cardNumber.Text = dataGridCard.CurrentRow.Cells[1].Value.ToString();
         }
 
+
+
         // Just the preparation for the add/edit panel
         private void LOAD_PANEL()
         {
+            dataGridCard.Enabled = false;
             lbl_loadingCard.Visible = true;
             Cursor.Current = Cursors.WaitCursor;
             // At the beginning, these fields are disabled
-            lbl_cardEqualsTo.Enabled = false;
-            lbl_differencies.Enabled = false;
+            //lbl_cardEqualsTo.Enabled = false;
+            //lbl_differencies.Enabled = false;
             txt_cardDifferencies.Enabled = false;
             combo_cardNumber.Enabled = false;
             btn_publishBlog.Visible = false;
@@ -605,7 +650,7 @@ namespace PostcardsEditor
                 }
                 else
                 {
-                    if (txt_frontImgPath.Text.Substring(0, 4) == "HTTP" || txt_frontImgPath.Text.Substring(0, 4) == "http")
+                    if (txt_frontImgPath.Text.Substring(0, 4) == "HTTP" || txt_frontImgPath.Text.Substring(0, 4) == "http" || txt_frontImgPath.Text.Substring(0, 3) == "WWW" || txt_frontImgPath.Text.Substring(0, 3) == "www")
                         pic_frontImg.ImageLocation = txt_frontImgPath.Text;
                     else
                         pic_frontImg.Image = new Bitmap(txt_frontImgPath.Text);
@@ -623,7 +668,7 @@ namespace PostcardsEditor
                 }
                 else
                 {
-                    if (txt_backImgPath.Text.Substring(0, 4) == "HTTP" || txt_backImgPath.Text.Substring(0, 4) == "http")
+                    if (txt_backImgPath.Text.Substring(0, 4) == "HTTP" || txt_backImgPath.Text.Substring(0, 4) == "http" || txt_backImgPath.Text.Substring(0, 3) == "WWW" || txt_backImgPath.Text.Substring(0, 3) == "www")
                         pic_backImg.ImageLocation = txt_backImgPath.Text;
                     else
                         pic_backImg.Image = new Bitmap(txt_backImgPath.Text);
@@ -688,10 +733,19 @@ namespace PostcardsEditor
             }
             txt_price.Text = dataGridCard.CurrentRow.Cells[24].Value.ToString();
             txt_webpage.Text = dataGridCard.CurrentRow.Cells[25].Value.ToString();
+            // Check the identical checkbox
             if (dataGridCard.CurrentRow.Cells[26].Value.ToString() == "Y")
+            {
                 chk_identical.Checked = true;
+                txt_cardDifferencies.Enabled = true;
+                combo_cardNumber.Enabled = true;
+            }
             else
+            {
                 chk_identical.Checked = false;
+                txt_cardDifferencies.Enabled = false;
+                combo_cardNumber.Enabled = false;
+            }
             get_cardEquals = dataGridCard.CurrentRow.Cells[27].Value.ToString();
             txt_cardDifferencies.Text = dataGridCard.CurrentRow.Cells[28].Value.ToString();
             txt_bigDescription.Text = dataGridCard.CurrentRow.Cells[29].Value.ToString();
@@ -791,65 +845,25 @@ namespace PostcardsEditor
             Cursor.Current = Cursors.Default;
         }
 
+
+
         // Just the preparation for the add/edit panel
         private void VIEW_PANEL()
         {
+            dataGridCard.Enabled = false;
             lbl_loadingCard.Visible = true;
             Cursor.Current = Cursors.WaitCursor;
-            // At the beginning, these fields are disabled
-            lbl_cardEqualsTo.Enabled = false;
-            lbl_differencies.Enabled = false;
-            txt_cardDifferencies.Enabled = false;
-            combo_cardNumber.Enabled = false;
             btn_publishBlog.Visible = false;
 
-            // disable editing and adding
-            txt_backImgPath.Enabled = false;
-            txt_backTxtColor.Enabled = false;
-            txt_barcodeGen.Enabled = false;
-            txt_bigDescription.Enabled = false;
-            txt_cardDifferencies.Enabled = false;
-            txt_cardNumber.Enabled = false;
-            txt_datePurchase.Enabled = false;
-            txt_descENG.Enabled = false;
-            txt_descORIG.Enabled = false;
-            txt_frontImgPath.Enabled = false;
-            txt_frtTxtColor.Enabled = false;
-            txt_price.Enabled = false;
-            txt_totalmgInCard.Enabled = false;
-            txt_totSeriesCards.Enabled = false;
-            txt_TypeDesc.Enabled = false;
-            txt_webpage.Enabled = false;
+            // disable updating and adding
             btn_saveCard.Visible = false;
-            btn_saveCard.Enabled = false;
-            combo_cardNumber.Enabled = false;
-            combo_coloring.Enabled = false;
-            combo_cond.Enabled = false;
-            combo_country.Enabled = false;
-            combo_material.Enabled = false;
-            combo_orient.Enabled = false;
-            combo_publish.Enabled = false;
-            combo_searchType.Enabled = false;
-            combo_SentType.Enabled = false;
-            combo_shape.Enabled = false;
-            combo_size.Enabled = false;
-            combo_theme.Enabled = false;
-            combo_year.Enabled = false;
-            chk_updateCard.Visible = false;
-            chk_scanned.Enabled = false;
-            chk_identical.Enabled = false;
-            chk_blog.Enabled = false;
-            chk_seriesMulti.Enabled = false;
-            pic_frontImg.Enabled = false;
-            pic_backImg.Enabled = false;
-            dateTimePicker1.Enabled = false;
-            chk_borders.Enabled = false;
             btn_openFrontImg.Enabled = false;
             btn_openBackImg.Enabled = false;
+            dateTimePicker1.Enabled = false;
+            chk_updateCard.Visible = false;
 
-            get_cardID = (int)dataGridCard.CurrentRow.Cells[0].Value;
             txt_cardNumber.Text = dataGridCard.CurrentRow.Cells[1].Value.ToString();
-            get_cardPublish = dataGridCard.CurrentRow.Cells[2].Value.ToString();
+            combo_publish.Text = dataGridCard.CurrentRow.Cells[2].Value.ToString();
             if (dataGridCard.CurrentRow.Cells[3].Value.ToString() == "Y")
                 chk_scanned.Checked = true;
             else
@@ -861,21 +875,21 @@ namespace PostcardsEditor
             get_cardCountry = dataGridCard.CurrentRow.Cells[5].Value.ToString();
             txt_descENG.Text = dataGridCard.CurrentRow.Cells[6].Value.ToString();
             txt_descORIG.Text = dataGridCard.CurrentRow.Cells[7].Value.ToString();
-            get_cardTheme = dataGridCard.CurrentRow.Cells[8].Value.ToString();
-            get_cardColoring = dataGridCard.CurrentRow.Cells[9].Value.ToString();
-            get_cardYear = dataGridCard.CurrentRow.Cells[10].Value.ToString();
+            combo_theme.Text = dataGridCard.CurrentRow.Cells[8].Value.ToString();
+            combo_coloring.Text = dataGridCard.CurrentRow.Cells[9].Value.ToString();
+            combo_year.Text = dataGridCard.CurrentRow.Cells[10].Value.ToString();
             txt_totalmgInCard.Text = dataGridCard.CurrentRow.Cells[11].Value.ToString();
             if (dataGridCard.CurrentRow.Cells[12].Value.ToString() == "Y")
                 chk_seriesMulti.Checked = true;
             else
                 chk_seriesMulti.Checked = false;
             txt_totSeriesCards.Text = dataGridCard.CurrentRow.Cells[13].Value.ToString();
-            get_cardSize = dataGridCard.CurrentRow.Cells[14].Value.ToString();
-            get_cardShape = dataGridCard.CurrentRow.Cells[15].Value.ToString();
-            get_cardOrient = dataGridCard.CurrentRow.Cells[16].Value.ToString();
+            combo_size.Text = dataGridCard.CurrentRow.Cells[14].Value.ToString();
+            combo_shape.Text = dataGridCard.CurrentRow.Cells[15].Value.ToString();
+            combo_orient.Text = dataGridCard.CurrentRow.Cells[16].Value.ToString();
             txt_barcodeGen.Text = dataGridCard.CurrentRow.Cells[17].Value.ToString();
-            get_cardMaterial = dataGridCard.CurrentRow.Cells[18].Value.ToString();
-            get_cardCond = dataGridCard.CurrentRow.Cells[19].Value.ToString();
+            combo_material.Text = dataGridCard.CurrentRow.Cells[18].Value.ToString();
+            combo_cond.Text = dataGridCard.CurrentRow.Cells[19].Value.ToString();
             if (dataGridCard.CurrentRow.Cells[20].Value.ToString() == "Y")
                 chk_borders.Checked = true;
             else
@@ -902,13 +916,17 @@ namespace PostcardsEditor
             txt_price.Text = dataGridCard.CurrentRow.Cells[24].Value.ToString();
             txt_webpage.Text = dataGridCard.CurrentRow.Cells[25].Value.ToString();
             if (dataGridCard.CurrentRow.Cells[26].Value.ToString() == "Y")
+            {
                 chk_identical.Checked = true;
+            }
             else
+            {
                 chk_identical.Checked = false;
-            get_cardEquals = dataGridCard.CurrentRow.Cells[27].Value.ToString();
+            }
+            combo_cardNumber.Text = dataGridCard.CurrentRow.Cells[27].Value.ToString();
             txt_cardDifferencies.Text = dataGridCard.CurrentRow.Cells[28].Value.ToString();
             txt_bigDescription.Text = dataGridCard.CurrentRow.Cells[29].Value.ToString();
-            get_cardSentType = dataGridCard.CurrentRow.Cells[30].Value.ToString();
+            combo_SentType.Text = dataGridCard.CurrentRow.Cells[30].Value.ToString();
             txt_TypeDesc.Text = dataGridCard.CurrentRow.Cells[31].Value.ToString();
             txt_frontImgPath.Text = dataGridCard.CurrentRow.Cells[32].Value.ToString();
             txt_backImgPath.Text = dataGridCard.CurrentRow.Cells[33].Value.ToString();
@@ -922,7 +940,7 @@ namespace PostcardsEditor
                 }
                 else
                 {
-                    if (txt_frontImgPath.Text.Substring(0, 4) == "HTTP" || txt_frontImgPath.Text.Substring(0, 4) == "http")
+                    if (txt_frontImgPath.Text.Substring(0, 4) == "HTTP" || txt_frontImgPath.Text.Substring(0, 4) == "http" || txt_frontImgPath.Text.Substring(0, 3) == "WWW" || txt_frontImgPath.Text.Substring(0, 3) == "www")
                         pic_frontImg.ImageLocation = txt_frontImgPath.Text;
                     else
                         pic_frontImg.Image = new Bitmap(txt_frontImgPath.Text);
@@ -940,10 +958,10 @@ namespace PostcardsEditor
                 }
                 else
                 {
-                    if (txt_frontImgPath.Text.Substring(0, 4) == "HTTP" || txt_frontImgPath.Text.Substring(0, 4) == "http")
-                        pic_frontImg.ImageLocation = txt_frontImgPath.Text;
+                    if (txt_backImgPath.Text.Substring(0, 4) == "HTTP" || txt_backImgPath.Text.Substring(0, 4) == "http" || txt_backImgPath.Text.Substring(0, 3) == "WWW" || txt_backImgPath.Text.Substring(0, 3) == "www")
+                        pic_backImg.ImageLocation = txt_backImgPath.Text;
                     else
-                        pic_frontImg.Image = new Bitmap(txt_frontImgPath.Text);
+                        pic_backImg.Image = new Bitmap(txt_backImgPath.Text);
                 }
             }
             catch
@@ -951,78 +969,13 @@ namespace PostcardsEditor
                 pic_backImg.Image = new Bitmap(Properties.Resources.no_image);
             }
 
-            // Check if any of the image path fields has any image name. If it has, it shows, otherwise just show the default image
+            // Check database connection
             try
             {
                 con.connectdb.Open();
                 lbl_dbConnect.ForeColor = Color.Green;
                 lbl_dbConnect.Text = "Connected";
                 con.connectdb.Close();
-
-                dc.Show_ColoringTable();
-                combo_coloring.DataSource = dc.dt_coloringFill;
-                if (combo_coloring.FindString(get_cardColoring) >= 0)
-                    combo_coloring.SelectedIndex = combo_coloring.FindString(get_cardColoring);
-                else
-                    combo_coloring.SelectedIndex = 0;
-
-                dc.Show_CondTable();
-                combo_cond.DataSource = dc.dt_condFill;
-                if (combo_cond.FindString(get_cardCond) >= 0)
-                    combo_cond.SelectedIndex = combo_cond.FindString(get_cardCond);
-
-                dc.Show_CountryTable();
-                combo_country.DataSource = dc.dt_countryFill;
-                if (combo_country.FindString(get_cardCountry) >= 0)
-                    combo_country.SelectedIndex = combo_country.FindString(get_cardCountry);
-
-                dc.Show_MaterialTable();
-                combo_material.DataSource = dc.dt_materialFill;
-                if (combo_material.FindString(get_cardMaterial) >= 0)
-                    combo_material.SelectedIndex = combo_material.FindString(get_cardMaterial);
-
-                dc.Show_OrientTable();
-                combo_orient.DataSource = dc.dt_orientFill;
-                if (combo_orient.FindString(get_cardOrient) >= 0)
-                    combo_orient.SelectedIndex = combo_orient.FindString(get_cardOrient);
-
-                dc.Show_PublishTable();
-                combo_publish.DataSource = dc.dt_publishFill;
-                if (combo_publish.FindString(get_cardPublish) >= 0)
-                    combo_publish.SelectedIndex = combo_publish.FindString(get_cardPublish);
-
-                dc.Show_SentTypeTable();
-                combo_SentType.DataSource = dc.dt_sentTypeFill;
-                if (combo_SentType.FindString(get_cardSentType) >= 0)
-                    combo_SentType.SelectedIndex = combo_SentType.FindString(get_cardSentType);
-
-                dc.Show_ShapeTable();
-                combo_shape.DataSource = dc.dt_shapeFill;
-                if (combo_shape.FindString(get_cardShape) >= 0)
-                    combo_shape.SelectedIndex = combo_shape.FindString(get_cardShape);
-
-                dc.Show_SizeTable();
-                combo_size.DataSource = dc.dt_sizeFill;
-                if (combo_size.FindString(get_cardSize) >= 0)
-                    combo_size.SelectedIndex = combo_size.FindString(get_cardSize);
-
-                dc.Show_ThemeTable();
-                combo_theme.DataSource = dc.dt_themeFill;
-                if (combo_theme.FindString(get_cardTheme) >= 0)
-                    combo_theme.SelectedIndex = combo_theme.FindString(get_cardTheme);
-
-                dc.Show_YearTable();
-                combo_year.DataSource = dc.dt_yearFill;
-                if (combo_year.FindString(get_cardYear) >= 0)
-                    combo_year.SelectedIndex = combo_year.FindString(get_cardYear);
-
-                dc.Show_CardNumberTable();
-                combo_cardNumber.DataSource = dc.dt_cardNumberFill;
-                if (chk_identical.Checked == true)
-                {
-                    if (combo_cardNumber.FindString(get_cardEquals) >= 0)
-                        combo_cardNumber.SelectedIndex = combo_cardNumber.FindString(get_cardEquals);
-                }
             }
             catch
             {
@@ -1034,13 +987,22 @@ namespace PostcardsEditor
             }
             lbl_loadingCard.Visible = false;
             Cursor.Current = Cursors.Default;
+            panel1.Enabled = true;
+            panel3.Enabled = true;
         }
 
+
+
+
+        // Seeach list
         private void combo_searchType_SelectedIndexChanged(object sender, EventArgs e)
         {
             search_option = combo_searchType.SelectedIndex+1;
         }
 
+
+
+        // Search button
         private void btn_search_Click(object sender, EventArgs e)
         {
             if(txt_searchBox.Text!="" && search_option > 1)
@@ -1054,6 +1016,7 @@ namespace PostcardsEditor
             dataGridCard.DataSource = null;
             dc.REFRESH_CARD();
             dataGridCard.DataSource = dc.DT;
+            dataGridCard.Enabled = true;
         }
     }
 }

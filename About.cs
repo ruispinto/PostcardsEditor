@@ -19,7 +19,8 @@ namespace PostcardsEditor
         {
             InitializeComponent();
             string softVersion = dc.sVersion;
-            lbl_softwareVersion.Text = "Version " + softVersion;
+            string dataVersion = dc.dVersion;
+            lbl_softwareVersion.Text = "Version " + softVersion + " (" + dataVersion + ")";
         }
 
         private void btn_closeAbout_Click(object sender, EventArgs e)

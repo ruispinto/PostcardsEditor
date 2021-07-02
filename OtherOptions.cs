@@ -304,6 +304,7 @@ namespace PostcardsEditor
 
         private void btn_saveOthersPanel_Click(object sender, EventArgs e)
         {
+            int localRow = dataGridOthers.CurrentRow.Index;
             string msgTxt = tblName + "\n\nData saved!";
             if (txt_otherOptionsField1.Text != "" || txt_otherOptionsField1.TextLength > 0)
             {
@@ -410,10 +411,6 @@ namespace PostcardsEditor
             {
                 MessageBox.Show("Field cannot be empty.");
             }
-            REFRESH_OTHERS_PANEL();
-
-            con.connectdb.Close();
-
             panel2.Visible = false;
             btn_open.Enabled = true;
             dataGridOthers.Enabled = true;
@@ -421,6 +418,13 @@ namespace PostcardsEditor
             btn_closeOthers.Enabled = true;
             groupBox1.Enabled = true;
             groupBox2.Enabled = true;
+            dataGridOthers.DataSource = null;
+            REFRESH_OTHERS_PANEL();
+            dataGridOthers.DataSource = dc.DT;
+            dataGridOthers.Rows[localRow].Selected = true;
+            dataGridOthers.FirstDisplayedScrollingRowIndex = localRow;
+            dataGridOthers.Focus();
+            con.connectdb.Close();
         }
 
         /*

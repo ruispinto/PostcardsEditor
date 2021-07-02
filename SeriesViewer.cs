@@ -64,6 +64,7 @@ namespace PostcardsEditor
 
         private void btn_seriesAdd_Click(object sender, EventArgs e)
         {
+            panel1.Enabled = false;
             panel2.Visible = true;
             lbl_seriesAddEdit.Text = "Add Postcard";
             chkSeries = false;
@@ -81,6 +82,7 @@ namespace PostcardsEditor
 
         private void btn_seriesEdit_Click(object sender, EventArgs e)
         {
+            panel1.Enabled = false;
             panel2.Visible = true;
             lbl_seriesAddEdit.Text = "Edit Postcard";
             chkSeries = true;
@@ -163,7 +165,7 @@ namespace PostcardsEditor
                 using (var package = new ExcelPackage(new System.IO.FileInfo(sFileDialog.FileName)))
                 {
                     // define spreadsheet's sheet name
-                    var worksheet = package.Workbook.Worksheets.Add("CardSeries");
+                    var worksheet = package.Workbook.Worksheets.Add("Postcard Series");
 
                     // save the header
                     for (int i = 1; i < dataGridSeries.Columns.Count + 1; i++)
@@ -217,19 +219,19 @@ namespace PostcardsEditor
         private void dataGridSeries_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView senderGrid = (DataGridView)sender;
-            lbl_seriesRowNumber.Text = "Row " + dataGridSeries.CurrentRow.Index.ToString() + " / " + (dataGridSeries.RowCount - 1).ToString();
+            lbl_seriesRowNumber.Text = "Row " + (dataGridSeries.CurrentRow.Index + 1).ToString() + " / " + (dataGridSeries.RowCount).ToString();
         }
 
         private void dataGridSeries_CellContentClick(object sender, KeyEventArgs e)
         {
             DataGridView senderGrid = (DataGridView)sender;
-            lbl_seriesRowNumber.Text = "Row " + dataGridSeries.CurrentRow.Index.ToString() + " / " + (dataGridSeries.RowCount - 1).ToString();
+            lbl_seriesRowNumber.Text = "Row " + (dataGridSeries.CurrentRow.Index + 1).ToString() + " / " + (dataGridSeries.RowCount).ToString();
         }
 
         private void dataGridSeries_CellContentClick(object sender, KeyPressEventArgs e)
         {
             DataGridView senderGrid = (DataGridView)sender;
-            lbl_seriesRowNumber.Text = "Row " + dataGridSeries.CurrentRow.Index.ToString() + " / " + (dataGridSeries.RowCount - 1).ToString();
+            lbl_seriesRowNumber.Text = "Row " + (dataGridSeries.CurrentRow.Index + 1).ToString() + " / " + (dataGridSeries.RowCount).ToString();
         }
 
         private void btn_seriesPanelClose_Click(object sender, EventArgs e)
@@ -263,6 +265,7 @@ namespace PostcardsEditor
                 dateTimePickerSeries.Enabled = true;
                 chk_seriesUpdate.Enabled = true;
             }
+            panel1.Enabled = true;
         }
 
         private void btn_seriesViewerClose_Click(object sender, EventArgs e)
@@ -281,6 +284,7 @@ namespace PostcardsEditor
 
         private void btn_seriesSave_Click(object sender, EventArgs e)
         {
+            int localRow = dataGridSeries.CurrentRow.Index;
             if (txt_mainCardNumber.Text.Length > 0 || txt_mainCardNumber.Text.Trim() != "" && txt_seriesSecondNumber.Text.Length > 0 || txt_seriesSecondNumber.Text.Trim() != "" && txt_seriesSecondNumber.Text.Trim()!=txt_mainCardNumber.Text.Trim())
             {
                 dc.seriesCardNumber = txt_mainCardNumber.Text;
@@ -342,6 +346,12 @@ namespace PostcardsEditor
             {
                 MessageBox.Show("Field 'Main Card Number'  and 'Secondary Card Number' cannot be empty.\nField 'Secondary Card Number' must have a unique number.", "Main & Secondary Numbers", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            dataGridSeries.DataSource = null;
+            dc.REFRESH_ALL_MULTICARD();
+            dataGridSeries.DataSource = dc.DT;
+            dataGridSeries.Rows[localRow].Selected = true;
+            dataGridSeries.FirstDisplayedScrollingRowIndex = localRow;
+            dataGridSeries.Focus();
         }
 
         private void chk_seriesDelete_CheckedChanged(object sender, EventArgs e)

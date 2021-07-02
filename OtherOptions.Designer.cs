@@ -55,7 +55,6 @@ namespace PostcardsEditor
             this.lbl_tableName = new System.Windows.Forms.Label();
             this.saveTablesDiaglog = new System.Windows.Forms.SaveFileDialog();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.chk_updateOther = new System.Windows.Forms.CheckBox();
             this.btn_closeOthersPanel = new System.Windows.Forms.Button();
             this.btn_saveOthersPanel = new System.Windows.Forms.Button();
@@ -66,6 +65,7 @@ namespace PostcardsEditor
             this.lbl_otherOptField2 = new System.Windows.Forms.Label();
             this.lbl_otherOptField1 = new System.Windows.Forms.Label();
             this.lbl_otherOptions = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridOthers)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.gb_table.SuspendLayout();
@@ -79,6 +79,9 @@ namespace PostcardsEditor
             this.dataGridOthers.AllowUserToDeleteRows = false;
             this.dataGridOthers.AllowUserToResizeColumns = false;
             this.dataGridOthers.AllowUserToResizeRows = false;
+            this.dataGridOthers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridOthers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridOthers.BackgroundColor = System.Drawing.Color.LightGray;
             this.dataGridOthers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -233,6 +236,7 @@ namespace PostcardsEditor
             // 
             // btn_closeOthers
             // 
+            this.btn_closeOthers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_closeOthers.Location = new System.Drawing.Point(666, 560);
             this.btn_closeOthers.Name = "btn_closeOthers";
             this.btn_closeOthers.Size = new System.Drawing.Size(88, 30);
@@ -314,6 +318,7 @@ namespace PostcardsEditor
             // 
             // gb_table
             // 
+            this.gb_table.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gb_table.Controls.Add(this.lbl_tableName);
             this.gb_table.Location = new System.Drawing.Point(615, 1);
             this.gb_table.Name = "gb_table";
@@ -349,19 +354,6 @@ namespace PostcardsEditor
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(758, 200);
             this.panel2.TabIndex = 18;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btn_deleteOthers);
-            this.groupBox2.Controls.Add(this.chk_deleteOthers);
-            this.groupBox2.Controls.Add(this.btn_excelTable);
-            this.groupBox2.Controls.Add(this.btn_editOthers);
-            this.groupBox2.Controls.Add(this.btn_addOthers);
-            this.groupBox2.Location = new System.Drawing.Point(12, 551);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(639, 42);
-            this.groupBox2.TabIndex = 19;
-            this.groupBox2.TabStop = false;
             // 
             // chk_updateOther
             // 
@@ -450,6 +442,20 @@ namespace PostcardsEditor
             this.lbl_otherOptions.Size = new System.Drawing.Size(70, 18);
             this.lbl_otherOptions.TabIndex = 0;
             this.lbl_otherOptions.Text = "Add / Edit";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox2.Controls.Add(this.btn_deleteOthers);
+            this.groupBox2.Controls.Add(this.chk_deleteOthers);
+            this.groupBox2.Controls.Add(this.btn_excelTable);
+            this.groupBox2.Controls.Add(this.btn_editOthers);
+            this.groupBox2.Controls.Add(this.btn_addOthers);
+            this.groupBox2.Location = new System.Drawing.Point(12, 551);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(639, 42);
+            this.groupBox2.TabIndex = 19;
+            this.groupBox2.TabStop = false;
             // 
             // OtherOptions
             // 

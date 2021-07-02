@@ -198,7 +198,8 @@ namespace PostcardsEditor
             // 
             this.dataGridSeries.AllowUserToAddRows = false;
             this.dataGridSeries.AllowUserToDeleteRows = false;
-            this.dataGridSeries.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridSeries.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridSeries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridSeries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -226,7 +227,7 @@ namespace PostcardsEditor
             this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Controls.Add(this.groupBox1);
-            this.panel2.Location = new System.Drawing.Point(21, 169);
+            this.panel2.Location = new System.Drawing.Point(21, 10);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1131, 660);
@@ -716,10 +717,10 @@ namespace PostcardsEditor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1169, 836);
             this.ControlBox = false;
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.chk_allSeries);
             this.Controls.Add(this.txt_MainCard);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.dataGridSeries);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
