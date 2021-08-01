@@ -162,19 +162,22 @@ namespace PostcardsEditor
             // 
             // btn_moreOoptions
             // 
+            this.btn_moreOoptions.BackColor = System.Drawing.Color.Silver;
             this.btn_moreOoptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_moreOoptions.ForeColor = System.Drawing.Color.Black;
             this.btn_moreOoptions.Location = new System.Drawing.Point(881, 6);
             this.btn_moreOoptions.Name = "btn_moreOoptions";
             this.btn_moreOoptions.Size = new System.Drawing.Size(29, 30);
             this.btn_moreOoptions.TabIndex = 12;
             this.btn_moreOoptions.Text = "+";
-            this.btn_moreOoptions.UseVisualStyleBackColor = true;
+            this.btn_moreOoptions.UseVisualStyleBackColor = false;
             this.btn_moreOoptions.Click += new System.EventHandler(this.btn_moreOptions_Click);
             // 
             // lbl_cardNumber
             // 
             this.lbl_cardNumber.AutoSize = true;
             this.lbl_cardNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_cardNumber.ForeColor = System.Drawing.Color.Silver;
             this.lbl_cardNumber.Location = new System.Drawing.Point(176, 20);
             this.lbl_cardNumber.Name = "lbl_cardNumber";
             this.lbl_cardNumber.Size = new System.Drawing.Size(88, 17);
@@ -183,8 +186,8 @@ namespace PostcardsEditor
             // 
             // btn_series
             // 
-            this.btn_series.BackColor = System.Drawing.Color.DarkOliveGreen;
-            this.btn_series.ForeColor = System.Drawing.Color.White;
+            this.btn_series.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.btn_series.ForeColor = System.Drawing.Color.Silver;
             this.btn_series.Location = new System.Drawing.Point(481, 6);
             this.btn_series.Name = "btn_series";
             this.btn_series.Size = new System.Drawing.Size(88, 30);
@@ -195,39 +198,46 @@ namespace PostcardsEditor
             // 
             // btn_publishBlog
             // 
+            this.btn_publishBlog.BackColor = System.Drawing.Color.Silver;
+            this.btn_publishBlog.ForeColor = System.Drawing.Color.Black;
             this.btn_publishBlog.Location = new System.Drawing.Point(327, 6);
             this.btn_publishBlog.Name = "btn_publishBlog";
             this.btn_publishBlog.Size = new System.Drawing.Size(148, 30);
             this.btn_publishBlog.TabIndex = 3;
             this.btn_publishBlog.Text = "Export to &Blogspot";
-            this.btn_publishBlog.UseVisualStyleBackColor = true;
+            this.btn_publishBlog.UseVisualStyleBackColor = false;
             this.btn_publishBlog.Click += new System.EventHandler(this.btn_publishBlog_Click);
             // 
             // btn_saveExcel
             // 
+            this.btn_saveExcel.BackColor = System.Drawing.Color.Silver;
+            this.btn_saveExcel.ForeColor = System.Drawing.Color.Black;
             this.btn_saveExcel.Location = new System.Drawing.Point(916, 6);
             this.btn_saveExcel.Name = "btn_saveExcel";
             this.btn_saveExcel.Size = new System.Drawing.Size(130, 30);
             this.btn_saveExcel.TabIndex = 9;
             this.btn_saveExcel.Text = "Export to Excel";
-            this.btn_saveExcel.UseVisualStyleBackColor = true;
+            this.btn_saveExcel.UseVisualStyleBackColor = false;
             this.btn_saveExcel.Click += new System.EventHandler(this.btn_saveExcel_Click);
             // 
             // btn_about
             // 
+            this.btn_about.BackColor = System.Drawing.Color.Silver;
             this.btn_about.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_about.ForeColor = System.Drawing.Color.Black;
             this.btn_about.Location = new System.Drawing.Point(12, 6);
             this.btn_about.Name = "btn_about";
             this.btn_about.Size = new System.Drawing.Size(28, 30);
             this.btn_about.TabIndex = 0;
             this.btn_about.Text = "i";
-            this.btn_about.UseVisualStyleBackColor = true;
+            this.btn_about.UseVisualStyleBackColor = false;
             this.btn_about.Click += new System.EventHandler(this.btn_about_Click);
             // 
             // lbl_rowNumber
             // 
             this.lbl_rowNumber.AutoSize = true;
             this.lbl_rowNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_rowNumber.ForeColor = System.Drawing.Color.Silver;
             this.lbl_rowNumber.Location = new System.Drawing.Point(176, 2);
             this.lbl_rowNumber.Name = "lbl_rowNumber";
             this.lbl_rowNumber.Size = new System.Drawing.Size(35, 17);
@@ -246,39 +256,46 @@ namespace PostcardsEditor
             // 
             // btn_delete
             // 
+            this.btn_delete.BackColor = System.Drawing.Color.Silver;
             this.btn_delete.Enabled = false;
+            this.btn_delete.ForeColor = System.Drawing.Color.Black;
             this.btn_delete.Location = new System.Drawing.Point(787, 6);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(88, 30);
             this.btn_delete.TabIndex = 8;
             this.btn_delete.Text = "&Delete";
-            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.UseVisualStyleBackColor = false;
             this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // btn_edit
             // 
+            this.btn_edit.BackColor = System.Drawing.Color.Silver;
+            this.btn_edit.ForeColor = System.Drawing.Color.Black;
             this.btn_edit.Location = new System.Drawing.Point(667, 6);
             this.btn_edit.Name = "btn_edit";
             this.btn_edit.Size = new System.Drawing.Size(88, 30);
             this.btn_edit.TabIndex = 6;
             this.btn_edit.Text = "E&dit";
-            this.btn_edit.UseVisualStyleBackColor = true;
+            this.btn_edit.UseVisualStyleBackColor = false;
             this.btn_edit.Click += new System.EventHandler(this.btn_edit_Click);
             // 
             // btn_add
             // 
+            this.btn_add.BackColor = System.Drawing.Color.Silver;
+            this.btn_add.ForeColor = System.Drawing.Color.Black;
             this.btn_add.Location = new System.Drawing.Point(574, 6);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(88, 30);
             this.btn_add.TabIndex = 5;
             this.btn_add.Text = "&Add";
-            this.btn_add.UseVisualStyleBackColor = true;
+            this.btn_add.UseVisualStyleBackColor = false;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
             // lbl_dbcon
             // 
             this.lbl_dbcon.AutoSize = true;
             this.lbl_dbcon.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_dbcon.ForeColor = System.Drawing.Color.Silver;
             this.lbl_dbcon.Location = new System.Drawing.Point(93, 16);
             this.lbl_dbcon.Name = "lbl_dbcon";
             this.lbl_dbcon.Size = new System.Drawing.Size(19, 13);
@@ -287,18 +304,21 @@ namespace PostcardsEditor
             // 
             // btn_exitApp
             // 
+            this.btn_exitApp.BackColor = System.Drawing.Color.Silver;
+            this.btn_exitApp.ForeColor = System.Drawing.Color.Black;
             this.btn_exitApp.Location = new System.Drawing.Point(1052, 6);
             this.btn_exitApp.Name = "btn_exitApp";
             this.btn_exitApp.Size = new System.Drawing.Size(88, 30);
             this.btn_exitApp.TabIndex = 10;
             this.btn_exitApp.Text = "&Exit";
-            this.btn_exitApp.UseVisualStyleBackColor = true;
+            this.btn_exitApp.UseVisualStyleBackColor = false;
             this.btn_exitApp.Click += new System.EventHandler(this.btn_exitApp_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Silver;
             this.label1.Location = new System.Drawing.Point(59, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 13);
@@ -313,11 +333,16 @@ namespace PostcardsEditor
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridCard.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridCard.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dataGridCard.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             this.dataGridCard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridCard.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridCard.GridColor = System.Drawing.Color.Gray;
             this.dataGridCard.Location = new System.Drawing.Point(12, 50);
+            this.dataGridCard.MultiSelect = false;
             this.dataGridCard.Name = "dataGridCard";
             this.dataGridCard.ReadOnly = true;
+            this.dataGridCard.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridCard.Size = new System.Drawing.Size(1147, 724);
             this.dataGridCard.TabIndex = 1;
             this.dataGridCard.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridCard_CellContentClick);
@@ -326,11 +351,12 @@ namespace PostcardsEditor
             this.dataGridCard.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridCard_CellContentClick);
             this.dataGridCard.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dataGridCard_CellContentClick);
             this.dataGridCard.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dataGridCard_CellContentClick);
+            this.dataGridCard.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridCard_MouseClick);
             // 
             // panel2
             // 
             this.panel2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panel2.BackColor = System.Drawing.Color.Silver;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.panel2.Controls.Add(this.lbl_loadingCard);
             this.panel2.Controls.Add(this.lbl_dbConnect);
             this.panel2.Controls.Add(this.chk_updateCard);
@@ -340,7 +366,7 @@ namespace PostcardsEditor
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Controls.Add(this.lbl_addEdit);
             this.panel2.Controls.Add(this.groupBox1);
-            this.panel2.Location = new System.Drawing.Point(12, 5);
+            this.panel2.Location = new System.Drawing.Point(9, 5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1148, 830);
             this.panel2.TabIndex = 2;
@@ -349,6 +375,7 @@ namespace PostcardsEditor
             // 
             this.lbl_loadingCard.AutoSize = true;
             this.lbl_loadingCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_loadingCard.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_loadingCard.Location = new System.Drawing.Point(496, 8);
             this.lbl_loadingCard.Name = "lbl_loadingCard";
             this.lbl_loadingCard.Size = new System.Drawing.Size(160, 24);
@@ -358,6 +385,7 @@ namespace PostcardsEditor
             // lbl_dbConnect
             // 
             this.lbl_dbConnect.AutoSize = true;
+            this.lbl_dbConnect.ForeColor = System.Drawing.Color.Silver;
             this.lbl_dbConnect.Location = new System.Drawing.Point(18, 796);
             this.lbl_dbConnect.Name = "lbl_dbConnect";
             this.lbl_dbConnect.Size = new System.Drawing.Size(61, 18);
@@ -367,6 +395,7 @@ namespace PostcardsEditor
             // chk_updateCard
             // 
             this.chk_updateCard.AutoSize = true;
+            this.chk_updateCard.ForeColor = System.Drawing.Color.LightGray;
             this.chk_updateCard.Location = new System.Drawing.Point(804, 796);
             this.chk_updateCard.Name = "chk_updateCard";
             this.chk_updateCard.Size = new System.Drawing.Size(74, 22);
@@ -377,26 +406,30 @@ namespace PostcardsEditor
             // 
             // btn_saveCard
             // 
+            this.btn_saveCard.BackColor = System.Drawing.Color.Silver;
             this.btn_saveCard.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_saveCard.ForeColor = System.Drawing.Color.Black;
             this.btn_saveCard.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btn_saveCard.Location = new System.Drawing.Point(879, 792);
             this.btn_saveCard.Name = "btn_saveCard";
             this.btn_saveCard.Size = new System.Drawing.Size(84, 28);
             this.btn_saveCard.TabIndex = 8;
             this.btn_saveCard.Text = "&Save";
-            this.btn_saveCard.UseVisualStyleBackColor = true;
+            this.btn_saveCard.UseVisualStyleBackColor = false;
             this.btn_saveCard.Click += new System.EventHandler(this.btn_saveCard_Click);
             // 
             // btn_close
             // 
+            this.btn_close.BackColor = System.Drawing.Color.Silver;
             this.btn_close.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_close.ForeColor = System.Drawing.Color.Black;
             this.btn_close.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btn_close.Location = new System.Drawing.Point(1045, 792);
             this.btn_close.Name = "btn_close";
             this.btn_close.Size = new System.Drawing.Size(84, 28);
             this.btn_close.TabIndex = 9;
             this.btn_close.Text = "&Close";
-            this.btn_close.UseVisualStyleBackColor = true;
+            this.btn_close.UseVisualStyleBackColor = false;
             this.btn_close.Click += new System.EventHandler(this.btn_close_Click);
             // 
             // groupBox3
@@ -422,24 +455,28 @@ namespace PostcardsEditor
             // 
             // btn_openBackImg
             // 
+            this.btn_openBackImg.BackColor = System.Drawing.Color.Silver;
             this.btn_openBackImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_openBackImg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btn_openBackImg.Location = new System.Drawing.Point(1064, 70);
             this.btn_openBackImg.Name = "btn_openBackImg";
             this.btn_openBackImg.Size = new System.Drawing.Size(32, 22);
             this.btn_openBackImg.TabIndex = 6;
             this.btn_openBackImg.Text = "...";
-            this.btn_openBackImg.UseVisualStyleBackColor = true;
+            this.btn_openBackImg.UseVisualStyleBackColor = false;
             this.btn_openBackImg.Click += new System.EventHandler(this.btn_openBackImg_Click);
             // 
             // btn_openFrontImg
             // 
+            this.btn_openFrontImg.BackColor = System.Drawing.Color.Silver;
             this.btn_openFrontImg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_openFrontImg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.btn_openFrontImg.Location = new System.Drawing.Point(508, 70);
             this.btn_openFrontImg.Name = "btn_openFrontImg";
             this.btn_openFrontImg.Size = new System.Drawing.Size(32, 22);
             this.btn_openFrontImg.TabIndex = 4;
             this.btn_openFrontImg.Text = "...";
-            this.btn_openFrontImg.UseVisualStyleBackColor = true;
+            this.btn_openFrontImg.UseVisualStyleBackColor = false;
             this.btn_openFrontImg.Click += new System.EventHandler(this.btn_openFrontImg_Click);
             // 
             // pic_backImg
@@ -468,16 +505,18 @@ namespace PostcardsEditor
             // 
             // txt_backImgPath
             // 
+            this.txt_backImgPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_backImgPath.Location = new System.Drawing.Point(681, 69);
             this.txt_backImgPath.Name = "txt_backImgPath";
             this.txt_backImgPath.Size = new System.Drawing.Size(379, 24);
             this.txt_backImgPath.TabIndex = 5;
-            this.txt_backImgPath.TextChanged += new System.EventHandler(this.pic_loader);
+            this.txt_backImgPath.TextChanged += new System.EventHandler(this._pic_loader);
             // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.ForeColor = System.Drawing.Color.LightGray;
             this.label23.Location = new System.Drawing.Point(561, 71);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(120, 18);
@@ -487,16 +526,18 @@ namespace PostcardsEditor
             // 
             // txt_frontImgPath
             // 
+            this.txt_frontImgPath.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_frontImgPath.Location = new System.Drawing.Point(126, 69);
             this.txt_frontImgPath.Name = "txt_frontImgPath";
             this.txt_frontImgPath.Size = new System.Drawing.Size(379, 24);
             this.txt_frontImgPath.TabIndex = 3;
-            this.txt_frontImgPath.TextChanged += new System.EventHandler(this.pic_loader);
+            this.txt_frontImgPath.TextChanged += new System.EventHandler(this._pic_loader);
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.ForeColor = System.Drawing.Color.LightGray;
             this.label22.Location = new System.Drawing.Point(5, 70);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(121, 18);
@@ -507,6 +548,7 @@ namespace PostcardsEditor
             // combo_SentType
             // 
             this.combo_SentType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.combo_SentType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_SentType.FormattingEnabled = true;
             this.combo_SentType.Location = new System.Drawing.Point(126, 43);
             this.combo_SentType.Name = "combo_SentType";
@@ -515,6 +557,7 @@ namespace PostcardsEditor
             // 
             // txt_TypeDesc
             // 
+            this.txt_TypeDesc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_TypeDesc.Location = new System.Drawing.Point(272, 43);
             this.txt_TypeDesc.Name = "txt_TypeDesc";
             this.txt_TypeDesc.Size = new System.Drawing.Size(824, 24);
@@ -524,6 +567,7 @@ namespace PostcardsEditor
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.LightGray;
             this.label25.Location = new System.Drawing.Point(49, 44);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(77, 18);
@@ -533,6 +577,7 @@ namespace PostcardsEditor
             // 
             // txt_bigDescription
             // 
+            this.txt_bigDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_bigDescription.Location = new System.Drawing.Point(126, 18);
             this.txt_bigDescription.Name = "txt_bigDescription";
             this.txt_bigDescription.Size = new System.Drawing.Size(970, 24);
@@ -542,6 +587,7 @@ namespace PostcardsEditor
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.ForeColor = System.Drawing.Color.LightGray;
             this.label26.Location = new System.Drawing.Point(18, 19);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(108, 18);
@@ -584,6 +630,7 @@ namespace PostcardsEditor
             // 
             // combo_material
             // 
+            this.combo_material.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_material.FormattingEnabled = true;
             this.combo_material.Location = new System.Drawing.Point(114, 48);
             this.combo_material.Name = "combo_material";
@@ -593,6 +640,7 @@ namespace PostcardsEditor
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.LightGray;
             this.label13.Location = new System.Drawing.Point(51, 52);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(60, 18);
@@ -601,6 +649,7 @@ namespace PostcardsEditor
             // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.dateTimePicker1.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Location = new System.Drawing.Point(198, 153);
@@ -611,6 +660,7 @@ namespace PostcardsEditor
             // 
             // txt_datePurchase
             // 
+            this.txt_datePurchase.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_datePurchase.Location = new System.Drawing.Point(114, 153);
             this.txt_datePurchase.MaxLength = 10;
             this.txt_datePurchase.Name = "txt_datePurchase";
@@ -620,6 +670,7 @@ namespace PostcardsEditor
             // 
             // txt_cardDifferencies
             // 
+            this.txt_cardDifferencies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_cardDifferencies.Location = new System.Drawing.Point(114, 234);
             this.txt_cardDifferencies.Name = "txt_cardDifferencies";
             this.txt_cardDifferencies.Size = new System.Drawing.Size(428, 24);
@@ -629,6 +680,7 @@ namespace PostcardsEditor
             // 
             this.lbl_differencies.AutoSize = true;
             this.lbl_differencies.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_differencies.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_differencies.Location = new System.Drawing.Point(28, 237);
             this.lbl_differencies.Name = "lbl_differencies";
             this.lbl_differencies.Size = new System.Drawing.Size(86, 18);
@@ -638,6 +690,7 @@ namespace PostcardsEditor
             // combo_cardNumber
             // 
             this.combo_cardNumber.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.combo_cardNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_cardNumber.FormattingEnabled = true;
             this.combo_cardNumber.Location = new System.Drawing.Point(216, 206);
             this.combo_cardNumber.Name = "combo_cardNumber";
@@ -648,6 +701,7 @@ namespace PostcardsEditor
             // 
             this.chk_identical.AutoSize = true;
             this.chk_identical.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_identical.ForeColor = System.Drawing.Color.LightGray;
             this.chk_identical.Location = new System.Drawing.Point(24, 209);
             this.chk_identical.Name = "chk_identical";
             this.chk_identical.Size = new System.Drawing.Size(92, 22);
@@ -660,6 +714,7 @@ namespace PostcardsEditor
             // 
             this.lbl_cardEqualsTo.AutoSize = true;
             this.lbl_cardEqualsTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_cardEqualsTo.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_cardEqualsTo.Location = new System.Drawing.Point(120, 208);
             this.lbl_cardEqualsTo.Name = "lbl_cardEqualsTo";
             this.lbl_cardEqualsTo.Size = new System.Drawing.Size(98, 18);
@@ -668,6 +723,7 @@ namespace PostcardsEditor
             // 
             // txt_webpage
             // 
+            this.txt_webpage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_webpage.Location = new System.Drawing.Point(114, 180);
             this.txt_webpage.Name = "txt_webpage";
             this.txt_webpage.Size = new System.Drawing.Size(428, 24);
@@ -677,6 +733,7 @@ namespace PostcardsEditor
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.ForeColor = System.Drawing.Color.LightGray;
             this.label19.Location = new System.Drawing.Point(40, 182);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(71, 18);
@@ -685,6 +742,7 @@ namespace PostcardsEditor
             // 
             // txt_price
             // 
+            this.txt_price.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_price.Location = new System.Drawing.Point(305, 154);
             this.txt_price.Name = "txt_price";
             this.txt_price.Size = new System.Drawing.Size(89, 24);
@@ -696,6 +754,7 @@ namespace PostcardsEditor
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.LightGray;
             this.label18.Location = new System.Drawing.Point(263, 155);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(40, 18);
@@ -706,6 +765,7 @@ namespace PostcardsEditor
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.ForeColor = System.Drawing.Color.LightGray;
             this.label17.Location = new System.Drawing.Point(7, 154);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(106, 18);
@@ -714,6 +774,7 @@ namespace PostcardsEditor
             // 
             // combo_orient
             // 
+            this.combo_orient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_orient.FormattingEnabled = true;
             this.combo_orient.Location = new System.Drawing.Point(115, 20);
             this.combo_orient.Name = "combo_orient";
@@ -722,6 +783,7 @@ namespace PostcardsEditor
             // 
             // txt_backTxtColor
             // 
+            this.txt_backTxtColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_backTxtColor.Location = new System.Drawing.Point(114, 115);
             this.txt_backTxtColor.Multiline = true;
             this.txt_backTxtColor.Name = "txt_backTxtColor";
@@ -730,6 +792,7 @@ namespace PostcardsEditor
             // 
             // txt_barcodeGen
             // 
+            this.txt_barcodeGen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_barcodeGen.Location = new System.Drawing.Point(227, 20);
             this.txt_barcodeGen.Name = "txt_barcodeGen";
             this.txt_barcodeGen.Size = new System.Drawing.Size(118, 24);
@@ -739,6 +802,7 @@ namespace PostcardsEditor
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.LightGray;
             this.label14.Location = new System.Drawing.Point(290, 53);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(71, 18);
@@ -749,6 +813,7 @@ namespace PostcardsEditor
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.ForeColor = System.Drawing.Color.LightGray;
             this.label16.Location = new System.Drawing.Point(-1, 124);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(115, 18);
@@ -759,6 +824,7 @@ namespace PostcardsEditor
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.LightGray;
             this.label15.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label15.Location = new System.Drawing.Point(166, 21);
             this.label15.Name = "label15";
@@ -768,6 +834,7 @@ namespace PostcardsEditor
             // 
             // txt_frtTxtColor
             // 
+            this.txt_frtTxtColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_frtTxtColor.Location = new System.Drawing.Point(114, 76);
             this.txt_frtTxtColor.Multiline = true;
             this.txt_frtTxtColor.Name = "txt_frtTxtColor";
@@ -777,6 +844,7 @@ namespace PostcardsEditor
             // combo_cond
             // 
             this.combo_cond.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.combo_cond.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_cond.FormattingEnabled = true;
             this.combo_cond.Location = new System.Drawing.Point(365, 48);
             this.combo_cond.Name = "combo_cond";
@@ -787,6 +855,7 @@ namespace PostcardsEditor
             // 
             this.chk_borders.AutoSize = true;
             this.chk_borders.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_borders.ForeColor = System.Drawing.Color.LightGray;
             this.chk_borders.Location = new System.Drawing.Point(450, 48);
             this.chk_borders.Name = "chk_borders";
             this.chk_borders.Size = new System.Drawing.Size(92, 22);
@@ -798,6 +867,7 @@ namespace PostcardsEditor
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.ForeColor = System.Drawing.Color.LightGray;
             this.label20.Location = new System.Drawing.Point(-1, 87);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(116, 18);
@@ -808,6 +878,7 @@ namespace PostcardsEditor
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.ForeColor = System.Drawing.Color.LightGray;
             this.label21.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label21.Location = new System.Drawing.Point(32, 21);
             this.label21.Name = "label21";
@@ -818,6 +889,7 @@ namespace PostcardsEditor
             // lbl_addEdit
             // 
             this.lbl_addEdit.AutoSize = true;
+            this.lbl_addEdit.ForeColor = System.Drawing.Color.LightGray;
             this.lbl_addEdit.Location = new System.Drawing.Point(18, 9);
             this.lbl_addEdit.Name = "lbl_addEdit";
             this.lbl_addEdit.Size = new System.Drawing.Size(70, 18);
@@ -864,6 +936,7 @@ namespace PostcardsEditor
             // 
             this.chk_blog.AutoSize = true;
             this.chk_blog.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_blog.ForeColor = System.Drawing.Color.LightGray;
             this.chk_blog.Location = new System.Drawing.Point(272, 71);
             this.chk_blog.Name = "chk_blog";
             this.chk_blog.Size = new System.Drawing.Size(174, 22);
@@ -875,6 +948,7 @@ namespace PostcardsEditor
             // 
             this.chk_scanned.AutoSize = true;
             this.chk_scanned.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_scanned.ForeColor = System.Drawing.Color.LightGray;
             this.chk_scanned.Location = new System.Drawing.Point(131, 71);
             this.chk_scanned.Name = "chk_scanned";
             this.chk_scanned.Size = new System.Drawing.Size(97, 22);
@@ -884,6 +958,7 @@ namespace PostcardsEditor
             // 
             // combo_shape
             // 
+            this.combo_shape.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_shape.FormattingEnabled = true;
             this.combo_shape.Location = new System.Drawing.Point(449, 231);
             this.combo_shape.Name = "combo_shape";
@@ -894,6 +969,7 @@ namespace PostcardsEditor
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.Color.LightGray;
             this.label24.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label24.Location = new System.Drawing.Point(399, 234);
             this.label24.Name = "label24";
@@ -905,6 +981,7 @@ namespace PostcardsEditor
             // 
             this.chk_seriesMulti.AutoSize = true;
             this.chk_seriesMulti.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_seriesMulti.ForeColor = System.Drawing.Color.LightGray;
             this.chk_seriesMulti.Location = new System.Drawing.Point(458, 206);
             this.chk_seriesMulti.Name = "chk_seriesMulti";
             this.chk_seriesMulti.Size = new System.Drawing.Size(81, 22);
@@ -914,6 +991,7 @@ namespace PostcardsEditor
             // 
             // combo_size
             // 
+            this.combo_size.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_size.FormattingEnabled = true;
             this.combo_size.Location = new System.Drawing.Point(249, 232);
             this.combo_size.Name = "combo_size";
@@ -924,6 +1002,7 @@ namespace PostcardsEditor
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.LightGray;
             this.label11.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label11.Location = new System.Drawing.Point(213, 234);
             this.label11.Name = "label11";
@@ -933,6 +1012,7 @@ namespace PostcardsEditor
             // 
             // txt_totSeriesCards
             // 
+            this.txt_totSeriesCards.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_totSeriesCards.Location = new System.Drawing.Point(131, 233);
             this.txt_totSeriesCards.Name = "txt_totSeriesCards";
             this.txt_totSeriesCards.Size = new System.Drawing.Size(48, 24);
@@ -942,6 +1022,7 @@ namespace PostcardsEditor
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.LightGray;
             this.label10.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label10.Location = new System.Drawing.Point(56, 234);
             this.label10.Name = "label10";
@@ -951,6 +1032,7 @@ namespace PostcardsEditor
             // 
             // txt_totalmgInCard
             // 
+            this.txt_totalmgInCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_totalmgInCard.Location = new System.Drawing.Point(389, 205);
             this.txt_totalmgInCard.Name = "txt_totalmgInCard";
             this.txt_totalmgInCard.Size = new System.Drawing.Size(36, 24);
@@ -960,6 +1042,7 @@ namespace PostcardsEditor
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.LightGray;
             this.label9.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label9.Location = new System.Drawing.Point(327, 207);
             this.label9.Name = "label9";
@@ -971,6 +1054,7 @@ namespace PostcardsEditor
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.LightGray;
             this.label8.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label8.Location = new System.Drawing.Point(66, 207);
             this.label8.Name = "label8";
@@ -980,6 +1064,7 @@ namespace PostcardsEditor
             // 
             // combo_coloring
             // 
+            this.combo_coloring.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_coloring.FormattingEnabled = true;
             this.combo_coloring.Location = new System.Drawing.Point(131, 205);
             this.combo_coloring.Name = "combo_coloring";
@@ -990,6 +1075,7 @@ namespace PostcardsEditor
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.LightGray;
             this.label7.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label7.Location = new System.Drawing.Point(206, 207);
             this.label7.Name = "label7";
@@ -999,6 +1085,7 @@ namespace PostcardsEditor
             // 
             // combo_year
             // 
+            this.combo_year.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_year.FormattingEnabled = true;
             this.combo_year.Location = new System.Drawing.Point(245, 205);
             this.combo_year.Name = "combo_year";
@@ -1009,6 +1096,7 @@ namespace PostcardsEditor
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.LightGray;
             this.label2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label2.Location = new System.Drawing.Point(33, 21);
             this.label2.Name = "label2";
@@ -1018,6 +1106,7 @@ namespace PostcardsEditor
             // 
             // combo_theme
             // 
+            this.combo_theme.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_theme.FormattingEnabled = true;
             this.combo_theme.Location = new System.Drawing.Point(131, 178);
             this.combo_theme.Name = "combo_theme";
@@ -1026,6 +1115,7 @@ namespace PostcardsEditor
             // 
             // txt_cardNumber
             // 
+            this.txt_cardNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_cardNumber.Location = new System.Drawing.Point(131, 18);
             this.txt_cardNumber.MaxLength = 50;
             this.txt_cardNumber.Name = "txt_cardNumber";
@@ -1036,6 +1126,7 @@ namespace PostcardsEditor
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.LightGray;
             this.label3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label3.Location = new System.Drawing.Point(61, 46);
             this.label3.Name = "label3";
@@ -1047,6 +1138,7 @@ namespace PostcardsEditor
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.LightGray;
             this.label6.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label6.Location = new System.Drawing.Point(76, 180);
             this.label6.Name = "label6";
@@ -1058,6 +1150,7 @@ namespace PostcardsEditor
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.LightGray;
             this.label4.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label4.Location = new System.Drawing.Point(70, 100);
             this.label4.Name = "label4";
@@ -1067,6 +1160,7 @@ namespace PostcardsEditor
             // 
             // txt_descORIG
             // 
+            this.txt_descORIG.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_descORIG.Location = new System.Drawing.Point(131, 152);
             this.txt_descORIG.Name = "txt_descORIG";
             this.txt_descORIG.Size = new System.Drawing.Size(408, 24);
@@ -1076,6 +1170,7 @@ namespace PostcardsEditor
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.LightGray;
             this.label5.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label5.Location = new System.Drawing.Point(7, 128);
             this.label5.Name = "label5";
@@ -1085,6 +1180,7 @@ namespace PostcardsEditor
             // 
             // txt_descENG
             // 
+            this.txt_descENG.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_descENG.Location = new System.Drawing.Point(131, 126);
             this.txt_descENG.Name = "txt_descENG";
             this.txt_descENG.Size = new System.Drawing.Size(408, 24);
@@ -1094,6 +1190,7 @@ namespace PostcardsEditor
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.LightGray;
             this.label12.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.label12.Location = new System.Drawing.Point(5, 154);
             this.label12.Name = "label12";
@@ -1103,6 +1200,7 @@ namespace PostcardsEditor
             // 
             // combo_country
             // 
+            this.combo_country.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_country.FormattingEnabled = true;
             this.combo_country.Location = new System.Drawing.Point(131, 99);
             this.combo_country.Name = "combo_country";
@@ -1111,6 +1209,7 @@ namespace PostcardsEditor
             // 
             // combo_publish
             // 
+            this.combo_publish.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_publish.FormattingEnabled = true;
             this.combo_publish.Location = new System.Drawing.Point(131, 44);
             this.combo_publish.MaxLength = 150;
@@ -1122,31 +1221,20 @@ namespace PostcardsEditor
             // 
             this.combo_searchType.FormattingEnabled = true;
             this.combo_searchType.Items.AddRange(new object[] {
-            "",
+            "(where to search)",
             "Card Number",
             "Publisher",
             "Scanned ?",
             "Published in the blog ?",
             "Country",
-            "Description",
+            "Description (English)",
+            "Description (Original)",
             "Theme",
-            "Coloring",
-            "Year",
             "Series ?",
-            "Size",
-            "Shape",
-            "Orientation",
-            "Barcode",
             "Condition",
             "Borders ?",
-            "Front Text Color",
-            "Back Text Color",
-            "Purchase Date",
-            "Cost",
-            "Webpage",
             "Identical ?",
-            "Big Description",
-            "Offer Type"});
+            "Offer Type Description"});
             this.combo_searchType.Location = new System.Drawing.Point(7, 5);
             this.combo_searchType.Name = "combo_searchType";
             this.combo_searchType.Size = new System.Drawing.Size(180, 26);
@@ -1163,23 +1251,27 @@ namespace PostcardsEditor
             // 
             // btn_search
             // 
+            this.btn_search.BackColor = System.Drawing.Color.Silver;
+            this.btn_search.ForeColor = System.Drawing.Color.Black;
             this.btn_search.Location = new System.Drawing.Point(550, 4);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(84, 26);
             this.btn_search.TabIndex = 5;
             this.btn_search.Text = "&Search";
-            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.UseVisualStyleBackColor = false;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
             // btn_cardRefresh
             // 
             this.btn_cardRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cardRefresh.Location = new System.Drawing.Point(1055, 4);
+            this.btn_cardRefresh.BackColor = System.Drawing.Color.Silver;
+            this.btn_cardRefresh.ForeColor = System.Drawing.Color.Black;
+            this.btn_cardRefresh.Location = new System.Drawing.Point(640, 5);
             this.btn_cardRefresh.Name = "btn_cardRefresh";
-            this.btn_cardRefresh.Size = new System.Drawing.Size(84, 26);
+            this.btn_cardRefresh.Size = new System.Drawing.Size(118, 26);
             this.btn_cardRefresh.TabIndex = 6;
-            this.btn_cardRefresh.Text = "&Refresh";
-            this.btn_cardRefresh.UseVisualStyleBackColor = true;
+            this.btn_cardRefresh.Text = "&Clear Search";
+            this.btn_cardRefresh.UseVisualStyleBackColor = false;
             this.btn_cardRefresh.Click += new System.EventHandler(this.btn_cardRefresh_Click);
             // 
             // panel3
@@ -1199,6 +1291,7 @@ namespace PostcardsEditor
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1169, 837);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
@@ -1206,6 +1299,7 @@ namespace PostcardsEditor
             this.Controls.Add(this.dataGridCard);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);

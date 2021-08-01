@@ -54,6 +54,7 @@ namespace PostcardsEditor
                     chk_allSeries.Visible = true;
                 }
                 dataGridSeries.DataSource = dc.DT;
+                dataGridSeries.ForeColor = Color.FromArgb(64, 64, 64);
             }
             catch
             {

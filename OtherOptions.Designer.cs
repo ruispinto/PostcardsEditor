@@ -83,12 +83,13 @@ namespace PostcardsEditor
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridOthers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridOthers.BackgroundColor = System.Drawing.Color.LightGray;
+            this.dataGridOthers.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dataGridOthers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridOthers.GridColor = System.Drawing.Color.DimGray;
+            this.dataGridOthers.GridColor = System.Drawing.Color.DarkGreen;
             this.dataGridOthers.Location = new System.Drawing.Point(12, 116);
             this.dataGridOthers.Name = "dataGridOthers";
             this.dataGridOthers.ReadOnly = true;
+            this.dataGridOthers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridOthers.Size = new System.Drawing.Size(741, 431);
             this.dataGridOthers.TabIndex = 0;
             this.dataGridOthers.TabStop = false;
@@ -226,43 +227,51 @@ namespace PostcardsEditor
             // 
             // btn_open
             // 
+            this.btn_open.BackColor = System.Drawing.Color.Silver;
+            this.btn_open.ForeColor = System.Drawing.Color.Black;
             this.btn_open.Location = new System.Drawing.Point(501, 46);
             this.btn_open.Name = "btn_open";
             this.btn_open.Size = new System.Drawing.Size(88, 30);
             this.btn_open.TabIndex = 12;
             this.btn_open.Text = "&Open";
-            this.btn_open.UseVisualStyleBackColor = true;
+            this.btn_open.UseVisualStyleBackColor = false;
             this.btn_open.Click += new System.EventHandler(this.btn_open_Click);
             // 
             // btn_closeOthers
             // 
             this.btn_closeOthers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_closeOthers.BackColor = System.Drawing.Color.Silver;
+            this.btn_closeOthers.ForeColor = System.Drawing.Color.Black;
             this.btn_closeOthers.Location = new System.Drawing.Point(666, 560);
             this.btn_closeOthers.Name = "btn_closeOthers";
             this.btn_closeOthers.Size = new System.Drawing.Size(88, 30);
             this.btn_closeOthers.TabIndex = 13;
             this.btn_closeOthers.Text = "&Close";
-            this.btn_closeOthers.UseVisualStyleBackColor = true;
+            this.btn_closeOthers.UseVisualStyleBackColor = false;
             this.btn_closeOthers.Click += new System.EventHandler(this.btn_closeOthers_Click);
             // 
             // btn_excelTable
             // 
+            this.btn_excelTable.BackColor = System.Drawing.Color.Silver;
+            this.btn_excelTable.ForeColor = System.Drawing.Color.Black;
             this.btn_excelTable.Location = new System.Drawing.Point(505, 9);
             this.btn_excelTable.Name = "btn_excelTable";
             this.btn_excelTable.Size = new System.Drawing.Size(116, 30);
             this.btn_excelTable.TabIndex = 14;
             this.btn_excelTable.Text = "Export to Excel";
-            this.btn_excelTable.UseVisualStyleBackColor = true;
+            this.btn_excelTable.UseVisualStyleBackColor = false;
             this.btn_excelTable.Click += new System.EventHandler(this.btn_excelTable_Click);
             // 
             // btn_deleteOthers
             // 
+            this.btn_deleteOthers.BackColor = System.Drawing.Color.Silver;
+            this.btn_deleteOthers.ForeColor = System.Drawing.Color.Black;
             this.btn_deleteOthers.Location = new System.Drawing.Point(397, 9);
             this.btn_deleteOthers.Name = "btn_deleteOthers";
             this.btn_deleteOthers.Size = new System.Drawing.Size(88, 30);
             this.btn_deleteOthers.TabIndex = 18;
             this.btn_deleteOthers.Text = "Delete";
-            this.btn_deleteOthers.UseVisualStyleBackColor = true;
+            this.btn_deleteOthers.UseVisualStyleBackColor = false;
             this.btn_deleteOthers.Click += new System.EventHandler(this.btn_deleteOthers_Click);
             // 
             // chk_deleteOthers
@@ -277,22 +286,26 @@ namespace PostcardsEditor
             // 
             // btn_editOthers
             // 
+            this.btn_editOthers.BackColor = System.Drawing.Color.Silver;
+            this.btn_editOthers.ForeColor = System.Drawing.Color.Black;
             this.btn_editOthers.Location = new System.Drawing.Point(282, 9);
             this.btn_editOthers.Name = "btn_editOthers";
             this.btn_editOthers.Size = new System.Drawing.Size(88, 30);
             this.btn_editOthers.TabIndex = 16;
             this.btn_editOthers.Text = "E&dit";
-            this.btn_editOthers.UseVisualStyleBackColor = true;
+            this.btn_editOthers.UseVisualStyleBackColor = false;
             this.btn_editOthers.Click += new System.EventHandler(this.btn_editOthers_Click);
             // 
             // btn_addOthers
             // 
+            this.btn_addOthers.BackColor = System.Drawing.Color.Silver;
+            this.btn_addOthers.ForeColor = System.Drawing.Color.Black;
             this.btn_addOthers.Location = new System.Drawing.Point(189, 9);
             this.btn_addOthers.Name = "btn_addOthers";
             this.btn_addOthers.Size = new System.Drawing.Size(88, 30);
             this.btn_addOthers.TabIndex = 15;
             this.btn_addOthers.Text = "&Add";
-            this.btn_addOthers.UseVisualStyleBackColor = true;
+            this.btn_addOthers.UseVisualStyleBackColor = false;
             this.btn_addOthers.Click += new System.EventHandler(this.btn_addOthers_Click);
             // 
             // groupBox1
@@ -325,7 +338,6 @@ namespace PostcardsEditor
             this.gb_table.Size = new System.Drawing.Size(139, 109);
             this.gb_table.TabIndex = 17;
             this.gb_table.TabStop = false;
-            this.gb_table.Text = "Editing:";
             // 
             // lbl_tableName
             // 
@@ -339,7 +351,7 @@ namespace PostcardsEditor
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.LightYellow;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel2.Controls.Add(this.chk_updateOther);
             this.panel2.Controls.Add(this.btn_closeOthersPanel);
             this.panel2.Controls.Add(this.btn_saveOthersPanel);
@@ -350,6 +362,7 @@ namespace PostcardsEditor
             this.panel2.Controls.Add(this.lbl_otherOptField2);
             this.panel2.Controls.Add(this.lbl_otherOptField1);
             this.panel2.Controls.Add(this.lbl_otherOptions);
+            this.panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(184)))), ((int)(((byte)(184)))));
             this.panel2.Location = new System.Drawing.Point(4, 352);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(758, 200);
@@ -368,26 +381,31 @@ namespace PostcardsEditor
             // 
             // btn_closeOthersPanel
             // 
+            this.btn_closeOthersPanel.BackColor = System.Drawing.Color.Silver;
+            this.btn_closeOthersPanel.ForeColor = System.Drawing.Color.Black;
             this.btn_closeOthersPanel.Location = new System.Drawing.Point(589, 152);
             this.btn_closeOthersPanel.Name = "btn_closeOthersPanel";
             this.btn_closeOthersPanel.Size = new System.Drawing.Size(75, 35);
             this.btn_closeOthersPanel.TabIndex = 10;
             this.btn_closeOthersPanel.Text = "&Close";
-            this.btn_closeOthersPanel.UseVisualStyleBackColor = true;
+            this.btn_closeOthersPanel.UseVisualStyleBackColor = false;
             this.btn_closeOthersPanel.Click += new System.EventHandler(this.btn_closeOthersPanel_Click);
             // 
             // btn_saveOthersPanel
             // 
+            this.btn_saveOthersPanel.BackColor = System.Drawing.Color.Silver;
+            this.btn_saveOthersPanel.ForeColor = System.Drawing.Color.Black;
             this.btn_saveOthersPanel.Location = new System.Drawing.Point(446, 152);
             this.btn_saveOthersPanel.Name = "btn_saveOthersPanel";
             this.btn_saveOthersPanel.Size = new System.Drawing.Size(75, 35);
             this.btn_saveOthersPanel.TabIndex = 9;
             this.btn_saveOthersPanel.Text = "&Save";
-            this.btn_saveOthersPanel.UseVisualStyleBackColor = true;
+            this.btn_saveOthersPanel.UseVisualStyleBackColor = false;
             this.btn_saveOthersPanel.Click += new System.EventHandler(this.btn_saveOthersPanel_Click);
             // 
             // txt_otherOptionsField3
             // 
+            this.txt_otherOptionsField3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_otherOptionsField3.Location = new System.Drawing.Point(209, 115);
             this.txt_otherOptionsField3.Name = "txt_otherOptionsField3";
             this.txt_otherOptionsField3.Size = new System.Drawing.Size(455, 24);
@@ -395,6 +413,7 @@ namespace PostcardsEditor
             // 
             // txt_otherOptionsField2
             // 
+            this.txt_otherOptionsField2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_otherOptionsField2.Location = new System.Drawing.Point(209, 79);
             this.txt_otherOptionsField2.Name = "txt_otherOptionsField2";
             this.txt_otherOptionsField2.Size = new System.Drawing.Size(455, 24);
@@ -402,6 +421,7 @@ namespace PostcardsEditor
             // 
             // txt_otherOptionsField1
             // 
+            this.txt_otherOptionsField1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_otherOptionsField1.Location = new System.Drawing.Point(209, 44);
             this.txt_otherOptionsField1.Name = "txt_otherOptionsField1";
             this.txt_otherOptionsField1.Size = new System.Drawing.Size(455, 24);
@@ -461,7 +481,7 @@ namespace PostcardsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(766, 602);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox2);
@@ -471,6 +491,7 @@ namespace PostcardsEditor
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridOthers);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);

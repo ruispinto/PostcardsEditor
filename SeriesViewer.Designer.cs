@@ -100,43 +100,51 @@ namespace PostcardsEditor
             // 
             // btn_seriesViewerClose
             // 
+            this.btn_seriesViewerClose.BackColor = System.Drawing.Color.Silver;
+            this.btn_seriesViewerClose.ForeColor = System.Drawing.Color.Black;
             this.btn_seriesViewerClose.Location = new System.Drawing.Point(1044, 8);
             this.btn_seriesViewerClose.Name = "btn_seriesViewerClose";
             this.btn_seriesViewerClose.Size = new System.Drawing.Size(88, 26);
             this.btn_seriesViewerClose.TabIndex = 6;
             this.btn_seriesViewerClose.Text = "&Close";
-            this.btn_seriesViewerClose.UseVisualStyleBackColor = true;
+            this.btn_seriesViewerClose.UseVisualStyleBackColor = false;
             this.btn_seriesViewerClose.Click += new System.EventHandler(this.btn_seriesViewerClose_Click);
             // 
             // btn_seriesAdd
             // 
+            this.btn_seriesAdd.BackColor = System.Drawing.Color.Silver;
+            this.btn_seriesAdd.ForeColor = System.Drawing.Color.Black;
             this.btn_seriesAdd.Location = new System.Drawing.Point(534, 8);
             this.btn_seriesAdd.Name = "btn_seriesAdd";
             this.btn_seriesAdd.Size = new System.Drawing.Size(88, 26);
             this.btn_seriesAdd.TabIndex = 1;
             this.btn_seriesAdd.Text = "&Add";
-            this.btn_seriesAdd.UseVisualStyleBackColor = true;
+            this.btn_seriesAdd.UseVisualStyleBackColor = false;
             this.btn_seriesAdd.Click += new System.EventHandler(this.btn_seriesAdd_Click);
             // 
             // btn_seriesEdit
             // 
+            this.btn_seriesEdit.BackColor = System.Drawing.Color.Silver;
+            this.btn_seriesEdit.ForeColor = System.Drawing.Color.Black;
             this.btn_seriesEdit.Location = new System.Drawing.Point(628, 8);
             this.btn_seriesEdit.Name = "btn_seriesEdit";
             this.btn_seriesEdit.Size = new System.Drawing.Size(88, 26);
             this.btn_seriesEdit.TabIndex = 2;
             this.btn_seriesEdit.Text = "E&dit";
-            this.btn_seriesEdit.UseVisualStyleBackColor = true;
+            this.btn_seriesEdit.UseVisualStyleBackColor = false;
             this.btn_seriesEdit.Click += new System.EventHandler(this.btn_seriesEdit_Click);
             // 
             // btn_seriesDelete
             // 
+            this.btn_seriesDelete.BackColor = System.Drawing.Color.Silver;
             this.btn_seriesDelete.Enabled = false;
+            this.btn_seriesDelete.ForeColor = System.Drawing.Color.Black;
             this.btn_seriesDelete.Location = new System.Drawing.Point(754, 7);
             this.btn_seriesDelete.Name = "btn_seriesDelete";
             this.btn_seriesDelete.Size = new System.Drawing.Size(88, 26);
             this.btn_seriesDelete.TabIndex = 4;
             this.btn_seriesDelete.Text = "&Delete";
-            this.btn_seriesDelete.UseVisualStyleBackColor = true;
+            this.btn_seriesDelete.UseVisualStyleBackColor = false;
             this.btn_seriesDelete.Click += new System.EventHandler(this.btn_seriesDelete_Click);
             // 
             // chk_seriesDelete
@@ -160,12 +168,14 @@ namespace PostcardsEditor
             // 
             // btn_seriesSaveExcel
             // 
+            this.btn_seriesSaveExcel.BackColor = System.Drawing.Color.Silver;
+            this.btn_seriesSaveExcel.ForeColor = System.Drawing.Color.Black;
             this.btn_seriesSaveExcel.Location = new System.Drawing.Point(884, 7);
             this.btn_seriesSaveExcel.Name = "btn_seriesSaveExcel";
             this.btn_seriesSaveExcel.Size = new System.Drawing.Size(130, 26);
             this.btn_seriesSaveExcel.TabIndex = 5;
             this.btn_seriesSaveExcel.Text = "Export to Excel";
-            this.btn_seriesSaveExcel.UseVisualStyleBackColor = true;
+            this.btn_seriesSaveExcel.UseVisualStyleBackColor = false;
             this.btn_seriesSaveExcel.Click += new System.EventHandler(this.btn_seriesSaveExcel_Click);
             // 
             // label1
@@ -202,10 +212,12 @@ namespace PostcardsEditor
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridSeries.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dataGridSeries.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.dataGridSeries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridSeries.Location = new System.Drawing.Point(6, 39);
             this.dataGridSeries.Name = "dataGridSeries";
             this.dataGridSeries.ReadOnly = true;
+            this.dataGridSeries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridSeries.Size = new System.Drawing.Size(1151, 745);
             this.dataGridSeries.TabIndex = 1;
             this.dataGridSeries.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridSeries_CellContentClick);
@@ -217,7 +229,7 @@ namespace PostcardsEditor
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.PeachPuff;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(32)))), ((int)(((byte)(32)))));
             this.panel2.Controls.Add(this.lbl_loadingSeries);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.lbl_seriesAddEdit);
@@ -227,6 +239,7 @@ namespace PostcardsEditor
             this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Controls.Add(this.groupBox1);
+            this.panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(184)))), ((int)(((byte)(184)))));
             this.panel2.Location = new System.Drawing.Point(21, 10);
             this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
@@ -273,24 +286,28 @@ namespace PostcardsEditor
             // 
             // btn_seriesSave
             // 
+            this.btn_seriesSave.BackColor = System.Drawing.Color.Silver;
             this.btn_seriesSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_seriesSave.ForeColor = System.Drawing.Color.Black;
             this.btn_seriesSave.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.btn_seriesSave.Location = new System.Drawing.Point(839, 622);
             this.btn_seriesSave.Name = "btn_seriesSave";
             this.btn_seriesSave.Size = new System.Drawing.Size(84, 28);
             this.btn_seriesSave.TabIndex = 6;
             this.btn_seriesSave.Text = "&Save";
-            this.btn_seriesSave.UseVisualStyleBackColor = true;
+            this.btn_seriesSave.UseVisualStyleBackColor = false;
             this.btn_seriesSave.Click += new System.EventHandler(this.btn_seriesSave_Click);
             // 
             // btn_seriesPanelClose
             // 
+            this.btn_seriesPanelClose.BackColor = System.Drawing.Color.Silver;
+            this.btn_seriesPanelClose.ForeColor = System.Drawing.Color.Black;
             this.btn_seriesPanelClose.Location = new System.Drawing.Point(1023, 623);
             this.btn_seriesPanelClose.Name = "btn_seriesPanelClose";
             this.btn_seriesPanelClose.Size = new System.Drawing.Size(90, 26);
             this.btn_seriesPanelClose.TabIndex = 7;
             this.btn_seriesPanelClose.Text = "&Close";
-            this.btn_seriesPanelClose.UseVisualStyleBackColor = true;
+            this.btn_seriesPanelClose.UseVisualStyleBackColor = false;
             this.btn_seriesPanelClose.Click += new System.EventHandler(this.btn_seriesPanelClose_Click);
             // 
             // groupBox3
@@ -347,6 +364,7 @@ namespace PostcardsEditor
             // 
             // txt_seriesBigDescription
             // 
+            this.txt_seriesBigDescription.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_seriesBigDescription.Location = new System.Drawing.Point(128, 15);
             this.txt_seriesBigDescription.Name = "txt_seriesBigDescription";
             this.txt_seriesBigDescription.Size = new System.Drawing.Size(970, 24);
@@ -366,6 +384,7 @@ namespace PostcardsEditor
             // 
             // txt_seriesBackImg
             // 
+            this.txt_seriesBackImg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_seriesBackImg.Location = new System.Drawing.Point(683, 44);
             this.txt_seriesBackImg.Name = "txt_seriesBackImg";
             this.txt_seriesBackImg.Size = new System.Drawing.Size(379, 24);
@@ -396,6 +415,7 @@ namespace PostcardsEditor
             // 
             // txt_seriesFrontImg
             // 
+            this.txt_seriesFrontImg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_seriesFrontImg.Location = new System.Drawing.Point(128, 44);
             this.txt_seriesFrontImg.Name = "txt_seriesFrontImg";
             this.txt_seriesFrontImg.Size = new System.Drawing.Size(379, 24);
@@ -440,6 +460,7 @@ namespace PostcardsEditor
             // 
             // txt_seriesBackTxtColor
             // 
+            this.txt_seriesBackTxtColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_seriesBackTxtColor.Location = new System.Drawing.Point(119, 101);
             this.txt_seriesBackTxtColor.Multiline = true;
             this.txt_seriesBackTxtColor.Name = "txt_seriesBackTxtColor";
@@ -458,6 +479,7 @@ namespace PostcardsEditor
             // 
             // txt_seriesFrtTxtColor
             // 
+            this.txt_seriesFrtTxtColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_seriesFrtTxtColor.Location = new System.Drawing.Point(119, 69);
             this.txt_seriesFrtTxtColor.Multiline = true;
             this.txt_seriesFrtTxtColor.Name = "txt_seriesFrtTxtColor";
@@ -476,6 +498,7 @@ namespace PostcardsEditor
             // 
             // txt_seriesDate
             // 
+            this.txt_seriesDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_seriesDate.Location = new System.Drawing.Point(114, 41);
             this.txt_seriesDate.MaxLength = 10;
             this.txt_seriesDate.Name = "txt_seriesDate";
@@ -506,6 +529,7 @@ namespace PostcardsEditor
             // 
             // combo_seriesColoring
             // 
+            this.combo_seriesColoring.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_seriesColoring.FormattingEnabled = true;
             this.combo_seriesColoring.Location = new System.Drawing.Point(114, 10);
             this.combo_seriesColoring.Name = "combo_seriesColoring";
@@ -514,6 +538,7 @@ namespace PostcardsEditor
             // 
             // txt_seriesBarcodeGen
             // 
+            this.txt_seriesBarcodeGen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_seriesBarcodeGen.Location = new System.Drawing.Point(426, 40);
             this.txt_seriesBarcodeGen.Name = "txt_seriesBarcodeGen";
             this.txt_seriesBarcodeGen.Size = new System.Drawing.Size(118, 24);
@@ -543,6 +568,7 @@ namespace PostcardsEditor
             // 
             // combo_seriesYear
             // 
+            this.combo_seriesYear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_seriesYear.FormattingEnabled = true;
             this.combo_seriesYear.Location = new System.Drawing.Point(287, 39);
             this.combo_seriesYear.Name = "combo_seriesYear";
@@ -561,6 +587,7 @@ namespace PostcardsEditor
             // 
             // txt_seriesTotalImgCard
             // 
+            this.txt_seriesTotalImgCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_seriesTotalImgCard.Location = new System.Drawing.Point(508, 13);
             this.txt_seriesTotalImgCard.Name = "txt_seriesTotalImgCard";
             this.txt_seriesTotalImgCard.Size = new System.Drawing.Size(36, 24);
@@ -579,6 +606,7 @@ namespace PostcardsEditor
             // 
             // combo_seriesOrient
             // 
+            this.combo_seriesOrient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.combo_seriesOrient.FormattingEnabled = true;
             this.combo_seriesOrient.Items.AddRange(new object[] {
             "---",
@@ -619,6 +647,7 @@ namespace PostcardsEditor
             // 
             // txt_seriesSecondNumber
             // 
+            this.txt_seriesSecondNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_seriesSecondNumber.Location = new System.Drawing.Point(144, 41);
             this.txt_seriesSecondNumber.Name = "txt_seriesSecondNumber";
             this.txt_seriesSecondNumber.Size = new System.Drawing.Size(212, 24);
@@ -626,6 +655,7 @@ namespace PostcardsEditor
             // 
             // txt_mainCardNumber
             // 
+            this.txt_mainCardNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_mainCardNumber.Location = new System.Drawing.Point(144, 11);
             this.txt_mainCardNumber.Name = "txt_mainCardNumber";
             this.txt_mainCardNumber.Size = new System.Drawing.Size(212, 24);
@@ -633,6 +663,7 @@ namespace PostcardsEditor
             // 
             // txt_seriesDescENG
             // 
+            this.txt_seriesDescENG.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_seriesDescENG.Location = new System.Drawing.Point(144, 69);
             this.txt_seriesDescENG.Name = "txt_seriesDescENG";
             this.txt_seriesDescENG.Size = new System.Drawing.Size(394, 24);
@@ -640,6 +671,7 @@ namespace PostcardsEditor
             // 
             // txt_seriesDescORIG
             // 
+            this.txt_seriesDescORIG.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_seriesDescORIG.Location = new System.Drawing.Point(144, 98);
             this.txt_seriesDescORIG.Name = "txt_seriesDescORIG";
             this.txt_seriesDescORIG.Size = new System.Drawing.Size(394, 24);
@@ -692,6 +724,7 @@ namespace PostcardsEditor
             // 
             // txt_MainCard
             // 
+            this.txt_MainCard.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.txt_MainCard.Enabled = false;
             this.txt_MainCard.Location = new System.Drawing.Point(73, 6);
             this.txt_MainCard.Name = "txt_MainCard";
@@ -715,6 +748,7 @@ namespace PostcardsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1169, 836);
             this.ControlBox = false;
             this.Controls.Add(this.panel2);
@@ -724,6 +758,7 @@ namespace PostcardsEditor
             this.Controls.Add(this.dataGridSeries);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;

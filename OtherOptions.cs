@@ -22,6 +22,7 @@ namespace PostcardsEditor
 
         // Option from the simple menu
         public int option = 0;
+        public int chkResult;
         public bool chkOtherOptions = false;
 
         // table name
@@ -30,6 +31,7 @@ namespace PostcardsEditor
         public OtherOptions()
         {
             InitializeComponent();
+
         }
 
         // when this form loads some options are defined here
@@ -39,6 +41,8 @@ namespace PostcardsEditor
             groupBox2.Enabled = false;
             btn_open.Enabled = true;
             panel2.Visible = false;
+            con.connectdb.Close();
+            dataGridOthers.ForeColor = Color.FromArgb(64, 64, 64);
         }
 
         // what to show when you click the Open button
@@ -284,7 +288,7 @@ namespace PostcardsEditor
         private void REFRESH_OTHERS_PANEL()
         {
             gb_table.Visible = true;
-            lbl_tableName.Text = tblName;
+            lbl_tableName.Text = "Editing:\n" + tblName;
 
             dataGridOthers.DataSource = null;
             try
@@ -402,7 +406,6 @@ namespace PostcardsEditor
                     else
                         dc.ADD_OTHERS_YEAR();
                 }
-
                 // confirmation message
                 msgTxt = tblName + "\n\nData saved!";
                 MessageBox.Show(msgTxt);
