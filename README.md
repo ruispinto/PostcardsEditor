@@ -1,10 +1,11 @@
 # PostcardsEditor
 ##
-## Revision 2.0.02.0005 - 2021-07-02
+## Revision 2.0.02.0099 - 2021-08-01
 ##
 ### *** NEW ***
 ###
-### - Now the revision date appears in the about screen
+### - Dark version
+### - Added search for a specific card in the postcards viewer
 ###
 ###
 ###
