@@ -41,13 +41,15 @@ namespace PostcardsEditor
             // 
             // btn_closeAbout
             // 
+            this.btn_closeAbout.BackColor = System.Drawing.Color.Silver;
             this.btn_closeAbout.Font = new System.Drawing.Font("Microsoft Tai Le", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_closeAbout.ForeColor = System.Drawing.Color.Black;
             this.btn_closeAbout.Location = new System.Drawing.Point(164, 347);
             this.btn_closeAbout.Name = "btn_closeAbout";
             this.btn_closeAbout.Size = new System.Drawing.Size(118, 28);
             this.btn_closeAbout.TabIndex = 13;
             this.btn_closeAbout.Text = "&Close";
-            this.btn_closeAbout.UseVisualStyleBackColor = true;
+            this.btn_closeAbout.UseVisualStyleBackColor = false;
             this.btn_closeAbout.UseWaitCursor = true;
             this.btn_closeAbout.Click += new System.EventHandler(this.btn_closeAbout_Click);
             // 
@@ -124,6 +126,7 @@ namespace PostcardsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.ClientSize = new System.Drawing.Size(449, 399);
             this.ControlBox = false;
             this.Controls.Add(this.label6);
