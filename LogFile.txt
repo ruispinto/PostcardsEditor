@@ -1,5 +1,13 @@
 Log for PostcardsEditor
 
+Revision 2.0.03.0001 - 2021-08-01
+=================================
+*** NEW ***
+- Dark version
+- Added search for a specific card in the postcards viewer
+*** UPDATED ***
+- Minor bug fixes
+
 Revision 2.0.02.0005 - 2021-07-02
 =================================
 *** NEW ***
@@ -44,4 +52,4 @@ If you intend to use these files, please change the mysql login details in file 
 
 
 Information
-- All database structure has been released today, at 2021-04-19
+- All database structure will be released on 2021-08-07
