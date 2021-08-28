@@ -1,5 +1,12 @@
 Log for PostcardsEditor
 
+Revision 2.0.04.0001 - 2021-08-28
+=================================
+*** NEW ***
+- Added search while adding the postcard to avoid duplicates on cardnumber
+*** UPDATED ***
+- Minor bug fixes
+
 Revision 2.0.03.0001 - 2021-08-01
 =================================
 *** NEW ***
