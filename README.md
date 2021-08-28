@@ -1,15 +1,13 @@
 # PostcardsEditor
 ##
-## Revision 2.0.02.0099 - 2021-08-01
+## Revision 2.0.04.0001 - 2021-08-28
 ##
 ### *** NEW ***
 ###
-### - Dark version
-### - Added search for a specific card in the postcards viewer
+### - Added search while adding new postcards to avoid duplicate card numbers
 ###
 ###
 ###
 ###  *** UPDATED ***
 ###
 ### - Minor bug fixes
-### - Now everytime you add a postcard to the database it refresh data in the screen but maintain the cursor in the row where you were before.
