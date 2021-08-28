@@ -146,11 +146,15 @@ namespace PostcardsEditor
 
 
 
+        /***********************************
+         *          SAVE POSTCARD          *
+        ************************************/
         private void btn_saveCard_Click(object sender, EventArgs e)
         {
             int localRow = dataGridCard.CurrentRow.Index;
             if (txt_cardNumber.Text.Length > 0 || txt_cardNumber.Text.Trim() != "")
             {
+                // check if postcard number already exists
                 dc.cardNumber = txt_cardNumber.Text;
                 if (combo_publish.Text == "Choose...")
                 {
@@ -311,8 +315,17 @@ namespace PostcardsEditor
                 }
                 else
                 {
-                    dc.ADD_CARD();
-                    query2 = "Added!";
+                    bool verify = false;
+                    verify = dc.SEARCH_NUMBER();
+                    if (verify)
+                    {
+                        query2 = "Already Exists!";
+                    }
+                    else
+                    {
+                        dc.ADD_CARD();
+                        query2 = "Added!";
+                    }
                 }
 
                 // create a messegabox with all results to confirm
@@ -633,7 +646,6 @@ namespace PostcardsEditor
         // In case you click with your mouse
         private void dataGridCard_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //DataGridView senderGrid = (DataGridView)sender;
             update_cardNumber();
         }
 
@@ -642,7 +654,6 @@ namespace PostcardsEditor
         // In case you press down a key in the grid
         private void dataGridCard_CellContentClick(object sender, KeyPressEventArgs e)
         {
-            //DataGridView senderGrid = (DataGridView)sender;
             update_cardNumber();
         }
 
@@ -659,7 +670,6 @@ namespace PostcardsEditor
         // update row number and card number
         private void update_cardNumber()
         {
-            //DataGridView senderGrid = (DataGridView)sender;
             Int32 currentRow = dataGridCard.CurrentRow.Index + 1;
             lbl_rowNumber.Text = "Row " + currentRow.ToString() + " / " + (dataGridCard.RowCount).ToString();
             lbl_cardNumber.Text = dataGridCard.CurrentRow.Cells[1].Value.ToString();
@@ -673,9 +683,6 @@ namespace PostcardsEditor
             dataGridCard.Enabled = false;
             lbl_loadingCard.Visible = true;
             Cursor.Current = Cursors.WaitCursor;
-            // At the beginning, these fields are disabled
-            //lbl_cardEqualsTo.Enabled = false;
-            //lbl_differencies.Enabled = false;
             txt_cardDifferencies.Enabled = false;
             combo_cardNumber.Enabled = false;
             btn_publishBlog.Visible = false;
@@ -962,13 +969,28 @@ namespace PostcardsEditor
         // refresh all data in the datagrid but stays in the same card
         private void REFRESH_CARD_STILL()
         {
-            int localRow = dataGridCard.CurrentRow.Index;
+            int localRow;
+            try
+            {
+                localRow = dataGridCard.CurrentRow.Index;
+            }
+            catch
+            {
+                localRow = dataGridCard.RowCount;
+            }
             dataGridCard.DataSource = null;
             dataGridCard.BackgroundColor = Color.FromArgb(64, 64, 64);
             dc.REFRESH_CARD();
             dataGridCard.DataSource = dc.DT;
-            dataGridCard.Rows[localRow].Selected = true;
-            dataGridCard.FirstDisplayedScrollingRowIndex = localRow;
+            try
+            {
+                dataGridCard.Rows[localRow].Selected = true;
+                dataGridCard.FirstDisplayedScrollingRowIndex = localRow;
+            }
+            catch
+            {
+                localRow = 0;
+            }
             dataGridCard.Focus();
             dataGridCard.Enabled = true;
         }
