@@ -93,8 +93,9 @@ namespace PostcardsEditor.myclass
         public DataTable DT = new DataTable();
         public DataSet DS = new DataSet();
 
-        public string sVersion = "2.0.02.0005";
-        public string dVersion = "2021-07-02";
+        // other variables
+        public string sVersion = "2.0.04.0001";
+        public string dVersion = "2021-08-28";
 
         // fetch data from coloring Table
         public void Show_ColoringTable()
@@ -532,7 +533,6 @@ namespace PostcardsEditor.myclass
                 // execute the query (in this case update the current postcard)
                 cmd.ExecuteNonQuery();
                 connectdb.Close();
-
             }
         }
 
@@ -540,10 +540,54 @@ namespace PostcardsEditor.myclass
 
         // *******************************************************************************************************
         // * 
-        // *  Series Card Table Management
+        // *  Search (show all and check one)
         // * 
         // * *****************************************************************************************************
 
+        // Search through the cards
+        public void SEARCH_CARD(string searchField, string searchText)
+        {
+            string query = "SELECT cardid AS 'Card #', cardnumber AS 'Card Number', cardpublisher AS 'Publisher', cardscanned AS 'Scanned', cardintheblog AS 'Blog', cardcountryname AS 'Country', carddesceng AS 'Description (English)', carddescoriginal AS 'Description (Original)', cardthemename AS 'Theme', cardcoloringabr AS 'Coloring', cardyearnumber AS 'Year', cardimgnmbr AS 'Tot.Num.of Img', cardseriesmulti AS 'Series ?', cardseriestotal AS 'Total Series', cardsizename AS 'Size', cardshapename AS 'Shape', cardorientabr AS 'Orient.', cardbarcode AS 'Barcode', cardmaterial as 'Material', cardcondabr AS 'Condition', cardborders AS 'Borders ?', cardfronttxtcolor AS 'Front Text Color', cardbacktxtcolor AS 'Back Text Color', carddatepurchased AS 'Purchase Date', cardcostprice AS 'Cost Price', cardwebpage AS 'Webpage', cardidentical AS 'Identical ?', cardequalsto AS 'Equals to', carddifferences AS 'Differencies', cardbigdesc AS 'Big Description', cardsenttypename AS 'Sent Type', cardtypedesc AS 'Type Description', cardfrontimgpath AS 'Front Image Path', cardbackimgpath AS 'Back Image Path' FROM card WHERE " + searchField + " LIKE '%" + searchText + "%'";
+            DS = new DataSet();
+            DT.Clear();
+            MySqlDataAdapter DA = new MySqlDataAdapter(query, connectdb);
+            DA.Fill(DS);
+            DT = DS.Tables[0];
+        }
+
+        // Search for cardnumber only
+        public bool SEARCH_NUMBER()
+        {
+            bool check = false;
+            int checkNumber = 0;
+            connectdb.Open();
+            MySqlDataReader reader;
+            using (var cmd = new MySqlCommand())
+            {
+                cmd.CommandText = "SELECT cardnumber FROM card WHERE cardnumber=@cnumber";
+                cmd.CommandType = CommandType.Text;
+                cmd.Connection = connectdb;
+                cmd.Parameters.Add("@cnumber", MySqlDbType.VarChar).Value = cardNumber;
+                reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    checkNumber++;
+                }
+                connectdb.Close();
+                if (checkNumber >= 1)
+                    check = true;
+                else
+                    check = false;
+            }
+            return check;
+        }
+
+
+        // *******************************************************************************************************
+        // * 
+        // *  Series Card Table Management
+        // * 
+        // * *****************************************************************************************************
 
         // Show data from the table 'CardSeries' in the grid
         public void REFRESH_MULTICARD(string upd_cardnumber)
@@ -571,7 +615,7 @@ namespace PostcardsEditor.myclass
         public void ADD_SERIESCARD()
         {
             connectdb.Open();
-            string query = "INSERT INTO cardseries(seriescardnumber, seriesseccardnumber, seriesdesceng, seriesdescoriginal, seriescolorabr, seriesorientabr, seriesimgcount, seriesdate, seriesyearnumber, seriesbarcode, seriesfronttxtcolor, seriesbacktxtcolor, seriesbigdesc, seriesfrontimgpath, seriesbackimgpath) VALUES(@snumber, @ssecnumber, @sdesceng, @sdescorig, @scolor, @sorient, @simg, @sdate, @syear, @sbarcode, @sfrttxtcolor, @sbcktxtcolor, @sbigdsc, @sfrtimg, @sbckimg) WHERE seriescardnumber=@snumber";
+            string query = "INSERT INTO cardseries(seriescardnumber, seriesseccardnumber, seriesdesceng, seriesdescoriginal, seriescolorabr, seriesorientabr, seriesimgcount, seriesdate, seriesyearnumber, seriesbarcode, seriesfronttxtcolor, seriesbacktxtcolor, seriesbigdesc, seriesfrontimgpath, seriesbackimgpath) VALUES(@snumber, @ssecnumber, @sdesceng, @sdescorig, @scolor, @sorient, @simg, @sdate, @syear, @sbarcode, @sfrttxtcolor, @sbcktxtcolor, @sbigdsc, @sfrtimg, @sbckimg)";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -579,6 +623,7 @@ namespace PostcardsEditor.myclass
                 cmd.Connection = connectdb;
 
                 // add app fields data to the database fields
+                cmd.Parameters.Add("@snumber", MySqlDbType.VarChar).Value = seriesCardNumber;
                 cmd.Parameters.Add("@ssecnumber", MySqlDbType.VarChar).Value = seriesSecCardNumber;
                 cmd.Parameters.Add("@sdesceng", MySqlDbType.VarChar).Value = seriesDescEng;
                 cmd.Parameters.Add("@sdescorig", MySqlDbType.VarChar).Value = seriesDescOrg;
@@ -594,7 +639,6 @@ namespace PostcardsEditor.myclass
                 cmd.Parameters.Add("@sfrtimg", MySqlDbType.VarChar).Value = seriesFrontImgPath;
                 cmd.Parameters.Add("@sbckimg", MySqlDbType.VarChar).Value = seriesBackImgPath;
 
-                cmd.Parameters.Add("@snumber", MySqlDbType.VarChar).Value = seriesCardNumber;
                 // execute the query (in this case add a new postcard)
                 cmd.ExecuteNonQuery();
                 connectdb.Close();
@@ -654,7 +698,6 @@ namespace PostcardsEditor.myclass
                 // execute the query (in this case update the current postcard)
                 cmd.ExecuteNonQuery();
                 connectdb.Close();
-
             }
         }
 
@@ -723,9 +766,8 @@ namespace PostcardsEditor.myclass
         // Add data to the coloring table
         public void ADD_OTHERS_COLORING()
         {
+            string query = "INSERT INTO coloring(coloringabr, coloringname) VALUES(@otherField1, @otherField2)";
             connectdb.Open();
-            string query = "";
-            query = "INSERT INTO coloring(coloringabr, coloringname) VALUES(@otherField1, @otherField2)";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -745,9 +787,8 @@ namespace PostcardsEditor.myclass
         // Add data to the condition table
         public void ADD_OTHERS_COND()
         {
+            string query = "INSERT INTO cond(condabr, condname, conddesc) VALUES(@otherField1, @otherField2, @otherField3)";
             connectdb.Open();
-            string query = "";
-            query = "INSERT INTO cond(condabr, condname, conddesc) VALUES(@otherField1, @otherField2, @otherField3)";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -768,9 +809,8 @@ namespace PostcardsEditor.myclass
         // Add data to the country table
         public void ADD_OTHERS_COUNTRY()
         {
+            string query = "INSERT INTO country(countryname, countryiso) VALUES(@otherField1, @otherField2)";
             connectdb.Open();
-            string query = "";
-            query = "INSERT INTO country(countryname, countryiso) VALUES(@otherField1, @otherField2)";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -790,9 +830,8 @@ namespace PostcardsEditor.myclass
         // Add data to the material table
         public void ADD_OTHERS_MATERIAL()
         {
+            string query = "INSERT INTO material(materialname) VALUES(@otherField1)";
             connectdb.Open();
-            string query = "";
-            query = "INSERT INTO material(materialname) VALUES(@otherField1)";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -811,9 +850,9 @@ namespace PostcardsEditor.myclass
         // Add data to the orientation table
         public void ADD_OTHERS_ORIENT()
         {
-            connectdb.Open();
             string query = "";
             query = "INSERT INTO orient(orientabr, orientname) VALUES(@otherField1, @otherField2)";
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -833,9 +872,8 @@ namespace PostcardsEditor.myclass
         // Add data to the publisher table
         public void ADD_OTHERS_PUBLISH()
         {
+            string query = "INSERT INTO publish(publishname, publishcompanies) VALUES(@otherField1, @otherField2)";
             connectdb.Open();
-            string query = "";
-            query = "INSERT INTO publish(publishname, publishcompanies) VALUES(@otherField1, @otherField2)";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -855,9 +893,8 @@ namespace PostcardsEditor.myclass
         // Add data to the sent type table
         public void ADD_OTHERS_SENTTYPE()
         {
+            string query = "INSERT INTO senttype(senttypename) VALUES(@otherField1)";
             connectdb.Open();
-            string query = "";
-            query = "INSERT INTO senttype(senttypename) VALUES(@otherField1)";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -876,9 +913,8 @@ namespace PostcardsEditor.myclass
         // Add data to the shape table
         public void ADD_OTHERS_SHAPE()
         {
+            string query = "INSERT INTO shape(shapename) VALUES(@otherField1)";
             connectdb.Open();
-            string query = "";
-            query = "INSERT INTO shape(shapename) VALUES(@otherField1)";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -897,9 +933,8 @@ namespace PostcardsEditor.myclass
         // Add data to the size table
         public void ADD_OTHERS_SIZE()
         {
+            string query = "INSERT INTO size(sizename) VALUES(@otherField1)";
             connectdb.Open();
-            string query = "";
-            query = "INSERT INTO size(sizename) VALUES(@otherField1)";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -918,9 +953,8 @@ namespace PostcardsEditor.myclass
         // Add data to the theme table
         public void ADD_OTHERS_THEME()
         {
+            string query = "INSERT INTO theme(themename) VALUES(@otherField1)";
             connectdb.Open();
-            string query = "";
-            query = "INSERT INTO theme(themename) VALUES(@otherField1)";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -928,7 +962,7 @@ namespace PostcardsEditor.myclass
                 cmd.Connection = connectdb;
 
                 // add app fields data to the database fields
-                cmd.Parameters.Add("@sdesceng", MySqlDbType.VarChar).Value = othersField1;
+                cmd.Parameters.Add("@otherField1", MySqlDbType.VarChar).Value = othersField1;
 
                 // execute the query (in this case add a new postcard)
                 cmd.ExecuteNonQuery();
@@ -939,9 +973,8 @@ namespace PostcardsEditor.myclass
         // Add data to the year table
         public void ADD_OTHERS_YEAR()
         {
+            string query = "INSERT INTO yyear(yearnumber) VALUES(@otherField1)";
             connectdb.Open();
-            string query = "";
-            query = "INSERT INTO yyear(yearnumber) VALUES(@otherField1)";
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -960,8 +993,8 @@ namespace PostcardsEditor.myclass
         // Update data to the coloring table
         public void UPDATE_OTHERS_COLORING()
         {
-            connectdb.Open();
             string query = "UPDATE coloring SET coloringabr=@otherField1, coloringname=@otherField2 WHERE coloringid=@otherID";
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -983,8 +1016,8 @@ namespace PostcardsEditor.myclass
         // Update data to the condition table
         public void UPDATE_OTHERS_COND()
         {
-            connectdb.Open();
             string query = "UPDATE cond SET condabr=@otherField1, condname=@otherField2, conddesc=@otherField3 WHERE condid=@otherID";
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -1007,8 +1040,8 @@ namespace PostcardsEditor.myclass
         // Update data to the country table
         public void UPDATE_OTHERS_COUNTRY()
         {
-            connectdb.Open();
             string query = "UPDATE cond SET countryname=@otherField1, countryiso=@otherField2 WHERE countryid=@otherID";
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -1030,8 +1063,8 @@ namespace PostcardsEditor.myclass
         // Update data to the material table
         public void UPDATE_OTHERS_MATERIAL()
         {
-            connectdb.Open();
             string query = "UPDATE material SET materialname=@otherField1 WHERE materialid=@otherID";
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -1052,8 +1085,8 @@ namespace PostcardsEditor.myclass
         // Update data to the orientation table
         public void UPDATE_OTHERS_ORIENT()
         {
-            connectdb.Open();
             string query = "UPDATE orient SET orientabr=@otherField1, orientname=@otherField2 WHERE orientid=@otherID";
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -1075,8 +1108,8 @@ namespace PostcardsEditor.myclass
         // Update data to the publisher table
         public void UPDATE_OTHERS_PUBLISH()
         {
-            connectdb.Open();
             string query = "UPDATE publish SET publishname=@otherField1, publishcompanies=@otherField2 WHERE publishid=@otherID";
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -1098,8 +1131,8 @@ namespace PostcardsEditor.myclass
         // Update data to the senttype table
         public void UPDATE_OTHERS_SENTTYPE()
         {
-            connectdb.Open();
             string query = "UPDATE senttype SET senttypename=@otherField1 WHERE senttypeid=@otherID";
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -1120,8 +1153,8 @@ namespace PostcardsEditor.myclass
         // Update data to the shape table
         public void UPDATE_OTHERS_SHAPE()
         {
-            connectdb.Open();
             string query = "UPDATE shape SET shapename=@otherField1 WHERE shapeid=@otherID";
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -1142,8 +1175,8 @@ namespace PostcardsEditor.myclass
         // Update data to the size table
         public void UPDATE_OTHERS_SIZE()
         {
-            connectdb.Open();
             string query = "UPDATE size SET sizename=@otherField1 WHERE sizeid=@otherID";
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -1164,8 +1197,8 @@ namespace PostcardsEditor.myclass
         // Update data to the theme table
         public void UPDATE_OTHERS_THEME()
         {
-            connectdb.Open();
             string query = "UPDATE theme SET themename=@otherField1 WHERE themeid=@otherID";
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -1186,8 +1219,8 @@ namespace PostcardsEditor.myclass
         // Update data to the year table
         public void UPDATE_OTHERS_YEAR()
         {
-            connectdb.Open();
             string query = "UPDATE year SET yearnumber=@otherField1 WHERE yearid=@otherID";
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -1208,7 +1241,6 @@ namespace PostcardsEditor.myclass
         // Delete postcard in the database
         public void DELETE_OTHERS(int opt)
         {
-            connectdb.Open();
             string query = "";
             if (opt == 1)
                 query = "DELETE FROM coloring WHERE coloringid=@otherID";
@@ -1233,6 +1265,7 @@ namespace PostcardsEditor.myclass
             else if (opt == 11)
                 query = "DELETE FROM yyear WHERE yearid=@otherID";
 
+            connectdb.Open();
             using (var cmd = new MySqlCommand())
             {
                 cmd.CommandText = query;
@@ -1245,9 +1278,13 @@ namespace PostcardsEditor.myclass
                 // execute the query (in this case update the current postcard)
                 cmd.ExecuteNonQuery();
                 connectdb.Close();
-
             }
         }
+        /*
+         * 
+         *  End of Others Table Management
+         * 
+         */
 
     }
 }
