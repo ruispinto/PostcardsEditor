@@ -94,8 +94,8 @@ namespace PostcardsEditor.myclass
         public DataSet DS = new DataSet();
 
         // other variables
-        public string sVersion = "2.0.04.0001";
-        public string dVersion = "2021-08-28";
+        public string sVersion = "2.0.04.0004";
+        public string dVersion = "2021-10-29";
 
         // fetch data from coloring Table
         public void Show_ColoringTable()
@@ -545,9 +545,9 @@ namespace PostcardsEditor.myclass
         // * *****************************************************************************************************
 
         // Search through the cards
-        public void SEARCH_CARD(string searchField, string searchText)
+        public void SEARCH_CARD(string searchText)
         {
-            string query = "SELECT cardid AS 'Card #', cardnumber AS 'Card Number', cardpublisher AS 'Publisher', cardscanned AS 'Scanned', cardintheblog AS 'Blog', cardcountryname AS 'Country', carddesceng AS 'Description (English)', carddescoriginal AS 'Description (Original)', cardthemename AS 'Theme', cardcoloringabr AS 'Coloring', cardyearnumber AS 'Year', cardimgnmbr AS 'Tot.Num.of Img', cardseriesmulti AS 'Series ?', cardseriestotal AS 'Total Series', cardsizename AS 'Size', cardshapename AS 'Shape', cardorientabr AS 'Orient.', cardbarcode AS 'Barcode', cardmaterial as 'Material', cardcondabr AS 'Condition', cardborders AS 'Borders ?', cardfronttxtcolor AS 'Front Text Color', cardbacktxtcolor AS 'Back Text Color', carddatepurchased AS 'Purchase Date', cardcostprice AS 'Cost Price', cardwebpage AS 'Webpage', cardidentical AS 'Identical ?', cardequalsto AS 'Equals to', carddifferences AS 'Differencies', cardbigdesc AS 'Big Description', cardsenttypename AS 'Sent Type', cardtypedesc AS 'Type Description', cardfrontimgpath AS 'Front Image Path', cardbackimgpath AS 'Back Image Path' FROM card WHERE " + searchField + " LIKE '%" + searchText + "%'";
+            string query = "SELECT cardid AS 'Card #', cardnumber AS 'Card Number', cardpublisher AS 'Publisher', cardscanned AS 'Scanned', cardintheblog AS 'Blog', cardcountryname AS 'Country', carddesceng AS 'Description (English)', carddescoriginal AS 'Description (Original)', cardthemename AS 'Theme', cardcoloringabr AS 'Coloring', cardyearnumber AS 'Year', cardimgnmbr AS 'Tot.Num.of Img', cardseriesmulti AS 'Series ?', cardseriestotal AS 'Total Series', cardsizename AS 'Size', cardshapename AS 'Shape', cardorientabr AS 'Orient.', cardbarcode AS 'Barcode', cardmaterial as 'Material', cardcondabr AS 'Condition', cardborders AS 'Borders ?', cardfronttxtcolor AS 'Front Text Color', cardbacktxtcolor AS 'Back Text Color', carddatepurchased AS 'Purchase Date', cardcostprice AS 'Cost Price', cardwebpage AS 'Webpage', cardidentical AS 'Identical ?', cardequalsto AS 'Equals to', carddifferences AS 'Differencies', cardbigdesc AS 'Big Description', cardsenttypename AS 'Sent Type', cardtypedesc AS 'Type Description', cardfrontimgpath AS 'Front Image Path', cardbackimgpath AS 'Back Image Path' FROM card WHERE CONCAT_WS(' ', cardnumber, cardpublisher, cardcountryname, carddesceng, carddescoriginal, cardthemename, cardsizename, cardshapename, cardbarcode, cardmaterial) LIKE '%" + searchText + "%'";
             DS = new DataSet();
             DT.Clear();
             MySqlDataAdapter DA = new MySqlDataAdapter(query, connectdb);
