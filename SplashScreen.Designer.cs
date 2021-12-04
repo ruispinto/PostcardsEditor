@@ -54,11 +54,11 @@ namespace PostcardsEditor
             // lbl_greeting
             // 
             this.lbl_greeting.AutoSize = true;
-            this.lbl_greeting.Location = new System.Drawing.Point(128, 280);
+            this.lbl_greeting.Location = new System.Drawing.Point(133, 280);
             this.lbl_greeting.Name = "lbl_greeting";
-            this.lbl_greeting.Size = new System.Drawing.Size(166, 20);
+            this.lbl_greeting.Size = new System.Drawing.Size(152, 20);
             this.lbl_greeting.TabIndex = 1;
-            this.lbl_greeting.Text = "Good Aferternoon Rui";
+            this.lbl_greeting.Text = "Good Afternoon Rui";
             // 
             // label2
             // 

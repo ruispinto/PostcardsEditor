@@ -54,7 +54,6 @@ namespace PostcardsEditor
         }
 
         void tmr_Tick(object sender, EventArgs e)
-
         {
             //after 3 sec stop the timer
             tmr.Stop();

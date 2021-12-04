@@ -83,41 +83,51 @@ namespace PostcardsEditor
 
         private void btn_seriesEdit_Click(object sender, EventArgs e)
         {
-            panel1.Enabled = false;
-            panel2.Visible = true;
-            lbl_seriesAddEdit.Text = "Edit Postcard";
-            chkSeries = true;
-            chk_seriesUpdate.Checked = true;
+            if (dataGridSeries.RowCount > 0)
+            {
+                panel1.Enabled = false;
+                panel2.Visible = true;
+                lbl_seriesAddEdit.Text = "Edit Postcard";
+                chkSeries = true;
+                chk_seriesUpdate.Checked = true;
 
-            LOAD_SPANEL();
+                LOAD_SPANEL();
 
-            dataGridSeries.DataSource = null;
-            if (chk_allSeries.Checked == true)
-                dc.REFRESH_ALL_MULTICARD();
+                dataGridSeries.DataSource = null;
+                if (chk_allSeries.Checked == true)
+                    dc.REFRESH_ALL_MULTICARD();
+                else
+                    dc.REFRESH_MULTICARD(upd_mainCardNumber);
+                dataGridSeries.DataSource = dc.DT;
+            }
             else
-                dc.REFRESH_MULTICARD(upd_mainCardNumber);
-            dataGridSeries.DataSource = dc.DT;
+                MessageBox.Show("Since this will be the first card of " + dc.cardNumber + "\nThere is nothing to edit yet!");
         }
 
         private void btn_seriesDelete_Click(object sender, EventArgs e)
         {
-            string del_msg = "You are about to delete:\n\nPostcard Number: " + dataGridSeries.CurrentRow.Cells[0].Value.ToString() + "\nFrom Main Postcard Number: " + upd_mainCardNumber + "\n\nAre you sure ?";
-            DialogResult dialog = MessageBox.Show(del_msg, "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            btn_seriesDelete.Enabled = false;
-            chk_seriesDelete.Checked = false;
-            if (dialog == DialogResult.Yes)
+            if (dataGridSeries.RowCount > 0)
             {
-                txt_seriesSecondNumber.Text = dataGridSeries.CurrentRow.Cells[1].Value.ToString();
-                dc.seriesSecCardNumber= txt_seriesSecondNumber.Text;
-                dc.DELETE_SERIESCARD();
+                string del_msg = "You are about to delete:\n\nPostcard Number: " + dataGridSeries.CurrentRow.Cells[0].Value.ToString() + "\nFrom Main Postcard Number: " + upd_mainCardNumber + "\n\nAre you sure ?";
+                DialogResult dialog = MessageBox.Show(del_msg, "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                btn_seriesDelete.Enabled = false;
+                chk_seriesDelete.Checked = false;
+                if (dialog == DialogResult.Yes)
+                {
+                    txt_seriesSecondNumber.Text = dataGridSeries.CurrentRow.Cells[1].Value.ToString();
+                    dc.seriesSecCardNumber = txt_seriesSecondNumber.Text;
+                    dc.DELETE_SERIESCARD();
 
-                dataGridSeries.DataSource = null;
-                dc.REFRESH_MULTICARD(upd_mainCardNumber);
-                dataGridSeries.DataSource = dc.DT;
+                    dataGridSeries.DataSource = null;
+                    dc.REFRESH_MULTICARD(upd_mainCardNumber);
+                    dataGridSeries.DataSource = dc.DT;
 
-                del_msg = "Postcard number " + txt_seriesSecondNumber.Text.Trim() + " deleted!";
-                MessageBox.Show(del_msg, "", MessageBoxButtons.OK);
+                    del_msg = "Postcard number " + txt_seriesSecondNumber.Text.Trim() + " deleted!";
+                    MessageBox.Show(del_msg, "", MessageBoxButtons.OK);
+                }
             }
+            else
+                MessageBox.Show("Since this will be the first card of " + dc.cardNumber + "\nThere is nothing to delete yet!");
         }
 
         private void btn_seriesOpenBackImg_Click(object sender, EventArgs e)
@@ -285,23 +295,18 @@ namespace PostcardsEditor
 
         private void btn_seriesSave_Click(object sender, EventArgs e)
         {
-            int localRow = dataGridSeries.CurrentRow.Index;
+            int localRow = 1;
+            if(dataGridSeries.RowCount>0)
+                localRow = dataGridSeries.CurrentRow.Index;
             if (txt_mainCardNumber.Text.Length > 0 || txt_mainCardNumber.Text.Trim() != "" && txt_seriesSecondNumber.Text.Length > 0 || txt_seriesSecondNumber.Text.Trim() != "" && txt_seriesSecondNumber.Text.Trim()!=txt_mainCardNumber.Text.Trim())
             {
                 dc.seriesCardNumber = txt_mainCardNumber.Text;
                 dc.seriesSecCardNumber = txt_seriesSecondNumber.Text;
                 upd_mainCardNumber = txt_mainCardNumber.Text;
-                upd_seriesSecondNumber = txt_seriesSecondNumber.Text;
+                //upd_seriesSecondNumber = txt_seriesSecondNumber.Text;
                 dc.seriesDescEng = txt_seriesDescENG.Text;
                 dc.seriesDescOrg = txt_seriesDescORIG.Text;
-                if (combo_seriesColoring.Text == "Choose...")
-                {
-                    dc.seriesColorAbr = "";
-                }
-                else
-                {
-                    dc.cardColoring = combo_seriesColoring.Text;
-                }
+                dc.seriesColorAbr = combo_seriesColoring.Text;
                 if (combo_seriesOrient.Text == "Choose...")
                 {
                     dc.seriesOrient = "";
@@ -340,19 +345,28 @@ namespace PostcardsEditor
                 MessageBox.Show(query);
 
                 con.connectdb.Close();
-                panel2.Visible = false;
 
             }
             else
             {
                 MessageBox.Show("Field 'Main Card Number'  and 'Secondary Card Number' cannot be empty.\nField 'Secondary Card Number' must have a unique number.", "Main & Secondary Numbers", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            dataGridSeries.DataSource = null;
-            dc.REFRESH_ALL_MULTICARD();
-            dataGridSeries.DataSource = dc.DT;
-            dataGridSeries.Rows[localRow].Selected = true;
-            dataGridSeries.FirstDisplayedScrollingRowIndex = localRow;
-            dataGridSeries.Focus();
+            CHECKS_SERIES();
+            try
+            {
+                if (dataGridSeries.RowCount > 0)
+                {
+                    dataGridSeries.Rows[localRow].Selected = true;
+                    dataGridSeries.FirstDisplayedScrollingRowIndex = localRow;
+                    dataGridSeries.Focus();
+                }
+            }
+            catch
+            {
+
+            }
+            panel2.Visible = false;
+            panel1.Enabled = true;
         }
 
         private void chk_seriesDelete_CheckedChanged(object sender, EventArgs e)
@@ -407,90 +421,112 @@ namespace PostcardsEditor
         {
             lbl_loadingSeries.Visible = true;
             Cursor.Current = Cursors.WaitCursor;
-
-            txt_mainCardNumber.Text = dataGridSeries.CurrentRow.Cells[0].Value.ToString();
-            if (chkSeries == true)
-                txt_mainCardNumber.Enabled = false;
-            else
-                txt_mainCardNumber.Enabled = true;
-            txt_seriesSecondNumber.Text = dataGridSeries.CurrentRow.Cells[1].Value.ToString();
-            dc.old_seriesSecond = txt_seriesSecondNumber.Text;
-            txt_seriesDescENG.Text = dataGridSeries.CurrentRow.Cells[2].Value.ToString();
-            txt_seriesDescORIG.Text = dataGridSeries.CurrentRow.Cells[3].Value.ToString();
-            get_seriesColoring = dataGridSeries.CurrentRow.Cells[4].Value.ToString();
-            get_seriesOrient = dataGridSeries.CurrentRow.Cells[5].Value.ToString();
-            txt_seriesTotalImgCard.Text = dataGridSeries.CurrentRow.Cells[6].Value.ToString();
-            if ((dataGridSeries.CurrentRow.Cells[7].Value.ToString()).Trim() != "")
+            if (dataGridSeries.RowCount > 0)
             {
-                txt_seriesDate.Text = dataGridSeries.CurrentRow.Cells[7].Value.ToString();
+                txt_mainCardNumber.Text = dataGridSeries.CurrentRow.Cells[1].Value.ToString();
+                if (chkSeries == true)
+                    txt_mainCardNumber.Enabled = false;
+                else
+                    txt_mainCardNumber.Enabled = true;
+                txt_seriesSecondNumber.Text = dataGridSeries.CurrentRow.Cells[2].Value.ToString();
+                txt_seriesDescENG.Text = dataGridSeries.CurrentRow.Cells[3].Value.ToString();
+                txt_seriesDescORIG.Text = dataGridSeries.CurrentRow.Cells[4].Value.ToString();
+                get_seriesColoring = dataGridSeries.CurrentRow.Cells[5].Value.ToString();
+                get_seriesOrient = dataGridSeries.CurrentRow.Cells[6].Value.ToString();
+                txt_seriesTotalImgCard.Text = dataGridSeries.CurrentRow.Cells[7].Value.ToString();
+                if ((dataGridSeries.CurrentRow.Cells[8].Value.ToString()).Trim() != "")
+                {
+                    txt_seriesDate.Text = dataGridSeries.CurrentRow.Cells[8].Value.ToString();
+                    try
+                    {
+                        dateTimePickerSeries.Value = DateTime.Parse(txt_seriesDate.Text);
+                    }
+                    catch
+                    {
+                        dateTimePickerSeries.Value = DateTime.Now;
+                    }
+                }
+                else
+                {
+                    txt_seriesDate.Text = "";
+                    dateTimePickerSeries.Value = DateTime.Now;
+                }
+                get_seriesYear = dataGridSeries.CurrentRow.Cells[9].Value.ToString();
+                txt_seriesBarcodeGen.Text = dataGridSeries.CurrentRow.Cells[10].Value.ToString();
+                txt_seriesFrtTxtColor.Text = dataGridSeries.CurrentRow.Cells[11].Value.ToString();
+                txt_seriesBackTxtColor.Text = dataGridSeries.CurrentRow.Cells[12].Value.ToString();
+                txt_seriesBigDescription.Text = dataGridSeries.CurrentRow.Cells[13].Value.ToString();
+                if (chkSeries == true)
+                {
+                    txt_seriesFrontImg.Text = dataGridSeries.CurrentRow.Cells[14].Value.ToString();
+                    txt_seriesBackImg.Text = dataGridSeries.CurrentRow.Cells[15].Value.ToString();
+                }
+                else
+                {
+                    txt_seriesFrontImg.Text = "";
+                    txt_seriesBackImg.Text = "";
+                }
+
+                // Check if any of the image path fields has any image name. If it has, it shows, otherwise just show the default image
                 try
                 {
-                    dateTimePickerSeries.Value = DateTime.Parse(txt_seriesDate.Text);
+                    // Front Image
+                    if (txt_seriesFrontImg.Text == "" || txt_seriesFrontImg.Text == null)
+                    {
+                        pic_seriesFrontImg.Image = new Bitmap(Properties.Resources.no_image);
+                    }
+                    else
+                    {
+                        if (txt_seriesFrontImg.Text.Substring(0, 4) == "HTTP" || txt_seriesFrontImg.Text.Substring(0, 4) == "http")
+                            pic_seriesFrontImg.ImageLocation = txt_seriesFrontImg.Text;
+                        else
+                            pic_seriesFrontImg.Image = new Bitmap(txt_seriesFrontImg.Text);
+                    }
                 }
                 catch
                 {
-                    dateTimePickerSeries.Value = DateTime.Now;
-                }
-            }
-            else
-            {
-                txt_seriesDate.Text = "";
-                dateTimePickerSeries.Value = DateTime.Now;
-            }
-            get_seriesYear = dataGridSeries.CurrentRow.Cells[8].Value.ToString();
-            txt_seriesBarcodeGen.Text = dataGridSeries.CurrentRow.Cells[9].Value.ToString();
-            txt_seriesFrtTxtColor.Text = dataGridSeries.CurrentRow.Cells[10].Value.ToString();
-            txt_seriesBackTxtColor.Text = dataGridSeries.CurrentRow.Cells[11].Value.ToString();
-            txt_seriesBigDescription.Text = dataGridSeries.CurrentRow.Cells[12].Value.ToString();
-            if (chkSeries == true)
-            {
-                txt_seriesFrontImg.Text = dataGridSeries.CurrentRow.Cells[13].Value.ToString();
-                txt_seriesBackImg.Text = dataGridSeries.CurrentRow.Cells[14].Value.ToString();
-            }
-            else
-            {
-                txt_seriesFrontImg.Text = "";
-                txt_seriesBackImg.Text = "";
-            }
-
-            // Check if any of the image path fields has any image name. If it has, it shows, otherwise just show the default image
-            try
-            {
-                // Front Image
-                if (txt_seriesFrontImg.Text == "" || txt_seriesFrontImg.Text == null)
-                {
                     pic_seriesFrontImg.Image = new Bitmap(Properties.Resources.no_image);
                 }
-                else
+                try
                 {
-                    if (txt_seriesFrontImg.Text.Substring(0, 4) == "HTTP" || txt_seriesFrontImg.Text.Substring(0, 4) == "http")
-                        pic_seriesFrontImg.ImageLocation = txt_seriesFrontImg.Text;
+                    // Back image
+                    if (txt_seriesBackImg.Text == "" || txt_seriesBackImg.Text == null)
+                    {
+                        pic_seriesBackImg.Image = new Bitmap(Properties.Resources.no_image);
+                    }
                     else
-                        pic_seriesFrontImg.Image = new Bitmap(txt_seriesFrontImg.Text);
+                    {
+                        if (txt_seriesBackImg.Text.Substring(0, 4) == "HTTP" || txt_seriesBackImg.Text.Substring(0, 4) == "http")
+                            pic_seriesBackImg.ImageLocation = txt_seriesBackImg.Text;
+                        else
+                            pic_seriesBackImg.Image = new Bitmap(txt_seriesBackImg.Text);
+                    }
                 }
-            }
-            catch
-            {
-                pic_seriesFrontImg.Image = new Bitmap(Properties.Resources.no_image);
-            }
-            try
-            {
-                // Back image
-                if (txt_seriesBackImg.Text == "" || txt_seriesBackImg.Text == null)
+                catch
                 {
                     pic_seriesBackImg.Image = new Bitmap(Properties.Resources.no_image);
                 }
-                else
-                {
-                    if (txt_seriesBackImg.Text.Substring(0, 4) == "HTTP" || txt_seriesBackImg.Text.Substring(0, 4) == "http")
-                        pic_seriesBackImg.ImageLocation = txt_seriesBackImg.Text;
-                    else
-                        pic_seriesBackImg.Image = new Bitmap(txt_seriesBackImg.Text);
-                }
             }
-            catch
+            else
             {
-                pic_seriesBackImg.Image = new Bitmap(Properties.Resources.no_image);
+                MessageBox.Show("Since this will be the first card of " + dc.cardNumber + "\nAll required fields must be filled");
+                txt_mainCardNumber.Text = upd_mainCardNumber;
+                txt_mainCardNumber.Enabled = false;
+                txt_seriesSecondNumber.Text = "";
+                txt_seriesDescENG.Text = "";
+                txt_seriesDescORIG.Text = "";
+                get_seriesColoring = "Choose...";
+                get_seriesOrient = "Choose...";
+                txt_seriesTotalImgCard.Text = "";
+                txt_seriesDate.Text = "";
+                dateTimePickerSeries.Value = DateTime.Now;
+                get_seriesYear = "----";
+                txt_seriesBarcodeGen.Text = "";
+                txt_seriesFrtTxtColor.Text = "";
+                txt_seriesBackTxtColor.Text = "";
+                txt_seriesBigDescription.Text = "";
+                txt_seriesFrontImg.Text = "";
+                txt_seriesBackImg.Text = "";
             }
 
             try
@@ -551,17 +587,16 @@ namespace PostcardsEditor
             combo_seriesYear.Enabled = false;
             dateTimePickerSeries.Enabled = false;
 
-            txt_mainCardNumber.Text = dataGridSeries.CurrentRow.Cells[0].Value.ToString();
-            txt_seriesSecondNumber.Text = dataGridSeries.CurrentRow.Cells[1].Value.ToString();
-            dc.old_seriesSecond = txt_seriesSecondNumber.Text;
-            txt_seriesDescENG.Text = dataGridSeries.CurrentRow.Cells[2].Value.ToString();
-            txt_seriesDescORIG.Text = dataGridSeries.CurrentRow.Cells[3].Value.ToString();
-            get_seriesColoring = dataGridSeries.CurrentRow.Cells[4].Value.ToString();
-            get_seriesOrient = dataGridSeries.CurrentRow.Cells[5].Value.ToString();
-            txt_seriesTotalImgCard.Text = dataGridSeries.CurrentRow.Cells[6].Value.ToString();
-            if ((dataGridSeries.CurrentRow.Cells[7].Value.ToString()).Trim() != "")
+            txt_mainCardNumber.Text = dataGridSeries.CurrentRow.Cells[1].Value.ToString();
+            txt_seriesSecondNumber.Text = dataGridSeries.CurrentRow.Cells[2].Value.ToString();
+            txt_seriesDescENG.Text = dataGridSeries.CurrentRow.Cells[3].Value.ToString();
+            txt_seriesDescORIG.Text = dataGridSeries.CurrentRow.Cells[4].Value.ToString();
+            get_seriesColoring = dataGridSeries.CurrentRow.Cells[5].Value.ToString();
+            get_seriesOrient = dataGridSeries.CurrentRow.Cells[6].Value.ToString();
+            txt_seriesTotalImgCard.Text = dataGridSeries.CurrentRow.Cells[7].Value.ToString();
+            if ((dataGridSeries.CurrentRow.Cells[8].Value.ToString()).Trim() != "")
             {
-                txt_seriesDate.Text = dataGridSeries.CurrentRow.Cells[7].Value.ToString();
+                txt_seriesDate.Text = dataGridSeries.CurrentRow.Cells[8].Value.ToString();
                 try
                 {
                     dateTimePickerSeries.Value = DateTime.Parse(txt_seriesDate.Text);
@@ -576,13 +611,13 @@ namespace PostcardsEditor
                 txt_seriesDate.Text = "";
                 dateTimePickerSeries.Value = DateTime.Now;
             }
-            get_seriesYear = dataGridSeries.CurrentRow.Cells[8].Value.ToString();
-            txt_seriesBarcodeGen.Text = dataGridSeries.CurrentRow.Cells[9].Value.ToString();
-            txt_seriesFrtTxtColor.Text = dataGridSeries.CurrentRow.Cells[10].Value.ToString();
-            txt_seriesBackTxtColor.Text = dataGridSeries.CurrentRow.Cells[11].Value.ToString();
-            txt_seriesBigDescription.Text = dataGridSeries.CurrentRow.Cells[12].Value.ToString();
-            txt_seriesFrontImg.Text = dataGridSeries.CurrentRow.Cells[13].Value.ToString();
-            txt_seriesBackImg.Text = dataGridSeries.CurrentRow.Cells[14].Value.ToString();
+            get_seriesYear = dataGridSeries.CurrentRow.Cells[9].Value.ToString();
+            txt_seriesBarcodeGen.Text = dataGridSeries.CurrentRow.Cells[10].Value.ToString();
+            txt_seriesFrtTxtColor.Text = dataGridSeries.CurrentRow.Cells[11].Value.ToString();
+            txt_seriesBackTxtColor.Text = dataGridSeries.CurrentRow.Cells[12].Value.ToString();
+            txt_seriesBigDescription.Text = dataGridSeries.CurrentRow.Cells[13].Value.ToString();
+            txt_seriesFrontImg.Text = dataGridSeries.CurrentRow.Cells[14].Value.ToString();
+            txt_seriesBackImg.Text = dataGridSeries.CurrentRow.Cells[15].Value.ToString();
 
             // Check if any of the image path fields has any image name. If it has, it shows, otherwise just show the default image
             try

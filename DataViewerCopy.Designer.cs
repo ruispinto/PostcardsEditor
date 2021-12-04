@@ -122,12 +122,11 @@ namespace PostcardsEditor
             this.label12 = new System.Windows.Forms.Label();
             this.combo_country = new System.Windows.Forms.ComboBox();
             this.combo_publish = new System.Windows.Forms.ComboBox();
+            this.combo_searchType = new System.Windows.Forms.ComboBox();
             this.txt_searchBox = new System.Windows.Forms.TextBox();
             this.btn_search = new System.Windows.Forms.Button();
             this.btn_cardRefresh = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.lbl_cardCounter = new System.Windows.Forms.Label();
-            this.lblCards = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCard)).BeginInit();
             this.panel2.SuspendLayout();
@@ -1218,14 +1217,37 @@ namespace PostcardsEditor
             this.combo_publish.Size = new System.Drawing.Size(325, 26);
             this.combo_publish.TabIndex = 1;
             // 
+            // combo_searchType
+            // 
+            this.combo_searchType.FormattingEnabled = true;
+            this.combo_searchType.Items.AddRange(new object[] {
+            "(where to search)",
+            "Card Number",
+            "Publisher",
+            "Scanned ?",
+            "Published in the blog ?",
+            "Country",
+            "Description (English)",
+            "Description (Original)",
+            "Theme",
+            "Series ?",
+            "Condition",
+            "Borders ?",
+            "Identical ?",
+            "Offer Type Description"});
+            this.combo_searchType.Location = new System.Drawing.Point(7, 5);
+            this.combo_searchType.Name = "combo_searchType";
+            this.combo_searchType.Size = new System.Drawing.Size(180, 26);
+            this.combo_searchType.TabIndex = 3;
+            this.combo_searchType.SelectedIndexChanged += new System.EventHandler(this.combo_searchType_SelectedIndexChanged);
+            // 
             // txt_searchBox
             // 
-            this.txt_searchBox.Location = new System.Drawing.Point(10, 6);
+            this.txt_searchBox.Location = new System.Drawing.Point(194, 6);
             this.txt_searchBox.MaxLength = 250;
             this.txt_searchBox.Name = "txt_searchBox";
-            this.txt_searchBox.Size = new System.Drawing.Size(534, 24);
+            this.txt_searchBox.Size = new System.Drawing.Size(350, 24);
             this.txt_searchBox.TabIndex = 4;
-            this.txt_searchBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this._chkSearchKeyPressed);
             // 
             // btn_search
             // 
@@ -1241,6 +1263,7 @@ namespace PostcardsEditor
             // 
             // btn_cardRefresh
             // 
+            this.btn_cardRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_cardRefresh.BackColor = System.Drawing.Color.Silver;
             this.btn_cardRefresh.ForeColor = System.Drawing.Color.Black;
             this.btn_cardRefresh.Location = new System.Drawing.Point(640, 5);
@@ -1253,42 +1276,15 @@ namespace PostcardsEditor
             // 
             // panel3
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel3.Controls.Add(this.lbl_cardCounter);
-            this.panel3.Controls.Add(this.lblCards);
+            this.panel3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panel3.Controls.Add(this.btn_search);
             this.panel3.Controls.Add(this.txt_searchBox);
             this.panel3.Controls.Add(this.btn_cardRefresh);
+            this.panel3.Controls.Add(this.combo_searchType);
             this.panel3.Location = new System.Drawing.Point(9, 8);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1150, 35);
             this.panel3.TabIndex = 7;
-            // 
-            // lbl_cardCounter
-            // 
-            this.lbl_cardCounter.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbl_cardCounter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_cardCounter.Location = new System.Drawing.Point(946, 9);
-            this.lbl_cardCounter.Name = "lbl_cardCounter";
-            this.lbl_cardCounter.Size = new System.Drawing.Size(123, 20);
-            this.lbl_cardCounter.TabIndex = 7;
-            this.lbl_cardCounter.Text = "0";
-            this.lbl_cardCounter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblCards
-            // 
-            this.lblCards.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCards.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCards.Location = new System.Drawing.Point(1066, 12);
-            this.lblCards.Name = "lblCards";
-            this.lblCards.Size = new System.Drawing.Size(78, 13);
-            this.lblCards.TabIndex = 8;
-            this.lblCards.Text = "cards";
-            this.lblCards.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // DataViewer
             // 
@@ -1420,6 +1416,7 @@ namespace PostcardsEditor
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button btn_publishBlog;
         private System.Windows.Forms.Button btn_series;
+        private System.Windows.Forms.ComboBox combo_searchType;
         private System.Windows.Forms.TextBox txt_searchBox;
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.ComboBox combo_material;
@@ -1429,7 +1426,5 @@ namespace PostcardsEditor
         private System.Windows.Forms.Button btn_cardRefresh;
         private System.Windows.Forms.Button btn_moreOoptions;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label lbl_cardCounter;
-        private System.Windows.Forms.Label lblCards;
     }
 }

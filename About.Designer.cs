@@ -110,9 +110,10 @@ namespace PostcardsEditor
             // 
             // label6
             // 
-            this.label6.BackColor = System.Drawing.Color.White;
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(184)))), ((int)(((byte)(184)))), ((int)(((byte)(184)))));
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label6.Location = new System.Drawing.Point(42, 265);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(363, 48);
@@ -126,7 +127,7 @@ namespace PostcardsEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(449, 399);
             this.ControlBox = false;
             this.Controls.Add(this.label6);
@@ -136,6 +137,7 @@ namespace PostcardsEditor
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lbl_softwareVersion);
             this.Controls.Add(this.label1);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

@@ -45,6 +45,8 @@ namespace PostcardsEditor
         {
             //this.BackColor = Properties.Settings.Default.FormBackground; ;
             dataGridCard.DataSource = null;
+            combo_searchType.SelectedIndex = 0;
+            combo_searchType.SelectedItem = combo_searchType.SelectedIndex;
             dataGridCard.ForeColor = Color.FromArgb(64, 64, 64);
 
             // tests database connection
@@ -56,7 +58,6 @@ namespace PostcardsEditor
                 con.connectdb.Close();
                 dc.REFRESH_CARD();
                 dataGridCard.DataSource = dc.DT;
-                _getTotals();
             }
             catch
             {
@@ -355,7 +356,6 @@ namespace PostcardsEditor
             dataGridCard.BackgroundColor = Color.FromArgb(64, 64, 64);
             dc.REFRESH_CARD();
             dataGridCard.DataSource = dc.DT;
-            _getTotals();
             dataGridCard.Rows[localRow].Selected = true;
             dataGridCard.FirstDisplayedScrollingRowIndex = localRow;
             dataGridCard.Focus();
@@ -471,7 +471,9 @@ namespace PostcardsEditor
         {
             REFRESH_CARD_STILL();
             txt_searchBox.Text = "";
-            _getTotals();
+            combo_searchType.SelectedIndex = 0;
+            combo_searchType.SelectedItem = combo_searchType.SelectedIndex;
+
         }
 
 
@@ -544,30 +546,10 @@ namespace PostcardsEditor
             LOAD_PANEL();
         }
 
-        private void _chkSearchKeyPressed(object sender, KeyEventArgs e)
-        {
-            if (e.KeyValue == (char)Keys.Enter)
-                _searchFunction();
-        }
 
-        private void _searchFunction()
-        {
-            dataGridCard.DataSource = null;
-            dc.SEARCH_CARD(txt_searchBox.Text.ToString());
-            dataGridCard.DataSource = dc.DT;
-            _getTotals();
-        }
-
-        private void _getTotals()
-        {
-            lbl_cardCounter.Text = dataGridCard.RowCount.ToString();
-            if (dataGridCard.RowCount == 1)
-                lblCards.Text = "card";
-            else
-                lblCards.Text = "cards";
-        }
 
         private void btn_edit_Click(object sender, EventArgs e)
+
         {
             panel1.Enabled = false;
             panel3.Enabled = false;
@@ -1033,34 +1015,34 @@ namespace PostcardsEditor
                 12. Identical ?
                 13. Offer Type Description
             */
-            //if (combo_searchType.SelectedIndex == 1)
-            //    search_option = "cardnumber";
-            //else if (combo_searchType.SelectedIndex == 2)
-            //    search_option = "cardpublisher";
-            //else if (combo_searchType.SelectedIndex == 3)
-            //    search_option = "cardscanned";
-            //else if (combo_searchType.SelectedIndex == 4)
-            //    search_option = "cardintheblog";
-            //else if (combo_searchType.SelectedIndex == 5)
-            //    search_option = "cardcountryname";
-            //else if (combo_searchType.SelectedIndex == 6)
-            //    search_option = "carddesceng";
-            //else if (combo_searchType.SelectedIndex == 7)
-            //    search_option = "carddescoriginal";
-            //else if (combo_searchType.SelectedIndex == 8)
-            //    search_option = "cardthemename";
-            //else if (combo_searchType.SelectedIndex == 9)
-            //    search_option = "cardseriesmulti";
-            //else if (combo_searchType.SelectedIndex == 10)
-            //    search_option = "cardcondabr";
-            //else if (combo_searchType.SelectedIndex == 11)
-            //    search_option = "cardborders";
-            //else if (combo_searchType.SelectedIndex == 12)
-            //    search_option = "cardidentical";
-            //else if (combo_searchType.SelectedIndex == 13)
-            //    search_option = "cardtypedesc";
-            //else
-            //    search_option = "";
+            if (combo_searchType.SelectedIndex == 1)
+                search_option = "cardnumber";
+            else if (combo_searchType.SelectedIndex == 2)
+                search_option = "cardpublisher";
+            else if (combo_searchType.SelectedIndex == 3)
+                search_option = "cardscanned";
+            else if (combo_searchType.SelectedIndex == 4)
+                search_option = "cardintheblog";
+            else if (combo_searchType.SelectedIndex == 5)
+                search_option = "cardcountryname";
+            else if (combo_searchType.SelectedIndex == 6)
+                search_option = "carddesceng";
+            else if (combo_searchType.SelectedIndex == 7)
+                search_option = "carddescoriginal";
+            else if (combo_searchType.SelectedIndex == 8)
+                search_option = "cardthemename";
+            else if (combo_searchType.SelectedIndex == 9)
+                search_option = "cardseriesmulti";
+            else if (combo_searchType.SelectedIndex == 10)
+                search_option = "cardcondabr";
+            else if (combo_searchType.SelectedIndex == 11)
+                search_option = "cardborders";
+            else if (combo_searchType.SelectedIndex == 12)
+                search_option = "cardidentical";
+            else if (combo_searchType.SelectedIndex == 13)
+                search_option = "cardtypedesc";
+            else
+                search_option = "";
         }
 
 
@@ -1068,10 +1050,15 @@ namespace PostcardsEditor
         // Search button
         private void btn_search_Click(object sender, EventArgs e)
         {
-            dataGridCard.DataSource = null;
-            dc.SEARCH_CARD(txt_searchBox.Text.ToString());
-            dataGridCard.DataSource = dc.DT;
-            dataGridCard.Enabled = true;
+            if (search_option != "" && txt_searchBox.Text.ToString() != "")
+            {
+                dataGridCard.DataSource = null;
+                dc.SEARCH_CARD(search_option, txt_searchBox.Text.ToString());
+                dataGridCard.DataSource = dc.DT;
+                dataGridCard.Enabled = true;
+            }
+            else
+                MessageBox.Show("You have to choose where to search and write some text to search.");
         }
     }
 }
