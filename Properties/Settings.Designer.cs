@@ -25,5 +25,7 @@ namespace PostcardsEditor.Properties
                 return defaultInstance;
             }
         }
+
+        public string FormBackground { get; internal set; }
     }
 }
