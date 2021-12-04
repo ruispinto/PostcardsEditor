@@ -1,4 +1,4 @@
-# PostcardsEditor
+# Postcards Editor
 ##
 ## Revision 2.0.04.0004 - 2021-10-29
 ##
