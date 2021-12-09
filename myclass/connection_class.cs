@@ -14,14 +14,6 @@ namespace PostcardsEditor.myclass
 
         public connection_class()
         {
-            // connection to remotemysql.com
-            // .
-            //string host = "remotemysql.com";    // host name 'localhost', 'web_address', etc...
-            //string database = "p0SiyDbzjG";     // database name
-            //string port = "3306";               // port used to connect to SQL Server
-            //string username = "p0SiyDbzjG";     // username ('root' - default username if you are using 'localhost')
-            //string password = "H1Fz7V1ItN";     // password
-
             // connection to my domain
             string host = "localhost";
             string database = "database_name";
